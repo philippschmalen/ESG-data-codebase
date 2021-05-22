@@ -29,7 +29,6 @@ The project benefits from previous work of the repositories:
 4. https://github.com/philippschmalen/etl_spark_airflow_emr
 
 
-
 Project Organization
 ------------
 
@@ -63,5 +62,17 @@ Project Organization
 
 
 --------
+
+## Dev
+
+Here is everything related to further develop and maintain the project.  
+
+### Conda virtual env
+
+__Build__ `conda env create -f conda_env.yaml`
+
+__Export to yaml__ `conda env export --no-builds > conda_env.yaml`
+
+--- 
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

@@ -1,0 +1,16 @@
+name: esg_codebase
+channels:
+  - defaults
+dependencies:
+  - ca-certificates=2021.4.13
+  - certifi=2020.12.5
+  - openssl=1.1.1k
+  - pip=21.1.1
+  - python=3.8.10
+  - setuptools=52.0.0
+  - sqlite=3.35.4
+  - vc=14.2
+  - vs2015_runtime=14.27.29016
+  - wheel=0.36.2
+  - wincertstore=0.2
+prefix: C:\Users\phili\miniconda3\envs\esg_codebase
