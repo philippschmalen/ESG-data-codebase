@@ -1,10 +1,7 @@
-"""
-Extract data from Google trends with the pytrends package
+import streamlit as st
 
-    methods take one keyword, call pytrends and return raw data 
 
-"""
-
+# ------------------- EXTRACT
 import pandas as pd
 import logging
 from datetime import datetime
@@ -92,3 +89,7 @@ def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo='', 
         geo_description=geo_description)
     
     return df_trends
+
+
+pytrends_session = create_pytrends_session()
+'', get_related_queries_pipeline(pytrends_session, keyword_list=['hallo', 'pizza'])
