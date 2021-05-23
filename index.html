@@ -1,0 +1,1102 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
+    
+    
+      
+        <title>ESG data codebase</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#code-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="ESG data codebase" class="md-header__button md-logo" aria-label="ESG data codebase" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ESG data codebase
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/philippschmalen/ESG-data-codebase/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ESG-data-codebase
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="ESG data codebase" class="md-nav__button md-logo" aria-label="ESG data codebase" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ESG data codebase
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/philippschmalen/ESG-data-codebase/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ESG-data-codebase
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#google-results-count" class="md-nav__link">
+    Google results count
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract" class="md-nav__link">
+    src.data.gresults_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.assert_google_results" class="md-nav__link">
+    assert_google_results()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.create_search_url" class="md-nav__link">
+    create_search_url()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.get_results_count" class="md-nav__link">
+    get_results_count()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.get_results_count_pipeline" class="md-nav__link">
+    get_results_count_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-trends" class="md-nav__link">
+    Google trends
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract" class="md-nav__link">
+    src.data.gtrends_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.create_pytrends_session" class="md-nav__link">
+    create_pytrends_session()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.create_related_queries_dataframe" class="md-nav__link">
+    create_related_queries_dataframe()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.get_related_queries" class="md-nav__link">
+    get_related_queries()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.get_related_queries_pipeline" class="md-nav__link">
+    get_related_queries_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.process_response" class="md-nav__link">
+    process_response()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.unpack_related_queries_response" class="md-nav__link">
+    unpack_related_queries_response()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#google-results-count" class="md-nav__link">
+    Google results count
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract" class="md-nav__link">
+    src.data.gresults_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.assert_google_results" class="md-nav__link">
+    assert_google_results()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.create_search_url" class="md-nav__link">
+    create_search_url()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.get_results_count" class="md-nav__link">
+    get_results_count()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gresults_extract.get_results_count_pipeline" class="md-nav__link">
+    get_results_count_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-trends" class="md-nav__link">
+    Google trends
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract" class="md-nav__link">
+    src.data.gtrends_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.create_pytrends_session" class="md-nav__link">
+    create_pytrends_session()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.create_related_queries_dataframe" class="md-nav__link">
+    create_related_queries_dataframe()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.get_related_queries" class="md-nav__link">
+    get_related_queries()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.get_related_queries_pipeline" class="md-nav__link">
+    get_related_queries_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.process_response" class="md-nav__link">
+    process_response()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.data.gtrends_extract.unpack_related_queries_response" class="md-nav__link">
+    unpack_related_queries_response()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/philippschmalen/ESG-data-codebase/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="code-reference">Code reference</h1>
+<h2 id="google-results-count">Google results count</h2>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="src.data.gresults_extract"></a>
+    <div class="doc doc-contents first">
+
+      <p>Extract results count from Google with beautiful soup</p>
+<pre><code>methods take a list of keywords and return a dataframe
+</code></pre>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gresults_extract.assert_google_results" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Ensures that dataframe meets expectations </p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensures that dataframe meets expectations &quot;&quot;&quot;</span>
+
+    <span class="c1"># expected dataframe for comparison</span>
+    <span class="n">df_compare</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="o">*</span><span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;results_count&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;search_url&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;query_timestamp&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
+    <span class="p">})</span>
+
+    <span class="c1"># comparison to actual</span>
+    <span class="n">column_difference</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">df_compare</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_difference</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;The following columns differ to reference dataframe: </span><span class="si">{</span><span class="n">column_difference</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Different dtypes for </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> does not equal </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Google results data meets expectations&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gresults_extract.create_search_url" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Create Google search URL for a keyword from keyword_list</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>keyword_list</code></td>
+        <td><code>list</code></td>
+        <td><p>list of strings that contain the search keywords</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>url</code></td>
+        <td><code>str</code></td>
+        <td><p>Google's base search url</p></td>
+        <td><code>&#39;https://www.google.com/search?q=&#39;</code></td>
+      </tr>
+  </tbody>
+</table>      <p>Returns: 
+    list: Google search URL for keyword, e.g. "https://www.google.com/search?q=pizza"</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create Google search URL for a keyword from keyword_list</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keyword_list (list): list of strings that contain the search keywords</span>
+<span class="sd">        url (str): Google&#39;s base search url</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        list: Google search URL for keyword, e.g. &quot;https://www.google.com/search?q=pizza&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">search_query</span> <span class="o">=</span> <span class="p">[</span><span class="n">kw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">]</span> <span class="c1"># replace space with &#39;+&#39;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">url</span><span class="o">+</span><span class="n">sq</span> <span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="n">search_query</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gresults_extract.get_results_count" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_results_count</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Gets Google's result count for a keyword</p>
+<p>Args: 
+    keyword (string): The keyword for which to get the results count 
+    user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}</p>
+<p>Returns: 
+    int: Results count</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_results_count</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets Google&#39;s result count for a keyword</span>
+
+<span class="sd">    Args: </span>
+<span class="sd">        keyword (string): The keyword for which to get the results count </span>
+<span class="sd">        user_agent (string): For example {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&quot;}</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        int: Results count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>    
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+    <span class="c1">#  string that contains results count &#39;About 1,410,000,000 results&#39;</span>
+    <span class="n">total_results_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;result-stats&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+
+    <span class="c1"># extract number</span>
+    <span class="n">results_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">total_results_text</span> <span class="k">if</span> <span class="n">num</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()])</span> <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results_num</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gresults_extract.get_results_count_pipeline" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_results_count_pipeline</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Google results count for each keyword of keyword_list in a dataframe</p>
+<p>Usage: 
+    with open('../settings.yaml') as file: 
+        config = yaml.full_load(file)
+    user_agent = config['query']['google_results']['user_agent']
+    base_url = config['query']['google_results']['base_url']
+    keyword_list = ['pizza', 'lufthansa']
+    result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)</p>
+<p>Args: 
+    keyword_list (list): The keywords for which to get the results count 
+    user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    url (string): Google's base search URL like "https://www.google.com/search?q=" (default)</p>
+<p>Returns: 
+    dataframe: Google results count and query metadata</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_results_count_pipeline</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Google results count for each keyword of keyword_list in a dataframe</span>
+
+<span class="sd">    Usage: </span>
+<span class="sd">        with open(&#39;../settings.yaml&#39;) as file: </span>
+<span class="sd">            config = yaml.full_load(file)</span>
+<span class="sd">        user_agent = config[&#39;query&#39;][&#39;google_results&#39;][&#39;user_agent&#39;]</span>
+<span class="sd">        base_url = config[&#39;query&#39;][&#39;google_results&#39;][&#39;base_url&#39;]</span>
+<span class="sd">        keyword_list = [&#39;pizza&#39;, &#39;lufthansa&#39;]</span>
+<span class="sd">        result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)</span>
+
+<span class="sd">    Args: </span>
+<span class="sd">        keyword_list (list): The keywords for which to get the results count </span>
+<span class="sd">        user_agent (string): For example {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&quot;}</span>
+<span class="sd">        url (string): Google&#39;s base search URL like &quot;https://www.google.com/search?q=&quot; (default)</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        dataframe: Google results count and query metadata</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">search_urls</span> <span class="o">=</span> <span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span>
+    <span class="n">result_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_results_count</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">search_urls</span><span class="p">]</span>  
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="n">keyword_list</span><span class="p">,</span> 
+                       <span class="s1">&#39;results_count&#39;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span> 
+                       <span class="s1">&#39;search_url&#39;</span><span class="p">:</span> <span class="n">search_urls</span><span class="p">,</span> 
+                       <span class="s1">&#39;query_timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()})</span>
+    <span class="c1"># testing</span>
+    <span class="n">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+<hr />
+<h2 id="google-trends">Google trends</h2>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="src.data.gtrends_extract"></a>
+    <div class="doc doc-contents first">
+
+      <p>Extract data from Google trends with the pytrends package</p>
+<pre><code>methods take one keyword, call pytrends and return raw data
+</code></pre>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.create_pytrends_session" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_pytrends_session</span><span class="p">()</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Create pytrends TrendReq() session on which .build_payload() can be called </p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_pytrends_session</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Create pytrends TrendReq() session on which .build_payload() can be called &quot;&quot;&quot;</span>
+    <span class="n">pytrends_session</span> <span class="o">=</span> <span class="n">TrendReq</span><span class="p">()</span> 
+
+    <span class="k">return</span> <span class="n">pytrends_session</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.create_related_queries_dataframe" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_related_queries_dataframe</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a single dataframe of related queries for a list of keywords
+and each ranking (either 'top' or 'rising') </p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_related_queries_dataframe</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a single dataframe of related queries for a list of keywords</span>
+<span class="sd">    and each ranking (either &#39;top&#39; or &#39;rising&#39;) &quot;&quot;&quot;</span>
+    <span class="n">df_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rankings</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+            <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_response</span><span class="p">(</span>
+                <span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo_description</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.get_related_queries" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a dictionary with a dataframe for each keyword 
+    Calls pytrend's related_queries()</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>pytrends_session</code></td>
+        <td><code>object</code></td>
+        <td><p>TrendReq() session of pytrend</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>keyword_list</code></td>
+        <td><code>list</code></td>
+        <td><p>Used as input for query and passed to TrendReq().build_payload() </p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>cat</code></td>
+        <td><code>int</code></td>
+        <td><p>see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories </p></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
+        <td><code>geo</code></td>
+        <td><code>str</code></td>
+        <td><p>Geolocation like US, UK</p></td>
+        <td><code>&#39;&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dictionary</code></td>
+      <td><p>Dict with dataframes with related query results </p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary with a dataframe for each keyword </span>
+<span class="sd">        Calls pytrend&#39;s related_queries()</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pytrends_session (object): TrendReq() session of pytrend</span>
+<span class="sd">        keyword_list (list): Used as input for query and passed to TrendReq().build_payload() </span>
+<span class="sd">        cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories </span>
+<span class="sd">        for all categories</span>
+<span class="sd">        geo (str): Geolocation like US, UK</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary: Dict with dataframes with related query results </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;keyword_list should be string. Instead of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">df_related_queries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pytrends_session</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo</span><span class="p">)</span>
+        <span class="n">df_related_queries</span> <span class="o">=</span> <span class="n">pytrends_session</span><span class="o">.</span><span class="n">related_queries</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query succeeded for </span><span class="si">{</span><span class="o">*</span><span class="n">keyword_list</span> <span class="p">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query not unsuccessful due to </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Return empty DataFrame.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_related_queries</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.get_related_queries_pipeline" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_related_queries_pipeline</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Returns all response data for pytrend's .related_queries() in a single dataframe
+Usage: 
+    pytrends_session = create_pytrends_session()
+    df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'lufthansa'])</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries_pipeline</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;Returns all response data for pytrend&#39;s .related_queries() in a single dataframe</span>
+<span class="sd">    Usage: </span>
+<span class="sd">        pytrends_session = create_pytrends_session()</span>
+<span class="sd">        df = get_related_queries_pipeline(pytrends_session, keyword_list=[&#39;pizza&#39;, &#39;lufthansa&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="o">=</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo</span><span class="p">)</span> <span class="c1"># </span>
+    <span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span>  <span class="o">=</span> <span class="n">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">df_trends</span> <span class="o">=</span> <span class="n">create_related_queries_dataframe</span><span class="p">(</span>
+        <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> 
+        <span class="n">rankings</span><span class="o">=</span><span class="n">rankings</span><span class="p">,</span> 
+        <span class="n">keywords</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span> 
+        <span class="n">geo_description</span><span class="o">=</span><span class="n">geo_description</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_trends</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.process_response" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Helper function for unpack_related_queries_response() </p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper function for unpack_related_queries_response() &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="n">kw</span><span class="p">][</span><span class="n">ranking</span><span class="p">]</span>
+        <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;query_timestamp&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Append empty dataframe for </span><span class="si">{</span><span class="n">ranking</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">kw</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;query_timestamp&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.unpack_related_queries_response" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Unpack response from dictionary and create one dataframe for each ranking and each keyword </p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Unpack response from dictionary and create one dataframe for each ranking and each keyword &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Empty response. Try again.&quot;</span>
+
+    <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">response</span><span class="p">[[</span><span class="o">*</span><span class="n">response</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">response</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="p">,</span> <span class="n">ranking</span><span class="p">,</span> <span class="n">keywords</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+<hr />
+<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
+<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
+<h2 id="commands">Commands</h2>
+<ul>
+<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
+<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
+<li><code>mkdocs build</code> - Build the documentation site.</li>
+<li><code>mkdocs -h</code> - Print help message and exit.</li>
+</ul>
+<h2 id="project-layout">Project layout</h2>
+<pre><code>mkdocs.yml    # The configuration file.
+docs/
+    index.md  # The documentation homepage.
+    ...       # Other markdown pages, images and other files.
+</code></pre>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.a1609d9a.min.js"></script>
+      
+    
+  </body>
+</html>
