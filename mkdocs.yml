@@ -9,5 +9,7 @@ plugins:
   - search
   - mkdocstrings:
       default_handler: python
+      watch:
+        - src/data
 nav:
   - Home: index.md

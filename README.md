@@ -84,6 +84,21 @@ __Export to yaml__ `conda env export --no-builds > conda_env.yaml`
 
 ### Build documentation with mkdocs
 
+Following Google style doccstrings: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html 
+
+A common issue that causes false rendering is to include a space after a headline. `Args: ` will __not__ work, but `Args:` will do.
+
+Workflow to update documentation: 
+
+```bash
+# conda activate esg_codebase
+mkdocs serve # live-reloading
+mkdocs build # build static site
+mkdocs gh-deploy # deploy to github pages
+```
+
+#### From scratch
+
 ```bash
 # in project root, run with conda env activated
 mkdocs new . 
@@ -98,6 +113,8 @@ plugins:
   - search
   - mkdocstrings:
       default_handler: python 
+      watch:
+        - src/data # enable auto-reload
 ```
 
 Add python scripts to `index.md` so that they appear in the code reference: 

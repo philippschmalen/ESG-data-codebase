@@ -1,7 +1,7 @@
 """
 Extract data from Google trends with the pytrends package
 
-    methods take one keyword, call pytrends and return raw data 
+methods take one keyword, call pytrends and return raw data 
 
 """
 
@@ -19,13 +19,12 @@ def create_pytrends_session():
 
 def get_related_queries(pytrends_session, keyword_list, cat=0, geo=''):
     """Returns a dictionary with a dataframe for each keyword 
-        Calls pytrend's related_queries()
+    Calls pytrend's related_queries()
     
     Args:
         pytrends_session (object): TrendReq() session of pytrend
         keyword_list (list): Used as input for query and passed to TrendReq().build_payload() 
-        cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories 
-        for all categories
+        cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories
         geo (str): Geolocation like US, UK
 
     Returns:
@@ -68,7 +67,8 @@ def unpack_related_queries_response(response):
 
 def create_related_queries_dataframe(response, rankings, keywords, geo_description='global'):
     """Returns a single dataframe of related queries for a list of keywords
-    and each ranking (either 'top' or 'rising') """
+    and each ranking (either 'top' or 'rising')
+    """
     df_list = []
     for r in rankings:
         for kw in keywords:
@@ -79,7 +79,9 @@ def create_related_queries_dataframe(response, rankings, keywords, geo_descripti
 
 def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo='', geo_description='global'): 
     """Returns all response data for pytrend's .related_queries() in a single dataframe
-    Usage: 
+    
+    Example usage:
+
         pytrends_session = create_pytrends_session()
         df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'lufthansa'])
     """

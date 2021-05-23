@@ -1,12 +1,12 @@
 # Code reference
 
-## Google results count
+# Google results count
 
 ::: src.data.gresults_extract
 
 ---
 
-## Google trends
+# Google trends
 
 ::: src.data.gtrends_extract
 
