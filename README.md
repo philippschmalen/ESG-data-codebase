@@ -15,9 +15,15 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 
 <center><img src="references/img/tsf_logo.png" height ="300" width="310"/></center>
 
+## Code reference
+
+Here is the official documentation powered by mkdocs and mkdocstrings.
+
+> https://philippschmalen.github.io/ESG-data-codebase/
+
 ## Getting started
 
-Configure `settings.yaml`
+Configure `settings.yaml`.
 
 TODO: Describe how to use the code snippets
 
