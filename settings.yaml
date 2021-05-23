@@ -1,0 +1,9 @@
+dir:
+  raw: 'data/raw'
+  interim: 'data/interim'
+  processed: 'data/processed'
+  external: 'data/external'
+query:
+  google_results:
+    user_agent: {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    base_url: "https://www.google.com/search?q="

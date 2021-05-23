@@ -1,0 +1,13 @@
+site_name: ESG data codebase
+repo_url: https://github.com/philippschmalen/ESG-data-codebase
+repo_name: ESG-data-codebase
+theme:
+  name: material
+  include_sidebar: false
+site_dir: references/docs-site
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+nav:
+  - Home: index.md

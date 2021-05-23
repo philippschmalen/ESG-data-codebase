@@ -1,7 +1,9 @@
-import streamlit as st
+"""
+Extract results count from Google with beautiful soup
 
+    methods take a list of keywords and return a dataframe 
 
-# ------------------- EXTRACT
+"""
 
 import pandas as pd
 import requests
@@ -17,7 +19,8 @@ def create_search_url(keyword_list, url="https://www.google.com/search?q="):
         url (str): Google's base search url
 
     Returns: 
-        list with Google search URL for keyword, e.g. "https://www.google.com/search?q=pizza"
+        list: Google search URL for keyword, e.g. "https://www.google.com/search?q=pizza"
+        
     """
     search_query = [kw.replace(' ','+') for kw in keyword_list] # replace space with '+'
     return [url+sq for sq in search_query]
@@ -27,11 +30,10 @@ def get_results_count(keyword, user_agent):
     
     Args: 
         keyword (string): The keyword for which to get the results count 
-        user_agent (string): For example 
-        {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
 
     Returns: 
-        Results count (int)
+        int: Results count
     """
     result = requests.get(keyword, headers=user_agent)    
     soup = BeautifulSoup(result.content, 'html.parser')
@@ -46,26 +48,24 @@ def get_results_count(keyword, user_agent):
 
 
 def get_results_count_pipeline(keyword_list, user_agent, url="https://www.google.com/search?q="):
-    """Returns Google results count for each keyword of keyword_list in a dataframe
-
-    Args: 
-        keyword_list (list): The keywords for which to get the results count 
-        user_agent (string): For example 
-        {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
-        url (string): Google's base search URL like "https://www.google.com/search?q=" (default)
+    """Google results count for each keyword of keyword_list in a dataframe
     
-    Returns: 
-        dataframe with Google results count and query metadata
-
     Usage: 
         with open('../settings.yaml') as file: 
             config = yaml.full_load(file)
-
         user_agent = config['query']['google_results']['user_agent']
         base_url = config['query']['google_results']['base_url']
         keyword_list = ['pizza', 'lufthansa']
-
         result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
+
+    Args: 
+        keyword_list (list): The keywords for which to get the results count 
+        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+        url (string): Google's base search URL like "https://www.google.com/search?q=" (default)
+    
+    Returns: 
+        dataframe: Google results count and query metadata
+
     """
     search_urls = create_search_url(keyword_list)
     result_count = [get_results_count(url, user_agent) for url in search_urls]  
@@ -98,16 +98,3 @@ def assert_google_results(df, keyword_list, url="https://www.google.com/search?q
     assert len(df) == len(keyword_list), f"{len(df)} does not equal {len(keyword_list)}"
     
     logging.info("Google results data meets expectations")
-    
-
-# --------
-import yaml
-
-with open('../settings.yaml') as file: 
-    config = yaml.full_load(file)
-
-user_agent = config['query']['google_results']['user_agent']
-base_url = config['query']['google_results']['base_url']
-keyword_list = ['pizza', 'lufthansa']
-
-get_results_count_pipeline(keyword_list=keyword_list, user_agent=user_agent, url=base_url)

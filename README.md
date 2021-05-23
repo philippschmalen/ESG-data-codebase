@@ -17,6 +17,8 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 
 ## Getting started
 
+Configure `settings.yaml`
+
 TODO: Describe how to use the code snippets
 
 ## Useful resources
@@ -72,6 +74,36 @@ Here is everything related to further develop and maintain the project.
 __Build__ `conda env create -f conda_env.yaml`
 
 __Export to yaml__ `conda env export --no-builds > conda_env.yaml`
+
+
+### Build documentation with mkdocs
+
+```bash
+# in project root, run with conda env activated
+mkdocs new . 
+# created mkdocs.yml and ./docs
+```
+Configure `mkdocs.yml` to work with `mkdocstrings` package. 
+```yaml
+site_name: ESG data codebase
+theme:
+  name: "material" # theme works with mkdocstrings
+plugins: 
+  - search
+  - mkdocstrings:
+      default_handler: python 
+```
+
+Add python scripts to `index.md` so that they appear in the code reference: 
+
+```markdown
+# Code reference
+## Google results count
+::: src.data.gresults_extract.py
+---
+## Google trends
+::: src.data.gtrends_extract.py
+```
 
 --- 
 

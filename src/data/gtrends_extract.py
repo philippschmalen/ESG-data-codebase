@@ -29,7 +29,7 @@ def get_related_queries(pytrends_session, keyword_list, cat=0, geo=''):
         geo (str): Geolocation like US, UK
 
     Returns:
-        Dictionary, with dataframes that have contain query results
+        Dictionary: Dict with dataframes with related query results 
     """    
     assert isinstance(keyword_list, list), f"keyword_list should be string. Instead of type {type(keyword_list)}"
 
