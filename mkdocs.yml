@@ -3,7 +3,7 @@ repo_url: https://github.com/philippschmalen/ESG-data-codebase
 repo_name: ESG-data-codebase
 theme:
   name: material
-  include_sidebar: false
+  include_sidebar: true
 site_dir: references/docs-site
 plugins:
   - search
