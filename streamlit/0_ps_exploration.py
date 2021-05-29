@@ -1,112 +1,15 @@
-"""
-Extract data from Google trends with the pytrends package
-
-methods take one keyword, call pytrends and return raw data 
-
-"""
+import streamlit as st
+import plotly.express as px
+import chart_studio.plotly as cs
+import logging
 
 import pandas as pd
-import logging
-import os
-from datetime import datetime
-from pytrends.request import TrendReq
+import numpy as np
 
-
-
-def create_pytrends_session():
-    """Create pytrends TrendReq() session on which .build_payload() can be called """
-    pytrends_session = TrendReq() 
-
-    return pytrends_session
-
-# ----------------------------------------------------------
-# Google trends: related queries
-# ----------------------------------------------------------
-
-def get_related_queries(pytrends_session, keyword_list, cat=0, geo=''):
-    """Returns a dictionary with a dataframe for each keyword 
-    Calls pytrend's related_queries()
-    
-    Args:
-        pytrends_session (object): TrendReq() session of pytrend
-        keyword_list (list): Used as input for query and passed to TrendReq().build_payload() 
-        cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories
-        geo (str): Geolocation like US, UK
-
-    Returns:
-        Dictionary: Dict with dataframes with related query results 
-    """    
-    assert isinstance(keyword_list, list), f"keyword_list should be string. Instead of type {type(keyword_list)}"
-
-    df_related_queries = pd.DataFrame()
-
-    try:
-        pytrends_session.build_payload(keyword_list, cat=cat, geo=geo)
-        df_related_queries = pytrends_session.related_queries()
-        logging.info(f"Query succeeded for {*keyword_list ,}")
-
-    except Exception as e:
-        logging.error(f"Query not unsuccessful due to {e}. Return empty DataFrame.")
-
-    return df_related_queries
-
-def process_related_query_response(response, kw, geo, ranking):
-    """ Helper function for unpack_related_queries_response() """
-    try:
-        df = response[kw][ranking]
-        df[['keyword', 'ranking', 'geo', 'query_timestamp']] = [
-            kw, ranking, geo, datetime.now()]
-    except:
-        logging.info(f"Append empty dataframe for {ranking}: {kw}")
-        return pd.DataFrame(columns=['query', 'value', 'keyword', 'ranking', 'geo', 'query_timestamp'])
-
-    return df
-
-def unpack_related_queries_response(response):
-    """Unpack response from dictionary and create one dataframe for each ranking and each keyword """
-    assert isinstance(response, dict), "Empty response. Try again."
-
-    ranking = [*response[[*response][0]]]
-    keywords = [*response]
-
-    return response, ranking, keywords
-
-def create_related_queries_dataframe(response, rankings, keywords, geo_description='global'):
-    """Returns a single dataframe of related queries for a list of keywords
-    and each ranking (either 'top' or 'rising')
-    """
-    df_list = []
-    for r in rankings:
-        for kw in keywords:
-            df_list.append(process_related_query_response(
-                response, kw=kw, ranking=r, geo=geo_description))
-
-    return pd.concat(df_list)
-
-def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo='', geo_description='global'): 
-    """Returns all response data for pytrend's .related_queries() in a single dataframe
-    
-    Example usage:
-
-        pytrends_session = create_pytrends_session()
-        df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'lufthansa'])
-    """
-    response = get_related_queries(pytrends_session=pytrends_session, keyword_list=keyword_list, cat=cat, geo=geo) # 
-    response, rankings, keywords  = unpack_related_queries_response(response=response)
-    df_trends = create_related_queries_dataframe(
-        response=response, 
-        rankings=rankings, 
-        keywords=keywords, 
-        geo_description=geo_description)
-    
-    return df_trends
-
-
-
-
-# ----------------------------------------------------------
-# Google trends: Interest over time
-# ----------------------------------------------------------
+import sys
+sys.path.append('../src/data')
+sys.path.append('../src/visualization')
+from gtrends_extract import create_pytrends_session 
 
 
 import os
@@ -272,7 +175,6 @@ def sleep_countdown(duration, print_step=2):
 def get_interest_over_time(keyword_list, filepath, filepath_unsuccessful, timeframe='today 5-y', max_retries=3, timeout=20):
     """  
     Args:
-        TODO: add docs
         max_retries: number of maximum retries
     Returns:
         None: Writes dataframe to csv
@@ -309,3 +211,128 @@ def get_interest_over_time(keyword_list, filepath, filepath_unsuccessful, timefr
         else:
             df_to_csv(pd.DataFrame(kw_batch), filepath=filepath_unsuccessful)
             logging.warning(f"{kw_batch} appended to unsuccessful_queries")
+
+
+def query(keywords, filepath, filename, max_retries=1, idx_unsuccessful=list(), timeout=20) :
+    """Handle failed query and handle raised exceptions
+    
+    Input
+        keywords: list with keywords for which to retrieve news
+        max_retries: number of maximum retries
+        until_page: maximum number of retrievd news page
+        
+    
+    Return
+        Inidces where max retries were reached
+    """    
+    
+    # retry until max_retries reached
+    for attempt in range(max_retries):   
+
+        # random int from range around timeout 
+        timeout_randomized = randint(timeout-3,timeout+3)
+
+        try:
+            df_result = query_googletrends(keywords)
+
+
+        # handle query error
+        except Exception as e:
+
+            # increase timeout
+            timeout += 5
+
+            print(">>> EXCEPTION at {}: {} \n Set timeout to {}\n".format(i, e, timeout))
+            # sleep
+            h.sleep_countdown(timeout_randomized, print_step=2)
+
+
+        # query was successful: store results, sleep 
+        else:
+
+            # generate timestamp for csv
+            stamp = h.timestamp_now()
+
+            # merge news dataframes and export query results
+            h.make_csv(df_result, filename, filepath, append=True)
+
+            # sleep
+            h.sleep_countdown(timeout_randomized)
+            break
+
+    # max_retries reached: store index of unsuccessful query
+    else:
+        h.make_csv(pd.DataFrame(keywords), "unsuccessful_queries.csv", filepath, append=True)
+        print("{} appended to unsuccessful_queries\n".format(keywords))
+
+
+
+# NEXT: check how empty responses can be added to dataframe
+# RUN: query_googletrends and check output
+keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 
+                'abott transparency']
+date_index = get_query_date_index()
+'', query_googletrends(keywords=keyword_list, date_index=date_index)
+                # 'abott labor strike',
+                # 'sustainable finance', 'MSCI', 'ESG', 'lufthansa', 'pizza'] 
+# get_interest_over_time(keyword_list=keyword_list, 
+#     filepath='../data/raw/gtrends_test_query.csv', 
+#     filepath_unsuccessful='../data/raw/gtrends_test_query.csv')
+
+st.stop()
+
+
+
+
+
+
+
+
+#---------------------------------------------------
+# VISUALS
+#---------------------------------------------------
+from datetime import datetime
+timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}' 
+date_index = get_query_date_index(timeframe=timeframe)
+df_search_interest =  query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
+'', df_search_interest.set_index('date').resample('M')
+
+import tsf_plots
+
+def plot_interest_over_time(df):
+    """line chart: weekly change of Google trends """
+    fig = px.line(df, x="date", y="search_interest", color="keyword", 
+                    line_shape='spline',
+                  title='Search interest over time', 
+                 labels={
+                         "date": "",
+                         "keyword": "", 
+                         "search_interest": "Search interest"
+                     },
+                  # text = df.keyword
+                 )
+    # fig.update_traces(mode="markers+lines", hovertemplate="%{text}<br>" + "%{y:20.0f}Mio.<br>%{x}<extra></extra>") 
+    
+    # -- customize legend
+    fig.update_layout(
+        # legend=dict(
+        # orientation="v",
+        # yanchor="bottom",
+        # y=0.9,
+        # xanchor="right", 
+        # x=0.5, 
+        # bgcolor='rgba(0,0,0,0)'), # transparent  
+        hovermode="closest",
+    )
+    return fig
+
+def deploy_figure(figure, filename):    
+    """ Upload graph to chartstudio """
+    logging.info(f"Upload {filename} figure to plotly")
+    cs.plot(figure, filename=filename)
+
+
+tsf_plots.set_layout_template()
+fig = plot_interest_over_time(df_search_interest)
+st.plotly_chart(fig)
+deploy_figure(figure=fig, filename='gtrends_greenwashing_sf')
