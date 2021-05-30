@@ -43,7 +43,27 @@ def get_index_stock_details(pytickersymbols, index_name):
     index_details['yahoo_ticker'] = index_details.symbols.apply(lambda x: x[0]['yahoo'] if len(x) > 1 else np.nan)
     index_details.yahoo_ticker.fillna(index_details.symbol, inplace=True)
 
+    # set ticker as index
+    index_details.set_index('yahoo_ticker', inplace=True, drop=False)
+
     return index_details
+
+def get_esg_details(yahoo_ticker):
+    """Returns dataframe with esg information for suitable yahoo ticker (can be string, pd.Series or list)"""
+    
+    # convert series to list
+    if isinstance(yahoo_ticker, pd.Series): 
+        yahoo_ticker = yahoo_ticker.to_list()
+    
+    ticker_details = Ticker(yahoo_ticker)
+    esg_df = pd.DataFrame(ticker_details.esg_scores).T
+
+    return esg_df
+
+def get_index_firm_esg():
+    # todo: 
+    pass
+
 
 
 pts = PyTickerSymbols()
@@ -51,17 +71,19 @@ indices = PyTickerSymbols().get_all_indices()
 
 
 dax = get_index_stock_details(pytickersymbols=pts, index_name='DAX')
-eu_stoxx = get_index_stock_details(pytickersymbols=pts, index_name="EURO STOXX 50")
-cac_40 = get_index_stock_details(pytickersymbols=pts, index_name="CAC 40")
-omx = get_index_stock_details(pytickersymbols=pts, index_name="OMX Helsinki 25")
-sp500 = get_index_stock_details(pytickersymbols=pts, index_name="S&P 500")
+# eu_stoxx = get_index_stock_details(pytickersymbols=pts, index_name="EURO STOXX 50")
+# cac_40 = get_index_stock_details(pytickersymbols=pts, index_name="CAC 40")
+# omx = get_index_stock_details(pytickersymbols=pts, index_name="OMX Helsinki 25")
+# sp500 = get_index_stock_details(pytickersymbols=pts, index_name="S&P 500")
 
-'Indices ', dax.yahoo_ticker.to_list()
+esg_df = get_esg_details(yahoo_ticker=dax.yahoo_ticker)
 
-# which ticker to use? --> symbols[1]['yahoo']
-dax_details = Ticker(dax.yahoo_ticker.to_list())
+'', pd.concat([dax, esg_df], axis=1)
 
-'', pd.DataFrame(dax_details.summary_detail)
+# dax_details = Ticker(dax.yahoo_ticker.to_list())
+# 'ESG data', pd.DataFrame(dax_details.esg_scores).T
+
+# NEXT: 
 
 st.stop()
 
