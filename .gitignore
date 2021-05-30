@@ -1,6 +1,7 @@
 # custom
 archive/*
 settings.yml
+*.bat
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

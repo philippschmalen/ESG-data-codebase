@@ -1,107 +1,82 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
-import plotly.express as px
-import chart_studio.plotly as cs
-import logging
 
+import logging
 import pandas as pd
-import numpy as np
 
 import sys
 sys.path.append('../src/data')
 sys.path.append('../src/visualization')
 
-from gtrends_extract import (create_pytrends_session, 
-                            get_interest_over_time)
 
-def handle_query_results(df_query_result, keywords, date_index=None, query_length=261):
-    """Process query results: 
-            (i) check for empty response --> create df with 0s if empty
-            (ii) drop isPartial rows and column
-            (iii) transpose dataframe to wide format (keywords//search interest)
+#---------------------------------------------------
+# FIRM NAMES
+#---------------------------------------------------
+
+from yahooquery import Ticker
+from pytickersymbols import PyTickerSymbols
+import logging
+import numpy as np
+
+def get_index_stock_details(pytickersymbols, index_name):
+    """Get firm name, stock ticker for a specified stock index. 
+    Available indices from pytickersymbols: PyTickerSymbols().get_all_indices() 
+    See https://github.com/portfolioplus/pytickersymbols for package details
 
     Args:
-        df_query_result (pd.DataFrame): dataframe containing query result (could be empty)
-        date_index (pd.Series): series with date form a basic query to construct df for empty reponses 
-        
-    Returns:
-        Dataframe: contains query results in long format 
-        (rows: keywords, columns: search interest over time)
-    """
-    # non-empty df
-    if df_query_result.shape[0] != 0:
-        # reset_index to preserve date information, drop isPartial column
-        df_query_result_processed = df_query_result.reset_index()\
-            .drop(['isPartial'], axis=1)
-
-        df_query_result_long = pd.melt(df_query_result_processed, id_vars=['date'], var_name='keyword', value_name='search_interest')
-
-        # long format (date, keyword, search interest)
-        return df_query_result_long
-
-    # empty df: no search result for any keyword
-    else:        
-        # create empty df with 0s
-        query_length = len(date_index) if date_index is not None else query_length
-
-        df_zeros = pd.DataFrame(np.zeros((query_length*len(keywords), 3)), columns=['date','keyword', 'search_interest'])
-        # replace 0s with dates
-        df_zeros['date'] = pd.concat([date_index for i in range(len(keywords))], axis=0).reset_index(drop=True) if date_index is not None else 0
-        # replace 0s with keywords 
-        df_zeros['keyword'] = np.repeat(keywords, query_length)
-
-
-        return df_zeros
-
-
-
-def query_googletrends(keywords, date_index=None, timeframe='today 5-y'):
-    """Forward keywords to Google Trends API and process results into long format
-
-    Args
-        keywords: list of keywords, with maximum length 5
-
-    Return
-        DataFrame with search interest per keyword, preprocessed by handle_query_results()
-
-    """
-    # initialize pytrends
-    pt = create_pytrends_session()
-
-    # pass keywords to api
-    pt.build_payload(kw_list=keywords, timeframe=timeframe) 
-
-    # retrieve query results: search interest over time
-    df_query_result_raw = pt.interest_over_time()
-
-    # preprocess query results
-    df_query_result_processed = handle_query_results(df_query_result_raw, keywords, date_index)
-
-    return df_query_result_processed
-
-
-def get_query_date_index(timeframe='today 5-y'):
-    """Queries Google trends to have a valid index for query results that returned an empty dataframe
-
-    Returns:
-        pd.Series: date index of Google trend's interest_over_time()
-    """
+        pytickersymbols (object): Init object from PyTickerSymbols()
+        index_name (str): Index name from PyTickerSymbols().get_all_indices() 
     
-    # init pytrends with query that ALWAYS works
-    pt = create_pytrends_session()
-    pt.build_payload(kw_list=['pizza', 'lufthansa'], timeframe=timeframe)
-    df = pt.interest_over_time()
+    Returns:
+        Dataframe: 
+    """
+    index_details = pd.DataFrame(pytickersymbols.get_stocks_by_index(index_name))
+    
+    # string encoding
+    try: 
+        index_details.name = index_details.name.str.encode('latin-1').str.decode('utf-8')
+    except Exception as e: 
+        logging.warning(f"Encoding error for {index_name}")
+        index_details.name = index_details.name.str.encode('utf-8').str.decode('utf-8')
 
-    # set date as column
-    df = df.rename_axis('date').reset_index()
+    # retrieve yahoo ticker symbol
+    index_details['yahoo_ticker'] = index_details.symbols.apply(lambda x: x[0]['yahoo'] if len(x) > 1 else np.nan)
+    index_details.yahoo_ticker.fillna(index_details.symbol, inplace=True)
+
+    return index_details
 
 
-    return df.date
+pts = PyTickerSymbols()
+indices = PyTickerSymbols().get_all_indices()
+
+
+dax = get_index_stock_details(pytickersymbols=pts, index_name='DAX')
+eu_stoxx = get_index_stock_details(pytickersymbols=pts, index_name="EURO STOXX 50")
+cac_40 = get_index_stock_details(pytickersymbols=pts, index_name="CAC 40")
+omx = get_index_stock_details(pytickersymbols=pts, index_name="OMX Helsinki 25")
+sp500 = get_index_stock_details(pytickersymbols=pts, index_name="S&P 500")
+
+'Indices ', dax.yahoo_ticker.to_list()
+
+# which ticker to use? --> symbols[1]['yahoo']
+dax_details = Ticker(dax.yahoo_ticker.to_list())
+
+'', pd.DataFrame(dax_details.summary_detail)
+
+st.stop()
+
+#---------------------------------------------------
+# CONSTRUCT KEYWORDS
+#---------------------------------------------------
 
 
 
-# #--------------------------------------------------- 
-# # main function
-# #---------------------------------------------------
+
+#---------------------------------------------------
+# INTEREST OVER TIME
+#---------------------------------------------------
+
+from gtrends_extract import get_interest_over_time
 
 keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 'abott transparency']
 
@@ -109,29 +84,17 @@ keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott 
     filepath='../data/raw/gtrend_test.csv', 
     filepath_failed='../data/raw/gtrend_test_failed.csv', max_retries=1, timeout=5)
 
-# date_index = get_query_date_index()
-# '', query_googletrends(keywords=keyword_list, date_index=date_index)
-# works --> rather append 
-
-                # 'abott labor strike',
-                # 'sustainable finance', 'MSCI', 'ESG', 'lufthansa', 'pizza'] 
-# get_interest_over_time(keyword_list=keyword_list, 
-#     filepath='../data/raw/gtrends_test_query.csv', 
-#     filepath_unsuccessful='../data/raw/gtrends_test_query_unsuccessful.csv')
-
-st.stop()
-
-
-
-
-
 
 
 
 #---------------------------------------------------
 # VISUALS
 #---------------------------------------------------
+
 from datetime import datetime
+import plotly.express as px
+import chart_studio.plotly as cs
+
 timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}' 
 date_index = get_query_date_index(timeframe=timeframe)
 df_search_interest =  query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
