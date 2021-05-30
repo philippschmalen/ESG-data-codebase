@@ -45,6 +45,7 @@ def get_index_stock_details(pytickersymbols, index_name):
 
     # set ticker as index
     index_details.set_index('yahoo_ticker', inplace=True, drop=False)
+    index_details.drop(columns=['id'], inplace=True)
 
     return index_details
 
@@ -60,14 +61,23 @@ def get_esg_details(yahoo_ticker):
 
     return esg_df
 
-def get_index_firm_esg():
-    # todo: 
-    pass
+def get_index_firm_esg(pytickersymbols, index_name):
+    index_stocks = get_index_stock_details(pytickersymbols=pytickersymbols, index_name=index_name)
+    esg_details = get_esg_details(yahoo_ticker=index_stocks.yahoo_ticker)
+    
+    stocks_esg = pd.concat([index_stocks, esg_details], axis=1)
+
+    return stocks_esg
+    
 
 
 
 pts = PyTickerSymbols()
 indices = PyTickerSymbols().get_all_indices()
+
+'', get_index_firm_esg(pytickersymbols=pts, index_name='DAX')
+
+st.stop()
 
 
 dax = get_index_stock_details(pytickersymbols=pts, index_name='DAX')
@@ -85,7 +95,6 @@ esg_df = get_esg_details(yahoo_ticker=dax.yahoo_ticker)
 
 # NEXT: 
 
-st.stop()
 
 #---------------------------------------------------
 # CONSTRUCT KEYWORDS
