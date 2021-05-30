@@ -15,17 +15,32 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 
 <center><img src="references/img/tsf_logo.png" height ="300" width="310"/></center>
 
+## Getting started
+
+Configure `settings.yaml`. Mine looks like:
+
+```yaml
+dir:
+  raw: 'data/raw'
+  interim: 'data/interim'
+  processed: 'data/processed'
+  external: 'data/external'
+query:
+  google_results:
+    user_agent: {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    base_url: "https://www.google.com/search?q="
+```
+
+### Search interest over time
+
+To get analysis-ready data from Google trends, use  `get_interest_over_time()`. It takes a list of keywords and stores each query result into a CSV in `filepath`. It has in-built error handling and is designed fail-safe. For example, it increases the timeout between queries if one fails due to rate limit. Even after max retries, data is not lost, but the unsuccessful keywords are stored in a csv. 
+
+
 ## Code reference
 
 Here is the official documentation powered by mkdocs and mkdocstrings.
 
 > https://philippschmalen.github.io/ESG-data-codebase/
-
-## Getting started
-
-Configure `settings.yaml`.
-
-TODO: Describe how to use the code snippets
 
 ## Useful resources
 
@@ -92,7 +107,7 @@ Workflow to update documentation:
 
 ```bash
 # conda activate esg_codebase
-mkdocs serve # live-reloading
+mkdocs serve # live-reloading for editing
 mkdocs build # build static site
 mkdocs gh-deploy # deploy to github pages
 ```

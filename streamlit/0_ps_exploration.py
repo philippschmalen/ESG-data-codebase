@@ -9,13 +9,9 @@ import numpy as np
 import sys
 sys.path.append('../src/data')
 sys.path.append('../src/visualization')
-from gtrends_extract import create_pytrends_session 
 
-
-import os
-import sys
-from time import sleep
-from random import randint 
+from gtrends_extract import (create_pytrends_session, 
+                            get_interest_over_time)
 
 def handle_query_results(df_query_result, keywords, date_index=None, query_length=261):
     """Process query results: 
@@ -101,183 +97,27 @@ def get_query_date_index(timeframe='today 5-y'):
 
     return df.date
 
-#---------------------------------------------------
-# -- UTILITIES
-# 
-# list_flatten: flatten list
-# n_batch: generator for n-sized list batches
-# list_batch: get n-sized chunks from n_batch generator
-# df_to_csv: write csv
-# timestamp_now: get string  
-# sleep_countdown(): countdown in console
-# 
-#---------------------------------------------------
-
-def list_flatten(nested_list):
-    """Flattens nested list"""
-    return [element for sublist in nested_list for element in sublist]
-
-def n_batch(lst, n=5):
-    """Yield successive n-sized chunks from list lst
-    
-    Args
-        lst: list 
-        n: selected batch size
-        
-    Returns 
-        List: lst divided into batches of len(lst)/n lists
-    """
-    
-    for i in range(0, len(lst), n):
-        yield lst[i:i + n]
-
-def list_batch(lst, n=5):
-    """"Divides a list into a list of lists with n-sized length"""
-    return list(n_batch(lst=lst, n=n))
 
 
-def df_to_csv(df, filepath):
-    """Export df to CSV. If it exists already, append data."""
-    # file does not exist --> write header
-    if not os.path.isfile(f'{filepath}'):
-        df.to_csv(f'{filepath}', index=False)
-    # file exists --> append data without header
-    else:
-        df.to_csv(f'{filepath}', index=False, header=False, mode='a')
+# #--------------------------------------------------- 
+# # main function
+# #---------------------------------------------------
 
-def timestamp_now():
-    """Create timestamp string in format: yyyy/mm/dd-hh/mm/ss"""
-    
-    timestr = strftime("%Y%m%d-%H%M%S")
-    timestamp = '{}'.format(timestr)  
-    
-    return timestamp
+keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 'abott transparency']
 
-def sleep_countdown(duration, print_step=2):
-    """Sleep for certain duration and print remaining time in steps of print_step
-    
-    Input
-        duration: duration of timeout (int)
-        print_step: steps to print countdown (int)
+'', get_interest_over_time(keyword_list=keyword_list, 
+    filepath='../data/raw/gtrend_test.csv', 
+    filepath_failed='../data/raw/gtrend_test_failed.csv', max_retries=1, timeout=5)
 
-    Return 
-        None
-    """
-    for i in range(duration,0,-print_step):
-        sleep(print_step)
-        sys.stdout.write(str(i-print_step)+' ')
-        sys.stdout.flush()
+# date_index = get_query_date_index()
+# '', query_googletrends(keywords=keyword_list, date_index=date_index)
+# works --> rather append 
 
-#--------------------------------------------------- 
-# main function
-#---------------------------------------------------
-
-def get_interest_over_time(keyword_list, filepath, filepath_unsuccessful, timeframe='today 5-y', max_retries=3, timeout=20):
-    """  
-    Args:
-        max_retries: number of maximum retries
-    Returns:
-        None: Writes dataframe to csv
-    """
-    # get basic date index for empty responses
-    date_index = get_query_date_index(timeframe=timeframe)
-
-    # keywords in batches of 5
-    kw_batches = list_batch(lst=keyword_list, n=5)
-
-
-    for kw_batch in kw_batches: 
-        # retry until max_retries reached
-        for attempt in range(max_retries): 
-
-            # random int from range around timeout 
-            timeout_randomized = randint(timeout-3,timeout+3)
-            try:
-                df = query_googletrends(kw_batch, date_index=date_index)
-            
-            # query unsuccessful
-            except Exception as e:
-                timeout += 3 # increase timetout to be safe
-                sleep_countdown(timeout_randomized, print_step=2)
-            
-
-            # query was successful: store results, sleep 
-            else:
-                df_to_csv(df, filepath=filepath)
-                sleep_countdown(timeout_randomized)
-                break
-
-        # max_retries reached: store index of unsuccessful query
-        else:
-            df_to_csv(pd.DataFrame(kw_batch), filepath=filepath_unsuccessful)
-            logging.warning(f"{kw_batch} appended to unsuccessful_queries")
-
-
-def query(keywords, filepath, filename, max_retries=1, idx_unsuccessful=list(), timeout=20) :
-    """Handle failed query and handle raised exceptions
-    
-    Input
-        keywords: list with keywords for which to retrieve news
-        max_retries: number of maximum retries
-        until_page: maximum number of retrievd news page
-        
-    
-    Return
-        Inidces where max retries were reached
-    """    
-    
-    # retry until max_retries reached
-    for attempt in range(max_retries):   
-
-        # random int from range around timeout 
-        timeout_randomized = randint(timeout-3,timeout+3)
-
-        try:
-            df_result = query_googletrends(keywords)
-
-
-        # handle query error
-        except Exception as e:
-
-            # increase timeout
-            timeout += 5
-
-            print(">>> EXCEPTION at {}: {} \n Set timeout to {}\n".format(i, e, timeout))
-            # sleep
-            h.sleep_countdown(timeout_randomized, print_step=2)
-
-
-        # query was successful: store results, sleep 
-        else:
-
-            # generate timestamp for csv
-            stamp = h.timestamp_now()
-
-            # merge news dataframes and export query results
-            h.make_csv(df_result, filename, filepath, append=True)
-
-            # sleep
-            h.sleep_countdown(timeout_randomized)
-            break
-
-    # max_retries reached: store index of unsuccessful query
-    else:
-        h.make_csv(pd.DataFrame(keywords), "unsuccessful_queries.csv", filepath, append=True)
-        print("{} appended to unsuccessful_queries\n".format(keywords))
-
-
-
-# NEXT: check how empty responses can be added to dataframe
-# RUN: query_googletrends and check output
-keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 
-                'abott transparency']
-date_index = get_query_date_index()
-'', query_googletrends(keywords=keyword_list, date_index=date_index)
                 # 'abott labor strike',
                 # 'sustainable finance', 'MSCI', 'ESG', 'lufthansa', 'pizza'] 
 # get_interest_over_time(keyword_list=keyword_list, 
 #     filepath='../data/raw/gtrends_test_query.csv', 
-#     filepath_unsuccessful='../data/raw/gtrends_test_query.csv')
+#     filepath_unsuccessful='../data/raw/gtrends_test_query_unsuccessful.csv')
 
 st.stop()
 

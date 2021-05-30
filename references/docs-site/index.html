@@ -601,8 +601,11 @@ result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
 <a id="src.data.gtrends_extract"></a>
     <div class="doc doc-contents first">
 
-      <p>Extract data from Google trends with the pytrends package</p>
-<p>methods take one keyword, call pytrends and return raw data </p>
+      <p>Extract data from Google trends with the pytrends package
+Methods take one keyword, call pytrends and return processed data as CSV or dataframe</p>
+<p>There are two main functions: 
+    * get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
+    * get_interest_over_time: Returns CSV with interest over time for specified keywords</p>
 
 
 
@@ -668,10 +671,231 @@ and each ranking (either 'top' or 'rising')</p>
     <span class="n">df_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rankings</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
-            <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_response</span><span class="p">(</span>
+            <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_related_query_response</span><span class="p">(</span>
                 <span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo_description</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.get_interest_over_time" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_interest_over_time</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">filepath_failed</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Workhorse function to query Google Trend's interest_over_time() function. 
+It respects the query's requirements like 
+    * max. 5 keywords per query, handled by list_batch()
+    * a basic date index for queries returning empty dataframe
+    * randomized timeout to not bust rate limits</p>
+<p>Error handling:
+    * retry after query error with increased timeout
+    * when a query fails after retries, related keywords are stored in csv in filepath_failed. </p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>keyword_list</code></td>
+        <td><code>list</code></td>
+        <td><p>strings used for the google trends query</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>filepath</code></td>
+        <td><code>string</code></td>
+        <td><p>csv to store successful query results</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>filepath_failed</code></td>
+        <td><code>string</code></td>
+        <td><p>csv to store unsuccessful keywords</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>max_retries</code></td>
+        <td><code>int</code></td>
+        <td><p>how often retry </p></td>
+        <td><code>3</code></td>
+      </tr>
+      <tr>
+        <td><code>timeout</code></td>
+        <td><code>int</code></td>
+        <td><p>time to wait in seconds btw. queries</p></td>
+        <td><code>10</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>None</code></td>
+      <td><p>Writes dataframe to csv</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_interest_over_time</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">filepath_failed</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Workhorse function to query Google Trend&#39;s interest_over_time() function. </span>
+<span class="sd">    It respects the query&#39;s requirements like </span>
+<span class="sd">        * max. 5 keywords per query, handled by list_batch()</span>
+<span class="sd">        * a basic date index for queries returning empty dataframe</span>
+<span class="sd">        * randomized timeout to not bust rate limits</span>
+
+<span class="sd">    Error handling:</span>
+<span class="sd">        * retry after query error with increased timeout</span>
+<span class="sd">        * when a query fails after retries, related keywords are stored in csv in filepath_failed. </span>
+
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        keyword_list (list): strings used for the google trends query</span>
+<span class="sd">        filepath (string): csv to store successful query results</span>
+<span class="sd">        filepath_failed (string): csv to store unsuccessful keywords</span>
+<span class="sd">        max_retries (int): how often retry </span>
+<span class="sd">        timeout (int): time to wait in seconds btw. queries</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None: Writes dataframe to csv</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># get basic date index for empty responses</span>
+    <span class="n">date_index</span> <span class="o">=</span> <span class="n">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span>
+
+    <span class="c1"># divide list into batches of max 5 elements (requirement from Gtrends)</span>
+    <span class="n">kw_batches</span> <span class="o">=</span> <span class="n">list_batch</span><span class="p">(</span><span class="n">lst</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+    <span class="k">for</span> <span class="n">kw_batch</span> <span class="ow">in</span> <span class="n">kw_batches</span><span class="p">:</span> 
+        <span class="c1"># retry until max_retries reached</span>
+        <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span> 
+
+            <span class="c1"># random int from range around timeout </span>
+            <span class="n">timeout_randomized</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">timeout</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">timeout</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">query_interest_over_time</span><span class="p">(</span><span class="n">kw_batch</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="n">date_index</span><span class="p">)</span>
+
+            <span class="c1"># query unsuccessful</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">timeout</span> <span class="o">+=</span> <span class="mi">3</span> <span class="c1"># increase timetout to be safe</span>
+                <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">,</span> <span class="n">print_step</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+            <span class="c1"># query was successful: store results, sleep </span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">df_to_csv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span><span class="p">)</span>
+                <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="c1"># max_retries reached: store index of unsuccessful query</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df_to_csv</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kw_batch</span><span class="p">),</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath_failed</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">kw_batch</span><span class="si">}</span><span class="s2"> appended to unsuccessful_queries&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.get_query_date_index" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Queries Google trends to have a valid index for query results that returned an empty dataframe</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>timeframe</code></td>
+        <td><code>string</code></td>
+        <td></td>
+        <td><code>&#39;today 5-y&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>pd.Series</code></td>
+      <td><p>date index of Google trend's interest_over_time()</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Queries Google trends to have a valid index for query results that returned an empty dataframe</span>
+<span class="sd">    Args:</span>
+<span class="sd">        timeframe (string): </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: date index of Google trend&#39;s interest_over_time()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># init pytrends with query that ALWAYS works</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">create_pytrends_session</span><span class="p">()</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;lufthansa&#39;</span><span class="p">],</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">interest_over_time</span><span class="p">()</span>
+
+    <span class="c1"># set date as column</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">date</span>
 </code></pre></div>
         </details>
     </div>
@@ -832,8 +1056,114 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 
 
-<h2 id="src.data.gtrends_extract.process_response" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">)</span></code>
+<h2 id="src.data.gtrends_extract.process_interest_over_time" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query_length</span><span class="o">=</span><span class="mi">261</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Process query results
+        * check for empty response --&gt; create df with 0s if empty
+        * drop isPartial rows and column
+        * transpose dataframe to wide format (keywords//search interest)</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>df_query_result</code></td>
+        <td><code>pd.DataFrame</code></td>
+        <td><p>dataframe containing query result (could be empty)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>date_index</code></td>
+        <td><code>pd.Series</code></td>
+        <td><p>series with date form a basic query to construct df for empty reponses </p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dataframe</code></td>
+      <td><p>contains query results in long format 
+(rows: keywords, columns: search interest over time)</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query_length</span><span class="o">=</span><span class="mi">261</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Process query results</span>
+<span class="sd">            * check for empty response --&gt; create df with 0s if empty</span>
+<span class="sd">            * drop isPartial rows and column</span>
+<span class="sd">            * transpose dataframe to wide format (keywords//search interest)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_query_result (pd.DataFrame): dataframe containing query result (could be empty)</span>
+<span class="sd">        date_index (pd.Series): series with date form a basic query to construct df for empty reponses </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataframe: contains query results in long format </span>
+<span class="sd">        (rows: keywords, columns: search interest over time)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># non-empty df</span>
+    <span class="k">if</span> <span class="n">df_query_result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># reset_index to preserve date information, drop isPartial column</span>
+        <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">df_query_result</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>\
+            <span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;isPartial&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">df_query_result_long</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df_query_result_processed</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;search_interest&#39;</span><span class="p">)</span>
+
+        <span class="c1"># long format (date, keyword, search interest)</span>
+        <span class="k">return</span> <span class="n">df_query_result_long</span>
+
+    <span class="c1"># empty df: no search result for any keyword</span>
+    <span class="k">else</span><span class="p">:</span>        
+        <span class="c1"># create empty df with 0s</span>
+        <span class="n">query_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_index</span><span class="p">)</span> <span class="k">if</span> <span class="n">date_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">query_length</span>
+
+        <span class="n">df_zeros</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">query_length</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;search_interest&#39;</span><span class="p">])</span>
+        <span class="c1"># replace 0s with dates</span>
+        <span class="n">df_zeros</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">date_index</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">date_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="c1"># replace 0s with keywords </span>
+        <span class="n">df_zeros</span><span class="p">[</span><span class="s1">&#39;keyword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">query_length</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">df_zeros</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.process_related_query_response" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">process_related_query_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">)</span></code>
 
 
 </h2>
@@ -844,7 +1174,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
         <details class="quote">
           <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_related_query_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Helper function for unpack_related_queries_response() &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="n">kw</span><span class="p">][</span><span class="n">ranking</span><span class="p">]</span>
@@ -855,6 +1185,85 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;query_timestamp&#39;</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.gtrends_extract.query_interest_over_time" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">query_interest_over_time</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Forward keywords to Google Trends API and process results into long format</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>keywords</code></td>
+        <td><code>list</code></td>
+        <td><p>list of keywords, with maximum length 5</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>DataFrame</code></td>
+      <td><p>Search interest per keyword, preprocessed by process_interest_over_time()</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">query_interest_over_time</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Forward keywords to Google Trends API and process results into long format</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keywords (list): list of keywords, with maximum length 5</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DataFrame: Search interest per keyword, preprocessed by process_interest_over_time()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># init pytrends</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">create_pytrends_session</span><span class="p">()</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span> 
+
+    <span class="c1"># load search interest over time</span>
+    <span class="n">df_query_result_raw</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">interest_over_time</span><span class="p">()</span>
+
+    <span class="c1"># preprocess query results</span>
+    <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result_raw</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_query_result_processed</span>
 </code></pre></div>
         </details>
     </div>
