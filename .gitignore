@@ -1,6 +1,5 @@
 # custom
 archive/*
-settings.yml
 *.bat
 
 # Byte-compiled / optimized / DLL files

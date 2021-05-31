@@ -3,6 +3,7 @@ import streamlit as st
 
 import logging
 import pandas as pd
+import yaml
 
 import sys
 sys.path.append('../src/data')
@@ -17,6 +18,7 @@ from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
+import re 
 
 def get_index_stock_details(pytickersymbols, index_name):
     """Get firm name, stock ticker for a specified stock index. 
@@ -61,6 +63,7 @@ def get_esg_details(yahoo_ticker):
 
     return esg_df
 
+@st.cache
 def get_index_firm_esg(pytickersymbols, index_name):
     index_stocks = get_index_stock_details(pytickersymbols=pytickersymbols, index_name=index_name)
     esg_details = get_esg_details(yahoo_ticker=index_stocks.yahoo_ticker)
@@ -68,16 +71,68 @@ def get_index_firm_esg(pytickersymbols, index_name):
     stocks_esg = pd.concat([index_stocks, esg_details], axis=1)
 
     return stocks_esg
+
+
+def regex_strip_legalname(legal_firm_name):
+    """Removes legal entity, technical description or firm type from firm name
+
+    Args:
+        legal_firm_names (list): strings with full firm names
+        
+    Returns:
+        list: firm names without legal suffix 
+
+    """
+
+    pattern = r"""(\s|\.|\,|\&)*(\.com|Enterprise|Worldwide|Int\'l|N\.V\.|LLC|Co\b|Inc\b|Corp\w*|Group\sInc|Group|Company|Holdings\sInc|\WCo(\s|\.)|plc|Ltd|Int'l\.|AG|SE|Kommanditgesellschaft auf Aktien|KGaA|PLC|versicherungs-Gesellschaft|\.|Vz|KGaA St|Holdings\(?Class\s\w+\)?)\.?\W?"""
+    stripped_names = re.sub(pattern,'', legal_firm_name)
+
+    return stripped_names
+
+def replace_firm_names(df, settings_path):
+    """Replace firm names as specified in settings.yaml"""
+
+    with open(settings_path, encoding='utf8') as file:
+        settings = yaml.full_load(file)
+
+    try: settings['query']['firm_name']
+    except: logging.warning("No firm names specified in settings['query']['firm_name']. \
+        Firm names still contain legal suffix which compromises search results.")
+    assert "name" in df.columns , "Dataframe has no name column. Firm names cannot be replaced."
+
+    replace_firm_names = settings['query']['firm_names']
+    df['firm_name'] = df.name.replace(replace_firm_names, regex=True)
+
+    return df
+
     
 
+def remove_missing_esg_firms(df):
+
+    pass
 
 
 pts = PyTickerSymbols()
 indices = PyTickerSymbols().get_all_indices()
+esg_df_raw = get_index_firm_esg(pytickersymbols=pts, index_name="DAX")
+esg_df = esg_df_raw.pipe(replace_firm_names, settings_path='../settings.yaml')
 
-'', get_index_firm_esg(pytickersymbols=pts, index_name='DAX')
+
+'', indices, esg_df[~esg_df.peerGroup.str.contains("No fundamentals data")]
+
 
 st.stop()
+
+
+
+
+
+
+
+
+
+
+
 
 
 dax = get_index_stock_details(pytickersymbols=pts, index_name='DAX')
