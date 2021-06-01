@@ -63,7 +63,7 @@ def get_esg_details(yahoo_ticker):
 
     return esg_df
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def get_index_firm_esg(pytickersymbols, index_name):
     index_stocks = get_index_stock_details(pytickersymbols=pytickersymbols, index_name=index_name)
     esg_details = get_esg_details(yahoo_ticker=index_stocks.yahoo_ticker)
@@ -105,55 +105,67 @@ def replace_firm_names(df, settings_path):
 
     return df
 
+def get_esg_controversy_keywords(settings_path):
+    """Load controversy keywords from settings.yaml"""
+
+    with open(settings_path, encoding='utf8') as file:
+        settings = yaml.full_load(file)
+
+    controversies = settings['esg']['negative']
+
+    return controversies
+
+def remove_missing_esg_firms(esg_df, missing_placeholder="No fundamentals data"):
+    """Drops firms that have no ESG scores. Placeholder from Yahoo"""
+    return esg_df.loc[~esg_df.peerGroup.str.contains(missing_placeholder)]
     
+def create_query_keywords(esg_df, keyword_list, explode=True):
+    """Construct query keywords from firm_name and a list of keywords
+    
+    Args:
+        esg_df (Dataframe): Data from yahooquery Ticker(yahoo_ticker).esg_scores, processed firm names
+        keyword_list (list): list of strings that are attached to each firm name
+        explode (boolean): If true re-shapes to logn format with each row having a unique query_keyword
 
-def remove_missing_esg_firms(df):
+    Returns:
+        Dataframe: added query_keyword column (firm_name + keyword)
 
-    pass
+    """
+    esg_df['query_keyword'] = esg_df.firm_name.apply(lambda x: [x+kw for kw in keyword_list])
 
+    if explode: return esg_df.explode(column='query_keyword')
+    else: return esg_df
 
-pts = PyTickerSymbols()
+def esg_firm_query_keywords_pipeline(pytickersymbols, index_name, path_to_settings):
+    """ 
+
+    Args:
+        pytickersymbols (object): PyTickerSymbols() from pytickersymbols import PyTickerSymbols 
+        index_name (string): Index name, one of PyTickerSymbols().get_all_indices()
+        path_to_settings (string): path to settings.yaml, where all esg keywords are specified
+    
+    Returns:
+        Dataframe: esg scores and related data from Yahoo!Finance incl. processed firm names and query keywords
+
+    """
+    controversy_keywords = get_esg_controversy_keywords(path_to_settings)
+    esg_df = (get_index_firm_esg(pytickersymbols=pytickersymbols, index_name=index_name)
+                        .pipe(replace_firm_names, settings_path=path_to_settings)
+                        .pipe(remove_missing_esg_firms)
+                        .pipe(create_query_keywords, keyword_list=controversy_keywords))
+
+    return esg_df
+
+esg_df = esg_firm_query_keywords_pipeline(pytickersymbols=PyTickerSymbols(), index_name='DAX', path_to_settings='../settings.yaml')
 indices = PyTickerSymbols().get_all_indices()
-esg_df_raw = get_index_firm_esg(pytickersymbols=pts, index_name="DAX")
-esg_df = esg_df_raw.pipe(replace_firm_names, settings_path='../settings.yaml')
 
 
-'', indices, esg_df[~esg_df.peerGroup.str.contains("No fundamentals data")]
+
+'', esg_df
 
 
 st.stop()
 
-
-
-
-
-
-
-
-
-
-
-
-
-dax = get_index_stock_details(pytickersymbols=pts, index_name='DAX')
-# eu_stoxx = get_index_stock_details(pytickersymbols=pts, index_name="EURO STOXX 50")
-# cac_40 = get_index_stock_details(pytickersymbols=pts, index_name="CAC 40")
-# omx = get_index_stock_details(pytickersymbols=pts, index_name="OMX Helsinki 25")
-# sp500 = get_index_stock_details(pytickersymbols=pts, index_name="S&P 500")
-
-esg_df = get_esg_details(yahoo_ticker=dax.yahoo_ticker)
-
-'', pd.concat([dax, esg_df], axis=1)
-
-# dax_details = Ticker(dax.yahoo_ticker.to_list())
-# 'ESG data', pd.DataFrame(dax_details.esg_scores).T
-
-# NEXT: 
-
-
-#---------------------------------------------------
-# CONSTRUCT KEYWORDS
-#---------------------------------------------------
 
 
 

@@ -25,3 +25,45 @@ query:
     "& Co. KGaA": ""
     PLC: ""
     hanswrust: "IK BIN MIR EINER"
+esg:
+  # inspired by https://www.esade.edu/itemsweb/biblioteca/bbdd/inbbdd/archivos/Thomson_Reuters_ESG_Scores.pdf
+  negative:
+    - pollution
+    - fossil fuel
+    - incident
+    - accident
+    - catastrophe
+    - harassment
+    - violation
+    - human rights
+    - sexism
+    - discrimination
+    - racist
+    - racism
+    - unfair
+    - hate
+    - strike
+    - layoff
+    - greenwashing
+    - scandal
+    - corruption
+    - fraud
+    - bribe
+    - tax
+    - violation
+    - conflict
+    - non-transparent
+    - lawsuit
+    - problem
+    - issue
+    - controversial
+    - infringement
+    - cartel
+    - child labor
+    - complaint
+    - shock
+    - aggressive
+    - manipulation
+    - dispute
+
+  
