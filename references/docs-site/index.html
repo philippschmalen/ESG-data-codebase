@@ -249,6 +249,475 @@
                 
                 
                 <h1 id="code-reference">Code reference</h1>
+<h1 id="esg-data-from-yahooquery">ESG data from yahooquery</h1>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="src.data.yahoofinance_extract"></a>
+    <div class="doc doc-contents first">
+
+      <p>Retrieve firm-level esg scores, process firm names and construct query strings</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.create_query_keywords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_query_keywords</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Construct query keywords from firm_name and a list of keywords</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>esg_df</code></td>
+        <td><code>Dataframe</code></td>
+        <td><p>Data from yahooquery Ticker(yahoo_ticker).esg_scores, processed firm names</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>keyword_list</code></td>
+        <td><code>list</code></td>
+        <td><p>list of strings that are attached to each firm name</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>explode</code></td>
+        <td><code>boolean</code></td>
+        <td><p>If true re-shapes to logn format with each row having a unique query_keyword</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dataframe</code></td>
+      <td><p>added query_keyword column (firm_name + keyword)</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_query_keywords</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct query keywords from firm_name and a list of keywords</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        esg_df (Dataframe): Data from yahooquery Ticker(yahoo_ticker).esg_scores, processed firm names</span>
+<span class="sd">        keyword_list (list): list of strings that are attached to each firm name</span>
+<span class="sd">        explode (boolean): If true re-shapes to logn format with each row having a unique query_keyword</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataframe: added query_keyword column (firm_name + keyword)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">esg_df</span><span class="p">[</span><span class="s1">&#39;query_keyword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">firm_name</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">kw</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">explode</span><span class="p">:</span> <span class="k">return</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;query_keyword&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">esg_df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.esg_firm_query_keywords_pipeline" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>ESG scores, processed firm names and firm name query strings in a dataframe.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>pytickersymbols</code></td>
+        <td><code>object</code></td>
+        <td><p>PyTickerSymbols() from pytickersymbols import PyTickerSymbols </p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>index_name</code></td>
+        <td><code>string</code></td>
+        <td><p>Index name, one of PyTickerSymbols().get_all_indices()</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>path_to_settings</code></td>
+        <td><code>string</code></td>
+        <td><p>path to settings.yaml, where all esg keywords are specified</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dataframe</code></td>
+      <td><p>esg scores and related data from Yahoo!Finance incl. processed firm names and query keywords</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;ESG scores, processed firm names and firm name query strings in a dataframe.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pytickersymbols (object): PyTickerSymbols() from pytickersymbols import PyTickerSymbols </span>
+<span class="sd">        index_name (string): Index name, one of PyTickerSymbols().get_all_indices()</span>
+<span class="sd">        path_to_settings (string): path to settings.yaml, where all esg keywords are specified</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataframe: esg scores and related data from Yahoo!Finance incl. processed firm names and query keywords</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">controversy_keywords</span> <span class="o">=</span> <span class="n">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">path_to_settings</span><span class="p">)</span>
+    <span class="n">esg_df</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">settings_path</span><span class="o">=</span><span class="n">path_to_settings</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">remove_missing_esg_firms</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">create_query_keywords</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">controversy_keywords</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">esg_df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.get_esg_controversy_keywords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">settings_path</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Load controversy keywords from settings.yaml</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">settings_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load controversy keywords from settings.yaml&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">full_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="n">controversies</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;esg&#39;</span><span class="p">][</span><span class="s1">&#39;negative&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">controversies</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.get_esg_details" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Returns esg information for suitable yahoo ticker which can be string, pd.Series or list</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns esg information for suitable yahoo ticker which can be string, pd.Series or list&quot;&quot;&quot;</span>
+
+    <span class="c1"># convert series to list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span> 
+        <span class="n">yahoo_ticker</span> <span class="o">=</span> <span class="n">yahoo_ticker</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+    <span class="n">ticker_details</span> <span class="o">=</span> <span class="n">Ticker</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">)</span>
+    <span class="n">esg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ticker_details</span><span class="o">.</span><span class="n">esg_scores</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">return</span> <span class="n">esg_df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.get_index_firm_esg" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Merge index, firm name and esg data</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@st</span><span class="o">.</span><span class="n">cache</span><span class="p">(</span><span class="n">allow_output_mutation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Merge index, firm name and esg data&quot;&quot;&quot;</span>
+    <span class="n">index_stocks</span> <span class="o">=</span> <span class="n">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+    <span class="n">esg_details</span> <span class="o">=</span> <span class="n">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="o">=</span><span class="n">index_stocks</span><span class="o">.</span><span class="n">yahoo_ticker</span><span class="p">)</span>
+
+    <span class="n">stocks_esg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">index_stocks</span><span class="p">,</span> <span class="n">esg_details</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">stocks_esg</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.get_index_stock_details" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Get firm name, stock ticker for a specified stock index. 
+Available indices from pytickersymbols: PyTickerSymbols().get_all_indices() 
+See https://github.com/portfolioplus/pytickersymbols for package details</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>pytickersymbols</code></td>
+        <td><code>object</code></td>
+        <td><p>Init object from PyTickerSymbols()</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>index_name</code></td>
+        <td><code>str</code></td>
+        <td><p>Index name from PyTickerSymbols().get_all_indices() </p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dataframe</code></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get firm name, stock ticker for a specified stock index. </span>
+<span class="sd">    Available indices from pytickersymbols: PyTickerSymbols().get_all_indices() </span>
+<span class="sd">    See https://github.com/portfolioplus/pytickersymbols for package details</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pytickersymbols (object): Init object from PyTickerSymbols()</span>
+<span class="sd">        index_name (str): Index name from PyTickerSymbols().get_all_indices() </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataframe: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index_details</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">.</span><span class="n">get_stocks_by_index</span><span class="p">(</span><span class="n">index_name</span><span class="p">))</span>
+
+    <span class="c1"># string encoding</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encoding error for </span><span class="si">{</span><span class="n">index_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+    <span class="c1"># retrieve yahoo ticker symbol</span>
+    <span class="n">index_details</span><span class="p">[</span><span class="s1">&#39;yahoo_ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;yahoo&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">index_details</span><span class="o">.</span><span class="n">yahoo_ticker</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">index_details</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># set ticker as index</span>
+    <span class="n">index_details</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;yahoo_ticker&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">index_details</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">index_details</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.remove_missing_esg_firms" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">remove_missing_esg_firms</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">missing_placeholder</span><span class="o">=</span><span class="s1">&#39;No fundamentals data&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Drops firms that have no ESG scores. Placeholder from Yahoo</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">remove_missing_esg_firms</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">missing_placeholder</span><span class="o">=</span><span class="s2">&quot;No fundamentals data&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Drops firms that have no ESG scores. Placeholder from Yahoo&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">esg_df</span><span class="o">.</span><span class="n">peerGroup</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">missing_placeholder</span><span class="p">)]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="src.data.yahoofinance_extract.replace_firm_names" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">replace_firm_names</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">settings_path</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Replace firm names as specified in settings.yaml</p>
+
+        <details class="quote">
+          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">replace_firm_names</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">settings_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Replace firm names as specified in settings.yaml&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">full_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">][</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No firm names specified in settings[&#39;query&#39;][&#39;firm_name&#39;]. </span><span class="se">\</span>
+<span class="s2">        Firm names still contain legal suffix which compromises search results.&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="p">,</span> <span class="s2">&quot;Dataframe has no name column. Firm names cannot be replaced.&quot;</span>
+
+    <span class="n">replace_firm_names</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">][</span><span class="s1">&#39;firm_names&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+<hr />
 <h1 id="google-results-count">Google results count</h1>
 
 
@@ -794,7 +1263,7 @@ It respects the query's requirements like
     <span class="n">kw_batches</span> <span class="o">=</span> <span class="n">list_batch</span><span class="p">(</span><span class="n">lst</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 
-    <span class="k">for</span> <span class="n">kw_batch</span> <span class="ow">in</span> <span class="n">kw_batches</span><span class="p">:</span> 
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">kw_batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">):</span> 
         <span class="c1"># retry until max_retries reached</span>
         <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span> 
 
@@ -805,12 +1274,14 @@ It respects the query's requirements like
 
             <span class="c1"># query unsuccessful</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;query_interest_over_time() failed in get_interest_over_time with: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">timeout</span> <span class="o">+=</span> <span class="mi">3</span> <span class="c1"># increase timetout to be safe</span>
                 <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">,</span> <span class="n">print_step</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 
             <span class="c1"># query was successful: store results, sleep </span>
             <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">))</span><span class="si">}</span><span class="s2"> get_interest_over_time() query successful&quot;</span><span class="p">)</span>
                 <span class="n">df_to_csv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span><span class="p">)</span>
                 <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">)</span>
                 <span class="k">break</span>

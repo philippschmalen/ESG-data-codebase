@@ -1,24 +1,17 @@
-# -*- coding: utf-8 -*-
+"""
+Retrieve firm-level esg scores, process firm names and construct query strings
+
+"""
 import streamlit as st
-
-import logging
-import pandas as pd
-import yaml
-
-import sys
-sys.path.append('../src/data')
-sys.path.append('../src/visualization')
-
-
-#---------------------------------------------------
-# INDEX DETAILS
-#---------------------------------------------------
-
 from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
 import re 
+
+#---------------------------------------------------
+# INDEX DETAILS
+#---------------------------------------------------
 
 def get_index_stock_details(pytickersymbols, index_name):
     """Get firm name, stock ticker for a specified stock index. 
@@ -143,85 +136,3 @@ def esg_firm_query_keywords_pipeline(pytickersymbols, index_name, path_to_settin
                         .pipe(create_query_keywords, keyword_list=controversy_keywords))
 
     return esg_df
-
-esg_df = esg_firm_query_keywords_pipeline(pytickersymbols=PyTickerSymbols(), index_name='DAX', path_to_settings='../settings.yaml')
-indices = PyTickerSymbols().get_all_indices()
-
-
-
-'', esg_df
-
-
-st.stop()
-
-
-
-
-
-#---------------------------------------------------
-# INTEREST OVER TIME
-#---------------------------------------------------
-
-from gtrends_extract import get_interest_over_time
-
-keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 'abott transparency']
-
-'', get_interest_over_time(keyword_list=keyword_list, 
-    filepath='../data/raw/gtrend_test.csv', 
-    filepath_failed='../data/raw/gtrend_test_failed.csv', max_retries=1, timeout=5)
-
-
-
-
-#---------------------------------------------------
-# VISUALS
-#---------------------------------------------------
-
-from datetime import datetime
-import plotly.express as px
-import chart_studio.plotly as cs
-
-timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}' 
-date_index = get_query_date_index(timeframe=timeframe)
-df_search_interest =  query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
-'', df_search_interest.set_index('date').resample('M')
-
-import tsf_plots
-
-def plot_interest_over_time(df):
-    """line chart: weekly change of Google trends """
-    fig = px.line(df, x="date", y="search_interest", color="keyword", 
-                    line_shape='spline',
-                  title='Search interest over time', 
-                 labels={
-                         "date": "",
-                         "keyword": "", 
-                         "search_interest": "Search interest"
-                     },
-                  # text = df.keyword
-                 )
-    # fig.update_traces(mode="markers+lines", hovertemplate="%{text}<br>" + "%{y:20.0f}Mio.<br>%{x}<extra></extra>") 
-    
-    # -- customize legend
-    fig.update_layout(
-        # legend=dict(
-        # orientation="v",
-        # yanchor="bottom",
-        # y=0.9,
-        # xanchor="right", 
-        # x=0.5, 
-        # bgcolor='rgba(0,0,0,0)'), # transparent  
-        hovermode="closest",
-    )
-    return fig
-
-def deploy_figure(figure, filename):    
-    """ Upload graph to chartstudio """
-    logging.info(f"Upload {filename} figure to plotly")
-    cs.plot(figure, filename=filename)
-
-
-tsf_plots.set_layout_template()
-fig = plot_interest_over_time(df_search_interest)
-st.plotly_chart(fig)
-deploy_figure(figure=fig, filename='gtrends_greenwashing_sf')
