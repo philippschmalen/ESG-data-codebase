@@ -15,7 +15,7 @@ from datetime import datetime
 from random import randint 
 from pytrends.request import TrendReq
 import streamlit as st
-# from utilities import (n_batch, list_batch, df_to_csv, timestamp_now, sleep_countdown)
+from utilities import (n_batch, list_batch, df_to_csv, timestamp_now, sleep_countdown)
 
 def create_pytrends_session():
     """Create pytrends TrendReq() session on which .build_payload() can be called """
