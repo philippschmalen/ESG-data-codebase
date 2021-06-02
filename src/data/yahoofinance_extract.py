@@ -7,7 +7,10 @@ from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
+import pandas as pd
 import re 
+import yaml
+
 
 #---------------------------------------------------
 # INDEX DETAILS
@@ -117,11 +120,10 @@ def create_query_keywords(esg_df, keyword_list, explode=True):
     if explode: return esg_df.explode(column='query_keyword')
     else: return esg_df
 
-def esg_firm_query_keywords_pipeline(pytickersymbols, index_name, path_to_settings):
+def esg_firm_query_keywords_pipeline(index_name, path_to_settings):
     """ESG scores, processed firm names and firm name query strings in a dataframe.
 
     Args:
-        pytickersymbols (object): PyTickerSymbols() from pytickersymbols import PyTickerSymbols 
         index_name (string): Index name, one of PyTickerSymbols().get_all_indices()
         path_to_settings (string): path to settings.yaml, where all esg keywords are specified
     
@@ -129,6 +131,7 @@ def esg_firm_query_keywords_pipeline(pytickersymbols, index_name, path_to_settin
         Dataframe: esg scores and related data from Yahoo!Finance incl. processed firm names and query keywords
 
     """
+    pytickersymbols = PyTickerSymbols()
     controversy_keywords = get_esg_controversy_keywords(path_to_settings)
     esg_df = (get_index_firm_esg(pytickersymbols=pytickersymbols, index_name=index_name)
                         .pipe(replace_firm_names, settings_path=path_to_settings)
