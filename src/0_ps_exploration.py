@@ -6,56 +6,24 @@ import pandas as pd
 import yaml
 import plotly.express as px
 
-import sys
-sys.path.append('../')
-sys.path.append('../src/data')
-sys.path.append('../src/visualization')
-
-
 from pytickersymbols import PyTickerSymbols
-import src.data.yahoofinance_extract as yq
-from src.data.gtrends_extract import get_interest_over_time
-from tsf_plots import set_layout_template
+import data.yahoofinance_extract as yq
+import data.utilities as utilities
+from data.gtrends_extract import get_interest_over_time
+from visualization.tsf_plots import set_layout_template
+from data.utilities import timestamp_now
 
-
+    
 esg_df = yq.esg_firm_query_keywords_pipeline(index_name='DAX', path_to_settings='../settings.yaml')
 indices = PyTickerSymbols().get_all_indices()
 
-trends_df = get_interest_over_time(keyword_list=esg_df.query_keyword, 
-    filepath='../data/raw/dax_search_interest_020621.csv', 
-    filepath_failed='../data/raw/failed_dax_search_interest_020621.csv')
-
-# '', trends_df
-
-# join esg and gtrends 
-# search_interest = pd.read_csv(filepath).set_index('keyword', drop=False)
-# esg_df = esg_df.set_index('query_keyword', drop=False)
-# search_interest.join(esg_df)
-
-
-# set_layout_template()
-# fig_over_time = px.scatter(df, x='date', y='search_interest', color='keyword')
-# st.plotly_chart(fig_over_time)
-
-
+trends_df = get_interest_over_time(keyword_list=esg_df.query_keyword[:100], 
+    filepath=f'../data/raw/dax_search_interest_{timestamp_now()}.csv', 
+    filepath_failed=f'../data/raw/failed_dax_search_interest_{timestamp_now()}.csv')
 
 st.stop()
 
 
-
-
-
-#---------------------------------------------------
-# INTEREST OVER TIME
-#---------------------------------------------------
-
-from gtrends_extract import get_interest_over_time
-
-keyword_list = ['abott labor strike', 'CenterPoint Energy greenwashing', 'abott greenwashing', 'abott transparency']
-
-'', get_interest_over_time(keyword_list=keyword_list, 
-    filepath='../data/raw/gtrend_test.csv', 
-    filepath_failed='../data/raw/gtrend_test_failed.csv', max_retries=1, timeout=5)
 
 
 

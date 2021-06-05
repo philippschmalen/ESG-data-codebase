@@ -14,8 +14,7 @@ import logging
 from datetime import datetime
 from random import randint 
 from pytrends.request import TrendReq
-import streamlit as st
-from utilities import (n_batch, list_batch, df_to_csv, timestamp_now, sleep_countdown)
+from .utilities import (n_batch, list_batch, df_to_csv, sleep_countdown, timestamp_now)
 
 def create_pytrends_session():
     """Create pytrends TrendReq() session on which .build_payload() can be called """
@@ -138,16 +137,16 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
         return df_query_result_long
 
     # empty df: no search result for any keyword
-    else:        
+    else: 
+        keywords = keywords.to_list()
+        logging.info(f"""process_interest_over_time() handles empty dataframe for {keywords}""")
         # create empty df with 0s
-        query_length = len(date_index) if date_index is not None else query_length
-
+        query_length = len(date_index)
         df_zeros = pd.DataFrame(np.zeros((query_length*len(keywords), 3)), columns=['date','keyword', 'search_interest'])
-        # replace 0s with dates
-        df_zeros['date'] = pd.concat([date_index for i in range(len(keywords))], axis=0).reset_index(drop=True) if date_index is not None else 0
         # replace 0s with keywords 
         df_zeros['keyword'] = np.repeat(keywords, query_length)
-
+        # replace 0s with dates
+        df_zeros['date'] = pd.concat([date_index for i in range(len(keywords))], axis=0, ignore_index=True) 
 
         return df_zeros
 

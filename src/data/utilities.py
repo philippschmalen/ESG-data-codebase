@@ -15,6 +15,8 @@ import os
 import sys
 import time 
 import pandas as pd
+from datetime import datetime
+
 
 
 def list_remove_duplicates(l):
@@ -63,8 +65,8 @@ def df_to_csv(df, filepath):
         df.to_csv(f'{filepath}', index=False, header=False, mode='a')
 
 def timestamp_now():
-    """Create timestamp string in format: yyyy/mm/dd-hh/mm/ss"""
-    return f'{strftime("%Y%m%d-%H%M%S")}'
+    """Return UTC timestamp string in format: yyyy/mm/dd-hh/mm/ss"""
+    return datetime.utcnow().strftime("%y%m%d-%H%M%S")
 
 def sleep_countdown(duration, print_step=2):
     """Sleep for certain duration and print remaining time in steps of print_step
@@ -80,3 +82,4 @@ def sleep_countdown(duration, print_step=2):
         time.sleep(print_step)
         sys.stdout.write(str(i-print_step)+' ')
         sys.stdout.flush()
+
