@@ -6,14 +6,14 @@ list_flatten: flatten nested list
 n_batch: generator for n-sized list batches
 list_batch: get n-sized chunks from n_batch generator
 df_to_csv: write csv either create new or append to existing
-timestamp_now: get string  
+timestamp_now: get string
 sleep_countdown(): countdown in console
 
 """
 
 import os
 import sys
-import time 
+import time
 import pandas as pd
 from datetime import datetime
 
@@ -24,10 +24,10 @@ def list_remove_duplicates(l):
 
     Args:
         list with string elements
-    
+
     Returns:
         Sorted list without duplicates
-    
+
     """
     seen = set()
     seen_add = seen.add
@@ -39,15 +39,15 @@ def list_flatten(nested_list):
 
 def n_batch(lst, n=5):
     """Yield successive n-sized chunks from list lst
-    
+
     Args:
-        lst (list): list object 
+        lst (list): list object
         n (int): batch size to divide list
-        
-    Returns: 
+
+    Returns:
         List: nested list, divided lst into batches of len(lst)/n lists
     """
-    
+
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
 
@@ -70,7 +70,7 @@ def timestamp_now():
 
 def sleep_countdown(duration, print_step=2):
     """Sleep for certain duration and print remaining time in steps of print_step
-    
+
     Args:
         duration (int): duration of timeout
         print_step (int): steps to print countdown
@@ -82,4 +82,3 @@ def sleep_countdown(duration, print_step=2):
         time.sleep(print_step)
         sys.stdout.write(str(i-print_step)+' ')
         sys.stdout.flush()
-

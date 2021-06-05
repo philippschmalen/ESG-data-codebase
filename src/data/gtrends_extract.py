@@ -2,7 +2,7 @@
 Extract data from Google trends with the pytrends package
 Methods take one keyword, call pytrends and return processed data as CSV or dataframe
 
-There are two main functions: 
+There are two main functions:
     * get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
     * get_interest_over_time: Returns CSV with interest over time for specified keywords
 
@@ -12,13 +12,13 @@ import pandas as pd
 import numpy as np
 import logging
 from datetime import datetime
-from random import randint 
+from random import randint
 from pytrends.request import TrendReq
 from .utilities import (n_batch, list_batch, df_to_csv, sleep_countdown, timestamp_now)
 
 def create_pytrends_session():
     """Create pytrends TrendReq() session on which .build_payload() can be called """
-    pytrends_session = TrendReq() 
+    pytrends_session = TrendReq()
 
     return pytrends_session
 
@@ -27,18 +27,18 @@ def create_pytrends_session():
 # ----------------------------------------------------------
 
 def get_related_queries(pytrends_session, keyword_list, cat=0, geo=''):
-    """Returns a dictionary with a dataframe for each keyword 
+    """Returns a dictionary with a dataframe for each keyword
     Calls pytrend's related_queries()
-    
+
     Args:
         pytrends_session (object): TrendReq() session of pytrend
-        keyword_list (list): Used as input for query and passed to TrendReq().build_payload() 
+        keyword_list (list): Used as input for query and passed to TrendReq().build_payload()
         cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories
         geo (str): Geolocation like US, UK
 
     Returns:
-        Dictionary: Dict with dataframes with related query results 
-    """    
+        Dictionary: Dict with dataframes with related query results
+    """
     assert isinstance(keyword_list, list), f"keyword_list should be string. Instead of type {type(keyword_list)}"
 
     df_related_queries = pd.DataFrame()
@@ -86,22 +86,22 @@ def create_related_queries_dataframe(response, rankings, keywords, geo_descripti
 
     return pd.concat(df_list)
 
-def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo='', geo_description='global'): 
+def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo='', geo_description='global'):
     """Returns all response data for pytrend's .related_queries() in a single dataframe
-    
+
     Example usage:
 
         pytrends_session = create_pytrends_session()
         df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'lufthansa'])
     """
-    response = get_related_queries(pytrends_session=pytrends_session, keyword_list=keyword_list, cat=cat, geo=geo) # 
+    response = get_related_queries(pytrends_session=pytrends_session, keyword_list=keyword_list, cat=cat, geo=geo) #
     response, rankings, keywords  = unpack_related_queries_response(response=response)
     df_trends = create_related_queries_dataframe(
-        response=response, 
-        rankings=rankings, 
-        keywords=keywords, 
+        response=response,
+        rankings=rankings,
+        keywords=keywords,
         geo_description=geo_description)
-    
+
     return df_trends
 
 
@@ -119,10 +119,10 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
 
     Args:
         df_query_result (pd.DataFrame): dataframe containing query result (could be empty)
-        date_index (pd.Series): series with date form a basic query to construct df for empty reponses 
-        
+        date_index (pd.Series): series with date form a basic query to construct df for empty reponses
+
     Returns:
-        Dataframe: contains query results in long format 
+        Dataframe: contains query results in long format
         (rows: keywords, columns: search interest over time)
     """
     # non-empty df
@@ -137,16 +137,16 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
         return df_query_result_long
 
     # empty df: no search result for any keyword
-    else: 
+    else:
         keywords = keywords.to_list()
         logging.info(f"""process_interest_over_time() handles empty dataframe for {keywords}""")
         # create empty df with 0s
         query_length = len(date_index)
         df_zeros = pd.DataFrame(np.zeros((query_length*len(keywords), 3)), columns=['date','keyword', 'search_interest'])
-        # replace 0s with keywords 
+        # replace 0s with keywords
         df_zeros['keyword'] = np.repeat(keywords, query_length)
         # replace 0s with dates
-        df_zeros['date'] = pd.concat([date_index for i in range(len(keywords))], axis=0, ignore_index=True) 
+        df_zeros['date'] = pd.concat([date_index for i in range(len(keywords))], axis=0, ignore_index=True)
 
         return df_zeros
 
@@ -164,7 +164,7 @@ def query_interest_over_time(keywords, date_index=None, timeframe='today 5-y'):
     """
     # init pytrends
     pt = create_pytrends_session()
-    pt.build_payload(kw_list=keywords, timeframe=timeframe) 
+    pt.build_payload(kw_list=keywords, timeframe=timeframe)
 
     # load search interest over time
     df_query_result_raw = pt.interest_over_time()
@@ -178,12 +178,12 @@ def query_interest_over_time(keywords, date_index=None, timeframe='today 5-y'):
 def get_query_date_index(timeframe='today 5-y'):
     """Queries Google trends to have a valid index for query results that returned an empty dataframe
     Args:
-        timeframe (string): 
+        timeframe (string):
 
     Returns:
         pd.Series: date index of Google trend's interest_over_time()
     """
-    
+
     # init pytrends with query that ALWAYS works
     pt = create_pytrends_session()
     pt.build_payload(kw_list=['pizza', 'lufthansa'], timeframe=timeframe)
@@ -195,20 +195,20 @@ def get_query_date_index(timeframe='today 5-y'):
 
     return df.date
 
-#--------------------------------------------------- 
+#---------------------------------------------------
 # MAIN QUERY FUNCTION
 #---------------------------------------------------
 
 def get_interest_over_time(keyword_list, filepath, filepath_failed, timeframe='today 5-y', max_retries=3, timeout=10):
-    """Workhorse function to query Google Trend's interest_over_time() function. 
-    It respects the query's requirements like 
+    """Workhorse function to query Google Trend's interest_over_time() function.
+    It respects the query's requirements like
         * max. 5 keywords per query, handled by list_batch()
         * a basic date index for queries returning empty dataframe
         * randomized timeout to not bust rate limits
-    
+
     Error handling:
         * retry after query error with increased timeout
-        * when a query fails after retries, related keywords are stored in csv in filepath_failed. 
+        * when a query fails after retries, related keywords are stored in csv in filepath_failed.
 
 
 
@@ -216,7 +216,7 @@ def get_interest_over_time(keyword_list, filepath, filepath_failed, timeframe='t
         keyword_list (list): strings used for the google trends query
         filepath (string): csv to store successful query results
         filepath_failed (string): csv to store unsuccessful keywords
-        max_retries (int): how often retry 
+        max_retries (int): how often retry
         timeout (int): time to wait in seconds btw. queries
 
     Returns:
@@ -229,23 +229,23 @@ def get_interest_over_time(keyword_list, filepath, filepath_failed, timeframe='t
     kw_batches = list_batch(lst=keyword_list, n=5)
 
 
-    for i, kw_batch in enumerate(kw_batches): 
+    for i, kw_batch in enumerate(kw_batches):
         # retry until max_retries reached
-        for attempt in range(max_retries): 
+        for attempt in range(max_retries):
 
-            # random int from range around timeout 
+            # random int from range around timeout
             timeout_randomized = randint(timeout-3,timeout+3)
             try:
                 df = query_interest_over_time(kw_batch, date_index=date_index)
-            
+
             # query unsuccessful
             except Exception as e:
                 logging.error(f"query_interest_over_time() failed in get_interest_over_time with: {e}")
                 timeout += 3 # increase timetout to be safe
                 sleep_countdown(timeout_randomized, print_step=2)
-            
 
-            # query was successful: store results, sleep 
+
+            # query was successful: store results, sleep
             else:
                 logging.info(f"{i+1}/{len(list(kw_batches))} get_interest_over_time() query successful")
                 df_to_csv(df, filepath=filepath)
