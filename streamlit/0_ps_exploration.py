@@ -19,9 +19,7 @@ from src.data.gtrends_extract import get_interest_over_time
 from tsf_plots import set_layout_template
 
 
-esg_df = yq.esg_firm_query_keywords_pipeline(
-    index_name="DAX", path_to_settings="../settings.yaml"
-)
+esg_df = yq.esg_firm_query_keywords_pipeline(index_name="DAX", path_to_settings="../settings.yaml")
 indices = PyTickerSymbols().get_all_indices()
 
 trends_df = get_interest_over_time(
@@ -78,9 +76,7 @@ import chart_studio.plotly as cs
 
 timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}'
 date_index = get_query_date_index(timeframe=timeframe)
-df_search_interest = query_googletrends(
-    keyword_list, date_index=date_index, timeframe=timeframe
-)
+df_search_interest = query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
 "", df_search_interest.set_index("date").resample("M")
 
 import tsf_plots
