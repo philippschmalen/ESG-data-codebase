@@ -2,7 +2,9 @@
 Export a Conda environment with --from-history, but also append
 Pip-installed dependencies
 
-For `conda_env.yml`, we dont use the following two commands, but this py file instead:
+For `conda env export`, we dont use the following two commands, but this py file instead.
+
+Reasons:
 - `Conda env export --from-history -f conda_env.yaml` does not contain pip installments
 - `Conda env export -f conda_env.yaml` pins dependencies too hard (add conda build number,
 which is os dependent, add os-denpendent libs as well).
@@ -12,7 +14,7 @@ This is adopted from https://gist.github.com/gwerbin/dab3cf5f8db07611c6e0aeec177
 Example:
     In root folder of this repo:
     >> which python # make sure you are in the right virtual env
-    >> python conda_env_export.py
+    >> python conda_env_export.py # a better alternative than `conda env export`
 """
 
 # TODO currently leave out python and pip, fix this.

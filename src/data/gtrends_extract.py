@@ -17,7 +17,7 @@ from pytrends.request import TrendReq
 from .utilities import (n_batch, list_batch, df_to_csv, sleep_countdown, timestamp_now)
 
 def create_pytrends_session():
-    """Create pytrends TrendReq() session on which .build_payload() can be called """
+    """Create pytrends TrendReq() session on which .build_payload() can be called."""
     pytrends_session = TrendReq()
 
     return pytrends_session

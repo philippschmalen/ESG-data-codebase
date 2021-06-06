@@ -64,6 +64,7 @@ def get_results_count_pipeline(keyword_list, user_agent, url="https://www.google
 
     Examples:
 
+        # TODO conform with doctest
         >> with open('../settings.yaml') as file:
            config = yaml.full_load(file)
         >> user_agent = config['query']['google_results']['user_agent']
@@ -108,3 +109,4 @@ def assert_google_results(df, keyword_list, url="https://www.google.com/search?q
     assert len(df) == len(keyword_list), f"{len(df)} does not equal {len(keyword_list)}"
 
     logging.info("Google results data meets expectations")
+    # TODO how about using df.equal(), less verbose
