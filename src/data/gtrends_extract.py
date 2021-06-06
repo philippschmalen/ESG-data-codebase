@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_pytrends_session():
-    """Create pytrends TrendReq() session on which .build_payload() can be called """
+    """Create pytrends TrendReq() session on which .build_payload() can be called."""
     pytrends_session = TrendReq()
 
     return pytrends_session

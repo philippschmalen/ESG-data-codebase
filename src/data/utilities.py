@@ -68,7 +68,7 @@ def df_to_csv(df, filepath):
 
 def timestamp_now():
     """Create timestamp string in format: yyyy/mm/dd-hh/mm/ss"""
-    return f'{strftime("%Y%m%d-%H%M%S")}'
+    return f'{time.strftime("%Y%m%d-%H%M%S")}'
 
 
 def sleep_countdown(duration, print_step=2):
