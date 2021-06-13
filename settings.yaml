@@ -3,6 +3,16 @@ dir:
   interim: 'data/interim'
   processed: 'data/processed'
   external: 'data/external'
+ci:
+  colorscale: 
+    - "#4d886d"
+    - "#f3dab9"
+    - "#9bcab8"
+    - "#829fa5"
+    - "#dc9b4d"
+    - "#4a82a1"
+    - "#cfaea5"
+    - '#D5E6E0'
 query:
   google_results:
     user_agent: {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
@@ -49,7 +59,7 @@ esg:
     - corruption
     - fraud
     - bribe
-    - tax
+    - tax evasion
     - violation
     - conflict
     - non-transparent

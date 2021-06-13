@@ -4,6 +4,7 @@ import streamlit as st
 import logging
 import pandas as pd
 import yaml
+from glob import glob
 import plotly.express as px
 
 from pytickersymbols import PyTickerSymbols
@@ -17,9 +18,13 @@ from data.utilities import timestamp_now
 esg_df = yq.esg_firm_query_keywords_pipeline(index_name='DAX', path_to_settings='../settings.yaml')
 indices = PyTickerSymbols().get_all_indices()
 
-trends_df = get_interest_over_time(keyword_list=esg_df.query_keyword[:100], 
-    filepath=f'../data/raw/dax_search_interest_{timestamp_now()}.csv', 
-    filepath_failed=f'../data/raw/failed_dax_search_interest_{timestamp_now()}.csv')
+filepath = st.selectbox('Select csv file from raw data', options=glob('../data/raw/*csv'))
+
+'', pd.read_csv(filepath)
+
+# trends_df = get_interest_over_time(keyword_list=esg_df.query_keyword[:100], 
+#     filepath=f'../data/raw/dax_search_interest_{timestamp_now()}.csv', 
+#     filepath_failed=f'../data/raw/failed_dax_search_interest_{timestamp_now()}.csv')
 
 st.stop()
 
