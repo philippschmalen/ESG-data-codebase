@@ -62,9 +62,11 @@ def main():
     with open("conda_env.yml", "w") as f:
         f.write(env_data)
     logger.info(
-        f"Conda env export successfully done."
-        f"Please check file 'conda_env.yml' before push to pip, making sure no un-safe dependencies are accidentally "
-        f"listed in the dependency file."
+        """
+        Conda env export successfully done.
+        Please check file 'conda_env.yml' before push to pip, making sure no un-safe dependencies are accidentally
+        listed in the dependency file.
+        """
     )
 
 

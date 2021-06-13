@@ -14,7 +14,7 @@ import logging
 from datetime import datetime
 from random import randint
 from pytrends.request import TrendReq
-from .utilities import n_batch, list_batch, df_to_csv, sleep_countdown, timestamp_now
+from .utilities import list_batch, df_to_csv, sleep_countdown
 
 
 def create_pytrends_session():

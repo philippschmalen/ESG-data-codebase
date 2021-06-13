@@ -34,7 +34,8 @@ def get_results_count(keyword, user_agent):
 
     Args:
         keyword (string): The keyword for which to get the results count
-        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
+            Gecko) Chrome/80.0.3987.149 Safari/537.36"}
 
     Returns:
         int: Results count
@@ -56,7 +57,8 @@ def get_results_count_pipeline(keyword_list, user_agent, url="https://www.google
 
     Args:
         keyword_list (list): The keywords for which to get the results count
-        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML,
+            like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
         url (string): Google's base search URL like "https://www.google.com/search?q=" (default)
 
     Returns:

@@ -8,7 +8,6 @@ from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
 import pandas as pd
-import re
 import yaml
 
 
@@ -34,7 +33,7 @@ def get_index_stock_details(pytickersymbols, index_name):
     # string encoding
     try:
         index_details.name = index_details.name.str.encode("latin-1").str.decode("utf-8")
-    except Exception as e:
+    except Exception as _:
         logging.warning(f"Encoding error for {index_name}")
         index_details.name = index_details.name.str.encode("utf-8").str.decode("utf-8")
 
