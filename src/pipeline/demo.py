@@ -84,7 +84,10 @@ with Flow("Image ETL") as flow:
     image_path = Path("src/pipeline/temp/image-data.img")
     gif_path = Path("src/pipeline/temp/comb.gif")
 
-    DATA_URL = Parameter("DATA_URL", default="https://github.com/cicdw/image-data/blob/master/all-images.img?raw=true")
+    DATA_URL = Parameter(
+        "DATA_URL",
+        default="https://github.com/cicdw/image-data/blob/master/all-images.img?raw=true",
+    )
     DATA_FILE = Parameter("DATA_FILE", default=image_path)
 
     # Extract
