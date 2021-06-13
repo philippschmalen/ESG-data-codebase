@@ -13,19 +13,29 @@ import logging
 
 
 def set_layout_template():
-    """ Creates watermarks and applies colors"""
+    """Creates watermarks and applies colors"""
     # watermarks
-    watermark_date = "Updated {}".format(datetime.now().strftime("%d.%B%Y") )# date watermark
+    watermark_date = "Updated {}".format(
+        datetime.now().strftime("%d.%B%Y")
+    )  # date watermark
     watermark_url = "towardssustainablefinance.com"
-    
+
     # colorscale
-    tsf_colorscale = ["#4d886d", "#f3dab9", "#9bcab8", "#829fa5", "#dc9b4d", "#4a82a1", "#cfaea5", '#D5E6E0']
-    
+    tsf_colorscale = [
+        "#4d886d",
+        "#f3dab9",
+        "#9bcab8",
+        "#829fa5",
+        "#dc9b4d",
+        "#4a82a1",
+        "#cfaea5",
+        "#D5E6E0",
+    ]
 
     pio.templates["tsf"] = go.layout.Template(
-        layout_colorway=tsf_colorscale, 
-        layout_hovermode= 'closest', 
-        layout_font_family='Verdana',
+        layout_colorway=tsf_colorscale,
+        layout_hovermode="closest",
+        layout_font_family="Verdana",
         layout_annotations=[
             dict(
                 name="watermark",
@@ -38,7 +48,7 @@ def set_layout_template():
                 x=1,
                 y=-0.15,
                 showarrow=False,
-            ), 
+            ),
             dict(
                 name="watermark2",
                 text=watermark_date,
@@ -50,7 +60,7 @@ def set_layout_template():
                 x=0,
                 y=0.1,
                 showarrow=False,
-            )
-        ]
+            ),
+        ],
     )
-    pio.templates.default = 'tsf'
+    pio.templates.default = "tsf"

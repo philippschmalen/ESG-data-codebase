@@ -70,7 +70,7 @@ fig = px.line(
     y="search_interest",
     color="keyword",
     line_shape="spline",
-    title='Google search interest',
+    title="Google search interest",
     labels={"date": "", "search_interest": "Search interest"},
     template="tsf",
 )
@@ -94,8 +94,7 @@ fig.add_layout_image(
 # layout tweaks
 fig.update_traces(line=dict(width=5))  # thicker line
 fig.update_layout(
-    plot_bgcolor="white", # white background
-    legend = dict(x=0.1, y=0.9, title='')
-)  
+    plot_bgcolor="white", legend=dict(x=0.1, y=0.9, title="")  # white background
+)
 
 st.plotly_chart(fig)

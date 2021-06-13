@@ -22,10 +22,13 @@ import streamlit as st
 # ----------------------------------------
 # -- Plot data
 # ----------------------------------------
+
+
 @st.cache(allow_output_mutation=True)
 def load_data(filepath, parse_dates=False):
     """Load data from filepath. parse_dates takes list of date columns to convert to datetime"""
     return pd.read_csv(filepath, parse_dates=parse_dates)
+
 
 def group_search_interest_on_time_unit(df, unit="M"):
     """Returns aggregated dataframe specified time unit. Uses pandas grouper
@@ -45,9 +48,11 @@ def group_search_interest_on_time_unit(df, unit="M"):
 
     return df
 
+
 # ----------------------------------------
 # -- General-purpose utilities
 # ----------------------------------------
+
 
 def list_remove_duplicates(lst):
     """Removes duplicates from list elements whilst preserving element order
@@ -118,4 +123,3 @@ def sleep_countdown(duration, print_step=2):
         time.sleep(print_step)
         sys.stdout.write(str(i - print_step) + " ")
         sys.stdout.flush()
-

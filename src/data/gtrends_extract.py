@@ -2,7 +2,7 @@
 Extract data from Google trends with the pytrends package
 Methods take one keyword, call pytrends and return processed data as CSV or dataframe
 
-Main functions:
+Main functions
     (1) get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
     (2) get_interest_over_time: Returns CSV with interest over time for specified keywords
 
@@ -14,7 +14,13 @@ import logging
 from datetime import datetime
 from random import randint
 from pytrends.request import TrendReq
-from .data_utilities import n_batch, list_batch, df_to_csv, sleep_countdown, timestamp_now
+from .data_utilities import (
+    n_batch,
+    list_batch,
+    df_to_csv,
+    sleep_countdown,
+    timestamp_now,
+)
 
 
 # ----------------------------------------------------------

@@ -6,7 +6,7 @@ import plotly.io as pio
 import plotly.graph_objects as go
 import yaml
 import logging
-    
+
 
 def set_layout_template(colorscale, template_name="tsf"):
     """Applies colorscale to graph
@@ -46,7 +46,7 @@ def load_colorscale(settings_filepath):
         colorscale = settings["ci"]["colorscale"]
     except Exception as e:
         logging.error(
-            f"Colorscale {scale_name} failed to load from {settings_filepath}. Return empty scale. Error: {e}"
+            f"Colorscale failed to load from {settings_filepath}. Return empty scale. Error: {e}"
         )
         colorscale = []
 
