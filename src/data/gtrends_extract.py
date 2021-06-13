@@ -14,7 +14,7 @@ import logging
 from datetime import datetime
 from random import randint
 from pytrends.request import TrendReq
-from data_utilities import (
+from .data_utilities import (
     n_batch,
     list_batch,
     df_to_csv,
