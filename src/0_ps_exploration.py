@@ -9,10 +9,12 @@ import tsf_plots
 
 from pytickersymbols import PyTickerSymbols
 import data.yahoofinance_extract as yq
-from data.gtrends_extract import get_interest_over_time
+from data.gtrends_extract import get_interest_over_time, get_query_date_index
 from data.utilities import timestamp_now
 
-esg_df = yq.esg_firm_query_keywords_pipeline(index_name="DAX", path_to_settings="../settings.yaml")
+esg_df = yq.esg_firm_query_keywords_pipeline(
+    index_name="DAX", path_to_settings="../settings.yaml"
+)
 indices = PyTickerSymbols().get_all_indices()
 
 trends_df = get_interest_over_time(
@@ -30,12 +32,14 @@ st.stop()
 
 timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}'
 date_index = get_query_date_index(timeframe=timeframe)
-df_search_interest = query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
+df_search_interest = query_googletrends(
+    keyword_list, date_index=date_index, timeframe=timeframe
+)
 "", df_search_interest.set_index("date").resample("M")
 
 
 def plot_interest_over_time(df):
-    """line chart: weekly change of Google trends """
+    """line chart: weekly change of Google trends"""
     fig = px.line(
         df,
         x="date",
@@ -63,7 +67,7 @@ def plot_interest_over_time(df):
 
 
 def deploy_figure(figure, filename):
-    """ Upload graph to chartstudio """
+    """Upload graph to chartstudio"""
     logging.info(f"Upload {filename} figure to plotly")
     cs.plot(figure, filename=filename)
 

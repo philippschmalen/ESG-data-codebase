@@ -53,7 +53,7 @@ def n_batch(lst, n=5):
 
 
 def list_batch(lst, n=5):
-    """"Divides a list into a list of lists with n-sized length"""
+    """ "Divides a list into a list of lists with n-sized length"""
     return list(n_batch(lst=lst, n=n))
 
 

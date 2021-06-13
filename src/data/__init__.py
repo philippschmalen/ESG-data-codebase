@@ -7,8 +7,7 @@ from gtrends_extract import (
 )
 
 __all__ = [
-    "create_pytrends_session"
-    "get_results_count_pipeline",
+    "create_pytrends_session" "get_results_count_pipeline",
     "assert_google_results",
     "get_related_queries",
     "process_related_query_response",
