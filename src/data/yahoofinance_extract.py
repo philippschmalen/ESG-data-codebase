@@ -1,5 +1,6 @@
 """
 Retrieve firm-level esg scores, process firm names and construct query strings
+
 """
 # import streamlit as st
 from yahooquery import Ticker
