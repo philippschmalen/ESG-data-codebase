@@ -34,9 +34,7 @@ def curl_cmd(url: str, file: str) -> str:
     return f"curl -fL -o {file} {url}"
 
 
-download: Runable = ShellTask(
-    name="curl_task", max_retries=2, retry_delay=datetime.timedelta(seconds=10)
-)
+download: Runable = ShellTask(name="curl_task", max_retries=2, retry_delay=datetime.timedelta(seconds=10))
 
 
 @task(skip_on_upstream_skip=False)
