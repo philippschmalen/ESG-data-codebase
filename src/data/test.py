@@ -32,8 +32,13 @@ if __name__ == "__main__":
     # create empty df with 0s
     query_length = len(date_index)
     # init dataframe with 0
-    df_zeros = pd.DataFrame(np.zeros((query_length * len(keywords), 3)), columns=["date", "keyword", "search_interest"])
+    df_zeros = pd.DataFrame(
+        np.zeros((query_length * len(keywords), 3)),
+        columns=["date", "keyword", "search_interest"],
+    )
     # replace 0s with keywords
     df_zeros["keyword"] = np.repeat(keywords, query_length)
     # replace 0s with dates
-    df_zeros["date"] = pd.concat([date_index for i in range(len(keywords))], axis=0, ignore_index=True)
+    df_zeros["date"] = pd.concat(
+        [date_index for i in range(len(keywords))], axis=0, ignore_index=True
+    )

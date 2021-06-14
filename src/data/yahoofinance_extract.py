@@ -2,6 +2,7 @@
 Retrieve firm-level esg scores, process firm names and construct query strings
 
 """
+# import streamlit as st
 from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
@@ -31,13 +32,17 @@ def get_index_stock_details(pytickersymbols, index_name):
 
     # string encoding
     try:
-        index_details.name = index_details.name.str.encode("latin-1").str.decode("utf-8")
-    except Exception as e:
+        index_details.name = index_details.name.str.encode("latin-1").str.decode(
+            "utf-8"
+        )
+    except Exception:
         logging.warning(f"Encoding error for {index_name}")
         index_details.name = index_details.name.str.encode("utf-8").str.decode("utf-8")
 
     # retrieve yahoo ticker symbol
-    index_details["yahoo_ticker"] = index_details.symbols.apply(lambda x: x[0]["yahoo"] if len(x) > 1 else np.nan)
+    index_details["yahoo_ticker"] = index_details.symbols.apply(
+        lambda x: x[0]["yahoo"] if len(x) > 1 else np.nan
+    )
     index_details.yahoo_ticker.fillna(index_details.symbol, inplace=True)
 
     # set ticker as index
@@ -68,7 +73,9 @@ def get_esg_details(yahoo_ticker):
 @st.cache(allow_output_mutation=True)
 def get_index_firm_esg(pytickersymbols, index_name):
     """Merge index, firm name and esg data"""
-    index_stocks = get_index_stock_details(pytickersymbols=pytickersymbols, index_name=index_name)
+    index_stocks = get_index_stock_details(
+        pytickersymbols=pytickersymbols, index_name=index_name
+    )
     esg_details = get_esg_details(yahoo_ticker=index_stocks.yahoo_ticker)
 
     stocks_esg = pd.concat([index_stocks, esg_details], axis=1)
@@ -89,7 +96,9 @@ def replace_firm_names(df, settings_path):
             "No firm names specified in settings['query']['firm_name']. \
         Firm names still contain legal suffix which compromises search results."
         )
-    assert "name" in df.columns, "Dataframe has no name column. Firm names cannot be replaced."
+    assert (
+        "name" in df.columns
+    ), "Dataframe has no name column. Firm names cannot be replaced."
 
     replace_firm_names = settings["query"]["firm_names"]
     df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
@@ -125,7 +134,9 @@ def create_query_keywords(esg_df, keyword_list, explode=True):
         Dataframe: added query_keyword column (firm_name + keyword)
 
     """
-    esg_df["query_keyword"] = esg_df.firm_name.apply(lambda x: [x + kw for kw in keyword_list])
+    esg_df["query_keyword"] = esg_df.firm_name.apply(
+        lambda x: [x + kw for kw in keyword_list]
+    )
 
     if explode:
         return esg_df.explode(column="query_keyword")

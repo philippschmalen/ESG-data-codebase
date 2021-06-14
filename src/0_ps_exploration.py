@@ -2,19 +2,19 @@
 import streamlit as st
 
 import logging
-import pandas as pd
-import yaml
+from datetime import datetime
 import plotly.express as px
+import chart_studio.plotly as cs
+import tsf_plots
 
 from pytickersymbols import PyTickerSymbols
 import data.yahoofinance_extract as yq
-import data.utilities as utilities
-from data.gtrends_extract import get_interest_over_time
-from visualization.tsf_plots import set_layout_template
+from data.gtrends_extract import get_interest_over_time, get_query_date_index
 from data.utilities import timestamp_now
 
-
-esg_df = yq.esg_firm_query_keywords_pipeline(index_name="DAX", path_to_settings="../settings.yaml")
+esg_df = yq.esg_firm_query_keywords_pipeline(
+    index_name="DAX", path_to_settings="../settings.yaml"
+)
 indices = PyTickerSymbols().get_all_indices()
 
 trends_df = get_interest_over_time(
@@ -25,25 +25,21 @@ trends_df = get_interest_over_time(
 
 st.stop()
 
-
 # ---------------------------------------------------
 # VISUALS
 # ---------------------------------------------------
 
-from datetime import datetime
-import plotly.express as px
-import chart_studio.plotly as cs
 
 timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}'
 date_index = get_query_date_index(timeframe=timeframe)
-df_search_interest = query_googletrends(keyword_list, date_index=date_index, timeframe=timeframe)
+df_search_interest = query_googletrends(
+    keyword_list, date_index=date_index, timeframe=timeframe
+)
 "", df_search_interest.set_index("date").resample("M")
-
-import tsf_plots
 
 
 def plot_interest_over_time(df):
-    """line chart: weekly change of Google trends """
+    """line chart: weekly change of Google trends"""
     fig = px.line(
         df,
         x="date",
@@ -71,7 +67,7 @@ def plot_interest_over_time(df):
 
 
 def deploy_figure(figure, filename):
-    """ Upload graph to chartstudio """
+    """Upload graph to chartstudio"""
     logging.info(f"Upload {filename} figure to plotly")
     cs.plot(figure, filename=filename)
 

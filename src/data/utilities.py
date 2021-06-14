@@ -17,7 +17,7 @@ import time
 from datetime import datetime
 
 
-def list_remove_duplicates(l):
+def list_remove_duplicates(the_list):
     """Removes duplicates from list elements whilst preserving element order
 
     Args:
@@ -29,7 +29,7 @@ def list_remove_duplicates(l):
     """
     seen = set()
     seen_add = seen.add
-    return [x for x in l if not (x in seen or seen_add(x))]
+    return [x for x in the_list if not (x in seen or seen_add(x))]
 
 
 def list_flatten(nested_list):
@@ -53,7 +53,7 @@ def n_batch(lst, n=5):
 
 
 def list_batch(lst, n=5):
-    """"Divides a list into a list of lists with n-sized length"""
+    """ "Divides a list into a list of lists with n-sized length"""
     return list(n_batch(lst=lst, n=n))
 
 
