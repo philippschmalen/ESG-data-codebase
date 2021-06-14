@@ -14,9 +14,7 @@ logger = logging.getLogger(__name__)
 def set_layout_template():
     """Creates watermarks and applies colors"""
     # watermarks
-    watermark_date = "Updated {}".format(
-        datetime.now().strftime("%d.%B%Y")
-    )  # date watermark
+    watermark_date = "Updated {}".format(datetime.now().strftime("%d.%B%Y"))  # date watermark
     watermark_url = "towardssustainablefinance.com"
 
     # colorscale
