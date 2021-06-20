@@ -1,11 +1,12 @@
 from typing import Tuple, Any, List
 from prefect import task, Parameter, Flow
+from prefect.executors import LocalDaskExecutor
 from pytrends.request import TrendReq
 import pandas as pd
 from datetime import datetime
-from root_logger import logger
+import logging
 
-logger = logger()
+logger = logging.getLogger(__name__)
 
 
 @task
@@ -85,3 +86,10 @@ with Flow("gtrends") as flow:
     response = get_response(session, KEYWORDS, CAT, GEO)
     rankings, keywords = unpack_response(response)
     df_trends = create_df_trends(response, rankings, keywords)
+
+
+if __name__ == "__main__":
+    flow.visualize()
+    flow.executor = LocalDaskExecutor(scheduler="threads", num_workers=4)
+    flow.run()
+    print(df_trends.head())
