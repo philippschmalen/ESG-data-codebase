@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 @task
 def load_settings() -> Tuple[Any, str, List[str]]:
-    with open(f"../../settings.yaml") as file:
+    with open("../../settings.yaml") as file:
         config = yaml.full_load(file)
     user_agent = config["query"]["google_results"]["user_agent"]
     base_url = config["query"]["google_results"]["base_url"]

@@ -58,7 +58,12 @@ def get_df_response(response: dict, rk: Any, kw: str, geo="global") -> pd.DataFr
     #  "pandas"
     try:
         df = response[kw][rk]
-        df[["keyword", "ranking", "geo", "query_timestamp"]] = [kw, rk, geo, datetime.now()]
+        df[["keyword", "ranking", "geo", "query_timestamp"]] = [
+            kw,
+            rk,
+            geo,
+            datetime.now(),
+        ]
         return df
     except KeyError:
         logger.warning(f"Append empty dataframe for {rk}: {kw}")
