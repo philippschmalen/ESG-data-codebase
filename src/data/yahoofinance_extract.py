@@ -1,8 +1,6 @@
 """
 Retrieve firm-level esg scores, process firm names and construct query strings
-
 """
-# import streamlit as st
 from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
@@ -34,8 +32,8 @@ def get_index_stock_details(pytickersymbols, index_name):
     # string encoding
     try:
         index_details.name = index_details.name.str.encode("latin-1").str.decode("utf-8")
-    except Exception as e:
-        logging.warning(f"Encoding error for {index_name}, {e}")
+    except Exception:
+        logging.warning(f"Encoding error for {index_name}")
         index_details.name = index_details.name.str.encode("utf-8").str.decode("utf-8")
 
     # retrieve yahoo ticker symbol
@@ -69,7 +67,6 @@ def get_esg_details(yahoo_ticker):
     return esg_df
 
 
-# @st.cache(allow_output_mutation=True)
 def get_index_firm_esg(pytickersymbols, index_name):
     """Merge index, firm name and esg data"""
     index_stocks = get_index_stock_details(
@@ -89,19 +86,19 @@ def replace_firm_names(df, settings_path):
         settings = yaml.full_load(file)
 
     try:
-        replace_firm_names = settings["query"]["firm_names"]
-        df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
-        assert (
-            "name" in df.columns
-        ), "Dataframe has no name column. Firm names cannot be replaced."
-
-        return df
+        settings["query"]["firm_name"]
     except Exception:
         logging.warning(
             "No firm names specified in settings['query']['firm_name']. \
         Firm names still contain legal suffix which compromises search results."
         )
-        return None
+    assert (
+        "name" in df.columns
+    ), "Dataframe has no name column. Firm names cannot be replaced."
+
+    replace_firm_names = settings["query"]["firm_names"]
+    df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
+    return df
 
 
 def remove_missing_esg_firms(esg_df, missing_placeholder="No fundamentals data"):

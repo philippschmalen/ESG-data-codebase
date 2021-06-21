@@ -5,7 +5,6 @@ Methods take one keyword, call pytrends and return processed data as CSV or data
 Main functions
     (1) get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
     (2) get_interest_over_time: Returns CSV with interest over time for specified keywords
-
 """
 
 import pandas as pd
@@ -22,14 +21,13 @@ from .data_utilities import (
     timestamp_now,
 )
 
-
 # ----------------------------------------------------------
 # Google trends: Create session
 # ----------------------------------------------------------
 
 
 def create_pytrends_session():
-    """Create pytrends TrendReq() session on which .build_payload() can be called"""
+    """Create pytrends TrendReq() session on which .build_payload() can be called."""
     pytrends_session = TrendReq()
 
     return pytrends_session
@@ -116,9 +114,9 @@ def create_related_queries_dataframe(
     return pd.concat(df_list)
 
 
-# -------------------------
-# ----- MAIN QUERY FUNCTION
-# -------------------------
+# ---------------------------------------------------
+# MAIN QUERY FUNCTION
+# ---------------------------------------------------
 
 
 def get_related_queries_pipeline(
@@ -250,9 +248,9 @@ def get_query_date_index(timeframe="today 5-y"):
     return df.date
 
 
-# -------------------------
-# ----- MAIN QUERY FUNCTION
-# -------------------------
+# ---------------------------------------------------
+# MAIN QUERY FUNCTION
+# ---------------------------------------------------
 
 
 def get_interest_over_time(
@@ -304,7 +302,6 @@ def get_interest_over_time(
                     kw_batch, date_index=date_index, timeframe=timeframe
                 )
 
-            # query unsuccessful
             except Exception as e:
                 logging.error(
                     f"query_interest_over_time() failed in get_interest_over_time with: {e}"

@@ -1,26 +1,16 @@
 """
 Make visualizations with plotly
 """
-
 import plotly.io as pio
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import plotly.express as px
-import chart_studio.plotly as cs
-
 from datetime import datetime
-import logging
 
 
 def set_layout_template():
     """Creates watermarks and applies colors"""
-    # watermarks
-    watermark_date = "Updated {}".format(
-        datetime.now().strftime("%d.%B%Y")
-    )  # date watermark
+    watermark_date = "Updated {}".format(datetime.now().strftime("%d.%B%Y"))
     watermark_url = "towardssustainablefinance.com"
 
-    # colorscale
     tsf_colorscale = [
         "#4d886d",
         "#f3dab9",

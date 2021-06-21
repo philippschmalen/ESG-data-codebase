@@ -54,7 +54,7 @@ def group_search_interest_on_time_unit(df, unit="M"):
 # ----------------------------------------
 
 
-def list_remove_duplicates(lst):
+def list_remove_duplicates(the_list):
     """Removes duplicates from list elements whilst preserving element order
 
     Args:
@@ -66,7 +66,7 @@ def list_remove_duplicates(lst):
     """
     seen = set()
     seen_add = seen.add
-    return [x for x in lst if not (x in seen or seen_add(x))]
+    return [x for x in the_list if not (x in seen or seen_add(x))]
 
 
 def list_flatten(nested_list):

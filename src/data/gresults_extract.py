@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import logging
 
+logger = logging.getLogger(__name__)
+
 
 def create_search_url(keyword_list, url="https://www.google.com/search?q="):
     """Create Google search URL for a keyword from keyword_list
@@ -32,12 +34,17 @@ def create_search_url(keyword_list, url="https://www.google.com/search?q="):
 def get_results_count(keyword, user_agent):
     """Gets Google's result count for a keyword
 
-    Args:
-        keyword (string): The keyword for which to get the results count
-        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+        Args:
+            keyword (string): The keyword for which to get the results count
+    <<<<<<< HEAD
+            user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    =======
+            user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
+                Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    >>>>>>> 3cb32814fb70df3c9e78efa840f5f142d0822612
 
-    Returns:
-        int: Results count
+        Returns:
+            int: Results count
     """
     result = requests.get(keyword, headers=user_agent)
     soup = BeautifulSoup(result.content, "html.parser")
@@ -68,12 +75,12 @@ def get_results_count_pipeline(
 
     Examples:
 
-        with open('../settings.yaml') as file:
-           config = yaml.full_load(file)
-        user_agent = config['query']['google_results']['user_agent']
-        base_url = config['query']['google_results']['base_url']
-        keyword_list = ['pizza', 'lufthansa']
-        result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
+        >> with open('../settings.yaml') as file:
+        >>     config = yaml.full_load(file)
+        >> user_agent = config['query']['google_results']['user_agent']
+        >> base_url = config['query']['google_results']['base_url']
+        >> keyword_list = ['pizza', 'lufthansa']
+        >> result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
     """
     search_urls = create_search_url(keyword_list)
     result_count = [get_results_count(url, user_agent) for url in search_urls]
@@ -86,7 +93,7 @@ def get_results_count_pipeline(
             "query_timestamp": datetime.now(),
         }
     )
-    # testing
+
     assert_google_results(df=df, keyword_list=keyword_list, url=url)
 
     return df
@@ -120,3 +127,4 @@ def assert_google_results(df, keyword_list, url="https://www.google.com/search?q
     assert len(df) == len(keyword_list), f"{len(df)} does not equal {len(keyword_list)}"
 
     logging.info("Google results data meets expectations")
+    # TODO how about using df.equal(), less verbose
