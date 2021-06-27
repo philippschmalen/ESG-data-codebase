@@ -21,7 +21,6 @@ def set_layout_template(colorscale, template_name="tsf"):
     Example:
 
     """
-
     pio.templates[template_name] = go.layout.Template(
         layout_colorway=colorscale,
         layout_hovermode="closest",
