@@ -1,6 +1,7 @@
 from typing import Tuple, Any, List
 from prefect import task, Parameter, Flow
 from prefect.executors import LocalDaskExecutor
+from prefect.agent.local import LocalAgent
 from pytrends.request import TrendReq
 import pandas as pd
 from datetime import datetime
@@ -94,7 +95,6 @@ with Flow("gtrends") as flow:
 
 
 if __name__ == "__main__":
-    flow.visualize()
     flow.executor = LocalDaskExecutor(scheduler="threads", num_workers=4)
     flow.run()
-    print(df_trends.head())
+    print(df_trends)

@@ -91,3 +91,12 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# local or sensitive terraform files
+.terraform/
+.tfstate
+.tfstate.*
+.tfvars
+
+# prefect config files
+.prefect/
