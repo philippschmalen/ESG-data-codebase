@@ -91,3 +91,12 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# terraform
+.terraform/
+.terraform.*
+terraform.tfvars
+*.tfstates
+
+# heztner token
+hetnzer-api-token.txt
