@@ -61,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#code-reference" class="md-skip">
+        <a href="#esg-data-from-yahooquery" class="md-skip">
           Skip to content
         </a>
       
@@ -206,9 +206,95 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         Home
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract" class="md-nav__link">
+    yahoofinance_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.create_query_keywords" class="md-nav__link">
+    create_query_keywords()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.esg_firm_query_keywords_pipeline" class="md-nav__link">
+    esg_firm_query_keywords_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_esg_controversy_keywords" class="md-nav__link">
+    get_esg_controversy_keywords()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_esg_details" class="md-nav__link">
+    get_esg_details()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_index_firm_esg" class="md-nav__link">
+    get_index_firm_esg()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_index_stock_details" class="md-nav__link">
+    get_index_stock_details()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.remove_missing_esg_firms" class="md-nav__link">
+    remove_missing_esg_firms()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.replace_firm_names" class="md-nav__link">
+    replace_firm_names()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -233,6 +319,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract" class="md-nav__link">
+    yahoofinance_extract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.create_query_keywords" class="md-nav__link">
+    create_query_keywords()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.esg_firm_query_keywords_pipeline" class="md-nav__link">
+    esg_firm_query_keywords_pipeline()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_esg_controversy_keywords" class="md-nav__link">
+    get_esg_controversy_keywords()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_esg_details" class="md-nav__link">
+    get_esg_details()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_index_firm_esg" class="md-nav__link">
+    get_index_firm_esg()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.get_index_stock_details" class="md-nav__link">
+    get_index_stock_details()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.remove_missing_esg_firms" class="md-nav__link">
+    remove_missing_esg_firms()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yahoofinance_extract.replace_firm_names" class="md-nav__link">
+    replace_firm_names()
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -248,13 +405,12 @@
                   </a>
                 
                 
-                <h1 id="code-reference">Code reference</h1>
-<h1 id="esg-data-from-yahooquery">ESG data from yahooquery</h1>
+                <h1 id="esg-data-from-yahooquery">ESG data from yahooquery</h1>
 
 
   <div class="doc doc-object doc-module">
 
-<a id="src.data.yahoofinance_extract"></a>
+<a id="yahoofinance_extract"></a>
     <div class="doc doc-contents first">
 
       <p>Retrieve firm-level esg scores, process firm names and construct query strings</p>
@@ -274,7 +430,7 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.create_query_keywords" class="doc doc-heading">
+<h2 id="yahoofinance_extract.create_query_keywords" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">create_query_keywords</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
@@ -331,7 +487,7 @@
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_query_keywords</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Construct query keywords from firm_name and a list of keywords</span>
 
@@ -344,10 +500,14 @@
 <span class="sd">        Dataframe: added query_keyword column (firm_name + keyword)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">esg_df</span><span class="p">[</span><span class="s1">&#39;query_keyword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">firm_name</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">kw</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">])</span>
+    <span class="n">esg_df</span><span class="p">[</span><span class="s2">&quot;query_keyword&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">firm_name</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">kw</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">]</span>
+    <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">explode</span><span class="p">:</span> <span class="k">return</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;query_keyword&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">esg_df</span>
+    <span class="k">if</span> <span class="n">explode</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;query_keyword&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">esg_df</span>
 </code></pre></div>
         </details>
     </div>
@@ -360,8 +520,8 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.esg_firm_query_keywords_pipeline" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">)</span></code>
+<h2 id="yahoofinance_extract.esg_firm_query_keywords_pipeline" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">)</span></code>
 
 
 </h2>
@@ -381,12 +541,6 @@
     </tr>
   </thead>
   <tbody>
-      <tr>
-        <td><code>pytickersymbols</code></td>
-        <td><code>object</code></td>
-        <td><p>PyTickerSymbols() from pytickersymbols import PyTickerSymbols </p></td>
-        <td><em>required</em></td>
-      </tr>
       <tr>
         <td><code>index_name</code></td>
         <td><code>string</code></td>
@@ -417,12 +571,11 @@
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">):</span>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">esg_firm_query_keywords_pipeline</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">path_to_settings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ESG scores, processed firm names and firm name query strings in a dataframe.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        pytickersymbols (object): PyTickerSymbols() from pytickersymbols import PyTickerSymbols </span>
 <span class="sd">        index_name (string): Index name, one of PyTickerSymbols().get_all_indices()</span>
 <span class="sd">        path_to_settings (string): path to settings.yaml, where all esg keywords are specified</span>
 
@@ -430,11 +583,14 @@
 <span class="sd">        Dataframe: esg scores and related data from Yahoo!Finance incl. processed firm names and query keywords</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pytickersymbols</span> <span class="o">=</span> <span class="n">PyTickerSymbols</span><span class="p">()</span>
     <span class="n">controversy_keywords</span> <span class="o">=</span> <span class="n">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">path_to_settings</span><span class="p">)</span>
-    <span class="n">esg_df</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">settings_path</span><span class="o">=</span><span class="n">path_to_settings</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">remove_missing_esg_firms</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">create_query_keywords</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">controversy_keywords</span><span class="p">))</span>
+    <span class="n">esg_df</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">settings_path</span><span class="o">=</span><span class="n">path_to_settings</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">remove_missing_esg_firms</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">create_query_keywords</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">controversy_keywords</span><span class="p">)</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">esg_df</span>
 </code></pre></div>
@@ -449,7 +605,7 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.get_esg_controversy_keywords" class="doc doc-heading">
+<h2 id="yahoofinance_extract.get_esg_controversy_keywords" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">settings_path</span><span class="p">)</span></code>
 
 
@@ -460,14 +616,14 @@
       <p>Load controversy keywords from settings.yaml</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_esg_controversy_keywords</span><span class="p">(</span><span class="n">settings_path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Load controversy keywords from settings.yaml&quot;&quot;&quot;</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">full_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
-    <span class="n">controversies</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;esg&#39;</span><span class="p">][</span><span class="s1">&#39;negative&#39;</span><span class="p">]</span>
+    <span class="n">controversies</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;esg&quot;</span><span class="p">][</span><span class="s2">&quot;negative&quot;</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">controversies</span>
 </code></pre></div>
@@ -482,7 +638,7 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.get_esg_details" class="doc doc-heading">
+<h2 id="yahoofinance_extract.get_esg_details" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">)</span></code>
 
 
@@ -493,12 +649,12 @@
       <p>Returns esg information for suitable yahoo ticker which can be string, pd.Series or list</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns esg information for suitable yahoo ticker which can be string, pd.Series or list&quot;&quot;&quot;</span>
 
     <span class="c1"># convert series to list</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
         <span class="n">yahoo_ticker</span> <span class="o">=</span> <span class="n">yahoo_ticker</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
     <span class="n">ticker_details</span> <span class="o">=</span> <span class="n">Ticker</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="p">)</span>
@@ -517,7 +673,7 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.get_index_firm_esg" class="doc doc-heading">
+<h2 id="yahoofinance_extract.get_index_firm_esg" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">)</span></code>
 
 
@@ -528,11 +684,12 @@
       <p>Merge index, firm name and esg data</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@st</span><span class="o">.</span><span class="n">cache</span><span class="p">(</span><span class="n">allow_output_mutation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_index_firm_esg</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Merge index, firm name and esg data&quot;&quot;&quot;</span>
-    <span class="n">index_stocks</span> <span class="o">=</span> <span class="n">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+    <span class="n">index_stocks</span> <span class="o">=</span> <span class="n">get_index_stock_details</span><span class="p">(</span>
+        <span class="n">pytickersymbols</span><span class="o">=</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span>
+    <span class="p">)</span>
     <span class="n">esg_details</span> <span class="o">=</span> <span class="n">get_esg_details</span><span class="p">(</span><span class="n">yahoo_ticker</span><span class="o">=</span><span class="n">index_stocks</span><span class="o">.</span><span class="n">yahoo_ticker</span><span class="p">)</span>
 
     <span class="n">stocks_esg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">index_stocks</span><span class="p">,</span> <span class="n">esg_details</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -550,7 +707,7 @@
 
 
 
-<h2 id="src.data.yahoofinance_extract.get_index_stock_details" class="doc doc-heading">
+<h2 id="yahoofinance_extract.get_index_stock_details" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">)</span></code>
 
 
@@ -558,8 +715,8 @@
 
     <div class="doc doc-contents ">
 
-      <p>Get firm name, stock ticker for a specified stock index. 
-Available indices from pytickersymbols: PyTickerSymbols().get_all_indices() 
+      <p>Get firm name, stock ticker for a specified stock index.
+Available indices from pytickersymbols: PyTickerSymbols().get_all_indices()
 See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 <p><strong>Parameters:</strong></p>
@@ -582,7 +739,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <tr>
         <td><code>index_name</code></td>
         <td><code>str</code></td>
-        <td><p>Index name from PyTickerSymbols().get_all_indices() </p></td>
+        <td><p>Index name from PyTickerSymbols().get_all_indices()</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -603,35 +760,37 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_index_stock_details</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get firm name, stock ticker for a specified stock index. </span>
-<span class="sd">    Available indices from pytickersymbols: PyTickerSymbols().get_all_indices() </span>
+    <span class="sd">&quot;&quot;&quot;Get firm name, stock ticker for a specified stock index.</span>
+<span class="sd">    Available indices from pytickersymbols: PyTickerSymbols().get_all_indices()</span>
 <span class="sd">    See https://github.com/portfolioplus/pytickersymbols for package details</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        pytickersymbols (object): Init object from PyTickerSymbols()</span>
-<span class="sd">        index_name (str): Index name from PyTickerSymbols().get_all_indices() </span>
+<span class="sd">        index_name (str): Index name from PyTickerSymbols().get_all_indices()</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Dataframe: </span>
+<span class="sd">        Dataframe:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">index_details</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pytickersymbols</span><span class="o">.</span><span class="n">get_stocks_by_index</span><span class="p">(</span><span class="n">index_name</span><span class="p">))</span>
 
     <span class="c1"># string encoding</span>
-    <span class="k">try</span><span class="p">:</span> 
-        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encoding error for </span><span class="si">{</span><span class="n">index_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encoding error for </span><span class="si">{</span><span class="n">index_name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">index_details</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
     <span class="c1"># retrieve yahoo ticker symbol</span>
-    <span class="n">index_details</span><span class="p">[</span><span class="s1">&#39;yahoo_ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;yahoo&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">index_details</span><span class="p">[</span><span class="s2">&quot;yahoo_ticker&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_details</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;yahoo&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="p">)</span>
     <span class="n">index_details</span><span class="o">.</span><span class="n">yahoo_ticker</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">index_details</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># set ticker as index</span>
-    <span class="n">index_details</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;yahoo_ticker&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">index_details</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">index_details</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;yahoo_ticker&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">index_details</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">index_details</span>
 </code></pre></div>
@@ -646,7 +805,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.yahoofinance_extract.remove_missing_esg_firms" class="doc doc-heading">
+<h2 id="yahoofinance_extract.remove_missing_esg_firms" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">remove_missing_esg_firms</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">missing_placeholder</span><span class="o">=</span><span class="s1">&#39;No fundamentals data&#39;</span><span class="p">)</span></code>
 
 
@@ -657,7 +816,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <p>Drops firms that have no ESG scores. Placeholder from Yahoo</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">remove_missing_esg_firms</span><span class="p">(</span><span class="n">esg_df</span><span class="p">,</span> <span class="n">missing_placeholder</span><span class="o">=</span><span class="s2">&quot;No fundamentals data&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Drops firms that have no ESG scores. Placeholder from Yahoo&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">esg_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">esg_df</span><span class="o">.</span><span class="n">peerGroup</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">missing_placeholder</span><span class="p">)]</span>
@@ -673,7 +832,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.yahoofinance_extract.replace_firm_names" class="doc doc-heading">
+<h2 id="yahoofinance_extract.replace_firm_names" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">replace_firm_names</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">settings_path</span><span class="p">)</span></code>
 
 
@@ -684,22 +843,27 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <p>Replace firm names as specified in settings.yaml</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\yahoofinance_extract.py</code></summary>
+          <summary>Source code in <code>data\yahoofinance_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">replace_firm_names</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">settings_path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Replace firm names as specified in settings.yaml&quot;&quot;&quot;</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">full_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
-    <span class="k">try</span><span class="p">:</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">][</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span>
-    <span class="k">except</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No firm names specified in settings[&#39;query&#39;][&#39;firm_name&#39;]. </span><span class="se">\</span>
-<span class="s2">        Firm names still contain legal suffix which compromises search results.&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="p">,</span> <span class="s2">&quot;Dataframe has no name column. Firm names cannot be replaced.&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">replace_firm_names</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">][</span><span class="s2">&quot;firm_names&quot;</span><span class="p">]</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;firm_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">),</span> <span class="s2">&quot;Dataframe has no name column. Firm names cannot be replaced.&quot;</span>
 
-    <span class="n">replace_firm_names</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">][</span><span class="s1">&#39;firm_names&#39;</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">replace_firm_names</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">df</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;No firm names specified in settings[&#39;query&#39;][&#39;firm_name&#39;]. </span><span class="se">\</span>
+<span class="s2">        Firm names still contain legal suffix which compromises search results.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -723,11 +887,11 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
   <div class="doc doc-object doc-module">
 
-<a id="src.data.gresults_extract"></a>
+<a id="gresults_extract"></a>
     <div class="doc doc-contents first">
 
       <p>Extract results count from Google with beautiful soup</p>
-<p>Methods take a list of keywords and return a dataframe. </p>
+<p>Methods take a list of keywords and return a dataframe.</p>
 
 
 
@@ -744,7 +908,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.gresults_extract.assert_google_results" class="doc doc-heading">
+<h2 id="gresults_extract.assert_google_results" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
 
 
@@ -752,25 +916,35 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
     <div class="doc doc-contents ">
 
-      <p>Ensures that dataframe meets expectations </p>
+      <p>Ensures that dataframe meets expectations</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <summary>Source code in <code>data\gresults_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Ensures that dataframe meets expectations &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Ensures that dataframe meets expectations&quot;&quot;&quot;</span>
 
     <span class="c1"># expected dataframe for comparison</span>
-    <span class="n">df_compare</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-        <span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="o">*</span><span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;results_count&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;search_url&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;query_timestamp&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
-    <span class="p">})</span>
+    <span class="n">df_compare</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;keyword&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="o">*</span><span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;results_count&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int64&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;search_url&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                <span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;query_timestamp&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;datetime64[ns]&quot;</span>
+            <span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
 
     <span class="c1"># comparison to actual</span>
     <span class="n">column_difference</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">df_compare</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_difference</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;The following columns differ to reference dataframe: </span><span class="si">{</span><span class="n">column_difference</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">assert</span> <span class="p">(</span><span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Different dtypes for </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">column_difference</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;The following columns differ to reference dataframe: </span><span class="si">{</span><span class="n">column_difference</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Different dtypes for </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">df_compare</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> does not equal </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Google results data meets expectations&quot;</span><span class="p">)</span>
@@ -786,7 +960,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.gresults_extract.create_search_url" class="doc doc-heading">
+<h2 id="gresults_extract.create_search_url" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
 
 
@@ -837,7 +1011,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <summary>Source code in <code>data\gresults_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create Google search URL for a keyword from keyword_list</span>
 
@@ -849,8 +1023,10 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 <span class="sd">        list: Google search url like https://www.google.com/search?q=pizza</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">search_query</span> <span class="o">=</span> <span class="p">[</span><span class="n">kw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span><span class="p">]</span> <span class="c1"># replace space with &#39;+&#39;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">url</span><span class="o">+</span><span class="n">sq</span> <span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="n">search_query</span><span class="p">]</span>
+    <span class="n">search_query</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">kw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keyword_list</span>
+    <span class="p">]</span>  <span class="c1"># replace space with &#39;+&#39;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">url</span> <span class="o">+</span> <span class="n">sq</span> <span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="n">search_query</span><span class="p">]</span>
 </code></pre></div>
         </details>
     </div>
@@ -863,7 +1039,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.gresults_extract.get_results_count" class="doc doc-heading">
+<h2 id="gresults_extract.get_results_count" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_results_count</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">)</span></code>
 
 
@@ -887,7 +1063,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <tr>
         <td><code>keyword</code></td>
         <td><code>string</code></td>
-        <td><p>The keyword for which to get the results count </p></td>
+        <td><p>The keyword for which to get the results count</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -914,25 +1090,27 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
+          <summary>Source code in <code>data\gresults_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_results_count</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Gets Google&#39;s result count for a keyword</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        keyword (string): The keyword for which to get the results count </span>
+<span class="sd">        keyword (string): The keyword for which to get the results count</span>
 <span class="sd">        user_agent (string): For example {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&quot;}</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        int: Results count</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>    
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
 
     <span class="c1">#  string that contains results count &#39;About 1,410,000,000 results&#39;</span>
-    <span class="n">total_results_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;result-stats&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+    <span class="n">total_results_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;result-stats&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
 
     <span class="c1"># extract number</span>
-    <span class="n">results_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">total_results_text</span> <span class="k">if</span> <span class="n">num</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()])</span> <span class="p">)</span>
+    <span class="n">results_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">total_results_text</span> <span class="k">if</span> <span class="n">num</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()]))</span>
 
     <span class="k">return</span> <span class="n">results_num</span>
 </code></pre></div>
@@ -947,7 +1125,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
 
 
 
-<h2 id="src.data.gresults_extract.get_results_count_pipeline" class="doc doc-heading">
+<h2 id="gresults_extract.get_results_count_pipeline" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_results_count_pipeline</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.google.com/search?q=&#39;</span><span class="p">)</span></code>
 
 
@@ -971,7 +1149,7 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <tr>
         <td><code>keyword_list</code></td>
         <td><code>list</code></td>
-        <td><p>The keywords for which to get the results count </p></td>
+        <td><p>The keywords for which to get the results count</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1002,31 +1180,33 @@ See https://github.com/portfolioplus/pytickersymbols for package details</p>
       <td><p>Google results count and query metadata</p></td>
     </tr>
   </tbody>
-</table>      <p>Examples: </p>
-<pre><code>with open('../settings.yaml') as file: 
+</table>
+<p><strong>Examples:</strong></p>
+    <p>with open('../settings.yaml') as file:
    config = yaml.full_load(file)
 user_agent = config['query']['google_results']['user_agent']
 base_url = config['query']['google_results']['base_url']
 keyword_list = ['pizza', 'lufthansa']
-result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
-</code></pre>
+result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gresults_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_results_count_pipeline</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span><span class="p">):</span>
+          <summary>Source code in <code>data\gresults_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_results_count_pipeline</span><span class="p">(</span>
+    <span class="n">keyword_list</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com/search?q=&quot;</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Google results count for each keyword of keyword_list in a dataframe</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        keyword_list (list): The keywords for which to get the results count </span>
+<span class="sd">        keyword_list (list): The keywords for which to get the results count</span>
 <span class="sd">        user_agent (string): For example {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&quot;}</span>
 <span class="sd">        url (string): Google&#39;s base search URL like &quot;https://www.google.com/search?q=&quot; (default)</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dataframe: Google results count and query metadata</span>
 
-<span class="sd">    Examples: </span>
+<span class="sd">    Examples:</span>
 
-<span class="sd">        with open(&#39;../settings.yaml&#39;) as file: </span>
+<span class="sd">        with open(&#39;../settings.yaml&#39;) as file:</span>
 <span class="sd">           config = yaml.full_load(file)</span>
 <span class="sd">        user_agent = config[&#39;query&#39;][&#39;google_results&#39;][&#39;user_agent&#39;]</span>
 <span class="sd">        base_url = config[&#39;query&#39;][&#39;google_results&#39;][&#39;base_url&#39;]</span>
@@ -1034,12 +1214,16 @@ result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
 <span class="sd">        result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">search_urls</span> <span class="o">=</span> <span class="n">create_search_url</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span>
-    <span class="n">result_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_results_count</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">search_urls</span><span class="p">]</span>  
+    <span class="n">result_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_results_count</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">search_urls</span><span class="p">]</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="n">keyword_list</span><span class="p">,</span> 
-                       <span class="s1">&#39;results_count&#39;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span> 
-                       <span class="s1">&#39;search_url&#39;</span><span class="p">:</span> <span class="n">search_urls</span><span class="p">,</span> 
-                       <span class="s1">&#39;query_timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()})</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;keyword&quot;</span><span class="p">:</span> <span class="n">keyword_list</span><span class="p">,</span>
+            <span class="s2">&quot;results_count&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+            <span class="s2">&quot;search_url&quot;</span><span class="p">:</span> <span class="n">search_urls</span><span class="p">,</span>
+            <span class="s2">&quot;query_timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
     <span class="c1"># testing</span>
     <span class="n">assert_google_results</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 
@@ -1067,14 +1251,14 @@ result_counts = get_results_count_pipeline(keyword_list, user_agent, base_url)
 
   <div class="doc doc-object doc-module">
 
-<a id="src.data.gtrends_extract"></a>
+<a id="gtrends_extract"></a>
     <div class="doc doc-contents first">
 
       <p>Extract data from Google trends with the pytrends package
 Methods take one keyword, call pytrends and return processed data as CSV or dataframe</p>
-<p>There are two main functions: 
-    * get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
-    * get_interest_over_time: Returns CSV with interest over time for specified keywords</p>
+<p>Main functions
+    (1) get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
+    (2) get_interest_over_time: Returns CSV with interest over time for specified keywords</p>
 
 
 
@@ -1091,7 +1275,7 @@ Methods take one keyword, call pytrends and return processed data as CSV or data
 
 
 
-<h2 id="src.data.gtrends_extract.create_pytrends_session" class="doc doc-heading">
+<h2 id="gtrends_extract.create_pytrends_session" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">create_pytrends_session</span><span class="p">()</span></code>
 
 
@@ -1099,13 +1283,13 @@ Methods take one keyword, call pytrends and return processed data as CSV or data
 
     <div class="doc doc-contents ">
 
-      <p>Create pytrends TrendReq() session on which .build_payload() can be called </p>
+      <p>Create pytrends TrendReq() session on which .build_payload() can be called</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_pytrends_session</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Create pytrends TrendReq() session on which .build_payload() can be called &quot;&quot;&quot;</span>
-    <span class="n">pytrends_session</span> <span class="o">=</span> <span class="n">TrendReq</span><span class="p">()</span> 
+    <span class="sd">&quot;&quot;&quot;Create pytrends TrendReq() session on which .build_payload() can be called&quot;&quot;&quot;</span>
+    <span class="n">pytrends_session</span> <span class="o">=</span> <span class="n">TrendReq</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">pytrends_session</span>
 </code></pre></div>
@@ -1120,7 +1304,7 @@ Methods take one keyword, call pytrends and return processed data as CSV or data
 
 
 
-<h2 id="src.data.gtrends_extract.create_related_queries_dataframe" class="doc doc-heading">
+<h2 id="gtrends_extract.create_related_queries_dataframe" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">create_related_queries_dataframe</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span></code>
 
 
@@ -1132,16 +1316,21 @@ Methods take one keyword, call pytrends and return processed data as CSV or data
 and each ranking (either 'top' or 'rising')</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_related_queries_dataframe</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">):</span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_related_queries_dataframe</span><span class="p">(</span>
+    <span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s2">&quot;global&quot;</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a single dataframe of related queries for a list of keywords</span>
 <span class="sd">    and each ranking (either &#39;top&#39; or &#39;rising&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rankings</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
-            <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_related_query_response</span><span class="p">(</span>
-                <span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo_description</span><span class="p">))</span>
+            <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">process_related_query_response</span><span class="p">(</span>
+                    <span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo_description</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
 </code></pre></div>
@@ -1156,7 +1345,7 @@ and each ranking (either 'top' or 'rising')</p>
 
 
 
-<h2 id="src.data.gtrends_extract.get_interest_over_time" class="doc doc-heading">
+<h2 id="gtrends_extract.get_interest_over_time" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_interest_over_time</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">filepath_failed</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
 
 
@@ -1164,14 +1353,14 @@ and each ranking (either 'top' or 'rising')</p>
 
     <div class="doc doc-contents ">
 
-      <p>Workhorse function to query Google Trend's interest_over_time() function. 
-It respects the query's requirements like 
+      <p>Workhorse function to query Google Trend's interest_over_time() function.
+It respects the query's requirements like
     * max. 5 keywords per query, handled by list_batch()
     * a basic date index for queries returning empty dataframe
     * randomized timeout to not bust rate limits</p>
 <p>Error handling:
     * retry after query error with increased timeout
-    * when a query fails after retries, related keywords are stored in csv in filepath_failed. </p>
+    * when a query fails after retries, related keywords are stored in csv in filepath_failed.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1205,7 +1394,7 @@ It respects the query's requirements like
       <tr>
         <td><code>max_retries</code></td>
         <td><code>int</code></td>
-        <td><p>how often retry </p></td>
+        <td><p>how often retry</p></td>
         <td><code>3</code></td>
       </tr>
       <tr>
@@ -1213,6 +1402,18 @@ It respects the query's requirements like
         <td><code>int</code></td>
         <td><p>time to wait in seconds btw. queries</p></td>
         <td><code>10</code></td>
+      </tr>
+      <tr>
+        <td><code>timeframe</code></td>
+        <td><code>string</code></td>
+        <td><p>Defaults to last 5yrs, 'today 5-y',</p></td>
+        <td><code>&#39;today 5-y&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>other</code></td>
+        <td><code>values</code></td>
+        <td><p>'all', Specific dates, 'YYYY-MM-DD YYYY-MM-DD',</p></td>
+        <td><em>required</em></td>
       </tr>
   </tbody>
 </table>
@@ -1232,17 +1433,24 @@ It respects the query's requirements like
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_interest_over_time</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">filepath_failed</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Workhorse function to query Google Trend&#39;s interest_over_time() function. </span>
-<span class="sd">    It respects the query&#39;s requirements like </span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_interest_over_time</span><span class="p">(</span>
+    <span class="n">keyword_list</span><span class="p">,</span>
+    <span class="n">filepath</span><span class="p">,</span>
+    <span class="n">filepath_failed</span><span class="p">,</span>
+    <span class="n">timeframe</span><span class="o">=</span><span class="s2">&quot;today 5-y&quot;</span><span class="p">,</span>
+    <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Workhorse function to query Google Trend&#39;s interest_over_time() function.</span>
+<span class="sd">    It respects the query&#39;s requirements like</span>
 <span class="sd">        * max. 5 keywords per query, handled by list_batch()</span>
 <span class="sd">        * a basic date index for queries returning empty dataframe</span>
 <span class="sd">        * randomized timeout to not bust rate limits</span>
 
 <span class="sd">    Error handling:</span>
 <span class="sd">        * retry after query error with increased timeout</span>
-<span class="sd">        * when a query fails after retries, related keywords are stored in csv in filepath_failed. </span>
+<span class="sd">        * when a query fails after retries, related keywords are stored in csv in filepath_failed.</span>
 
 
 
@@ -1250,8 +1458,10 @@ It respects the query's requirements like
 <span class="sd">        keyword_list (list): strings used for the google trends query</span>
 <span class="sd">        filepath (string): csv to store successful query results</span>
 <span class="sd">        filepath_failed (string): csv to store unsuccessful keywords</span>
-<span class="sd">        max_retries (int): how often retry </span>
+<span class="sd">        max_retries (int): how often retry</span>
 <span class="sd">        timeout (int): time to wait in seconds btw. queries</span>
+<span class="sd">        timeframe (string): Defaults to last 5yrs, &#39;today 5-y&#39;,</span>
+<span class="sd">        other values: &#39;all&#39;, Specific dates, &#39;YYYY-MM-DD YYYY-MM-DD&#39;,</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None: Writes dataframe to csv</span>
@@ -1262,26 +1472,30 @@ It respects the query's requirements like
     <span class="c1"># divide list into batches of max 5 elements (requirement from Gtrends)</span>
     <span class="n">kw_batches</span> <span class="o">=</span> <span class="n">list_batch</span><span class="p">(</span><span class="n">lst</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">kw_batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">):</span> 
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">kw_batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">):</span>
         <span class="c1"># retry until max_retries reached</span>
-        <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span> 
+        <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
 
-            <span class="c1"># random int from range around timeout </span>
-            <span class="n">timeout_randomized</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">timeout</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">timeout</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+            <span class="c1"># random int from range around timeout</span>
+            <span class="n">timeout_randomized</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">timeout</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">query_interest_over_time</span><span class="p">(</span><span class="n">kw_batch</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="n">date_index</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">query_interest_over_time</span><span class="p">(</span>
+                    <span class="n">kw_batch</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="n">date_index</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span>
+                <span class="p">)</span>
 
             <span class="c1"># query unsuccessful</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;query_interest_over_time() failed in get_interest_over_time with: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">timeout</span> <span class="o">+=</span> <span class="mi">3</span> <span class="c1"># increase timetout to be safe</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;query_interest_over_time() failed in get_interest_over_time with: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">timeout</span> <span class="o">+=</span> <span class="mi">3</span>  <span class="c1"># increase timetout to be safe</span>
                 <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">,</span> <span class="n">print_step</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-
-            <span class="c1"># query was successful: store results, sleep </span>
+            <span class="c1"># query was successful: store results, sleep</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">))</span><span class="si">}</span><span class="s2"> get_interest_over_time() query successful&quot;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kw_batches</span><span class="p">))</span><span class="si">}</span><span class="s2"> get_interest_over_time() query successful&quot;</span>
+                <span class="p">)</span>
                 <span class="n">df_to_csv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span><span class="p">)</span>
                 <span class="n">sleep_countdown</span><span class="p">(</span><span class="n">timeout_randomized</span><span class="p">)</span>
                 <span class="k">break</span>
@@ -1302,7 +1516,7 @@ It respects the query's requirements like
 
 
 
-<h2 id="src.data.gtrends_extract.get_query_date_index" class="doc doc-heading">
+<h2 id="gtrends_extract.get_query_date_index" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">)</span></code>
 
 
@@ -1347,11 +1561,11 @@ It respects the query's requirements like
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">):</span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_query_date_index</span><span class="p">(</span><span class="n">timeframe</span><span class="o">=</span><span class="s2">&quot;today 5-y&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Queries Google trends to have a valid index for query results that returned an empty dataframe</span>
 <span class="sd">    Args:</span>
-<span class="sd">        timeframe (string): </span>
+<span class="sd">        timeframe (string):</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.Series: date index of Google trend&#39;s interest_over_time()</span>
@@ -1359,12 +1573,11 @@ It respects the query's requirements like
 
     <span class="c1"># init pytrends with query that ALWAYS works</span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">create_pytrends_session</span><span class="p">()</span>
-    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;lufthansa&#39;</span><span class="p">],</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pizza&quot;</span><span class="p">,</span> <span class="s2">&quot;lufthansa&quot;</span><span class="p">],</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">interest_over_time</span><span class="p">()</span>
 
     <span class="c1"># set date as column</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">date</span>
 </code></pre></div>
@@ -1379,7 +1592,7 @@ It respects the query's requirements like
 
 
 
-<h2 id="src.data.gtrends_extract.get_related_queries" class="doc doc-heading">
+<h2 id="gtrends_extract.get_related_queries" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
 
 
@@ -1387,7 +1600,7 @@ It respects the query's requirements like
 
     <div class="doc doc-contents ">
 
-      <p>Returns a dictionary with a dataframe for each keyword 
+      <p>Returns a dictionary with a dataframe for each keyword
 Calls pytrend's related_queries()</p>
 
 <p><strong>Parameters:</strong></p>
@@ -1410,7 +1623,7 @@ Calls pytrend's related_queries()</p>
       <tr>
         <td><code>keyword_list</code></td>
         <td><code>list</code></td>
-        <td><p>Used as input for query and passed to TrendReq().build_payload() </p></td>
+        <td><p>Used as input for query and passed to TrendReq().build_payload()</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1438,26 +1651,28 @@ Calls pytrend's related_queries()</p>
   <tbody>
     <tr>
       <td><code>Dictionary</code></td>
-      <td><p>Dict with dataframes with related query results </p></td>
+      <td><p>Dict with dataframes with related query results</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a dictionary with a dataframe for each keyword </span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary with a dataframe for each keyword</span>
 <span class="sd">    Calls pytrend&#39;s related_queries()</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        pytrends_session (object): TrendReq() session of pytrend</span>
-<span class="sd">        keyword_list (list): Used as input for query and passed to TrendReq().build_payload() </span>
+<span class="sd">        keyword_list (list): Used as input for query and passed to TrendReq().build_payload()</span>
 <span class="sd">        cat (int): see https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories</span>
 <span class="sd">        geo (str): Geolocation like US, UK</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Dictionary: Dict with dataframes with related query results </span>
-<span class="sd">    &quot;&quot;&quot;</span>    
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;keyword_list should be string. Instead of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="sd">        Dictionary: Dict with dataframes with related query results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+        <span class="n">keyword_list</span><span class="p">,</span> <span class="nb">list</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;keyword_list should be string. Instead of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">keyword_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="n">df_related_queries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
@@ -1482,7 +1697,7 @@ Calls pytrend's related_queries()</p>
 
 
 
-<h2 id="src.data.gtrends_extract.get_related_queries_pipeline" class="doc doc-heading">
+<h2 id="gtrends_extract.get_related_queries_pipeline" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_related_queries_pipeline</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span></code>
 
 
@@ -1497,8 +1712,10 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 </code></pre>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries_pipeline</span><span class="p">(</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">):</span> 
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_related_queries_pipeline</span><span class="p">(</span>
+    <span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">geo_description</span><span class="o">=</span><span class="s2">&quot;global&quot;</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns all response data for pytrend&#39;s .related_queries() in a single dataframe</span>
 
 <span class="sd">    Example usage:</span>
@@ -1506,13 +1723,16 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 <span class="sd">        pytrends_session = create_pytrends_session()</span>
 <span class="sd">        df = get_related_queries_pipeline(pytrends_session, keyword_list=[&#39;pizza&#39;, &#39;lufthansa&#39;])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">get_related_queries</span><span class="p">(</span><span class="n">pytrends_session</span><span class="o">=</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo</span><span class="p">)</span> <span class="c1"># </span>
-    <span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span>  <span class="o">=</span> <span class="n">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">get_related_queries</span><span class="p">(</span>
+        <span class="n">pytrends_session</span><span class="o">=</span><span class="n">pytrends_session</span><span class="p">,</span> <span class="n">keyword_list</span><span class="o">=</span><span class="n">keyword_list</span><span class="p">,</span> <span class="n">cat</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">geo</span><span class="o">=</span><span class="n">geo</span>
+    <span class="p">)</span>  <span class="c1">#</span>
+    <span class="n">response</span><span class="p">,</span> <span class="n">rankings</span><span class="p">,</span> <span class="n">keywords</span> <span class="o">=</span> <span class="n">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
     <span class="n">df_trends</span> <span class="o">=</span> <span class="n">create_related_queries_dataframe</span><span class="p">(</span>
-        <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> 
-        <span class="n">rankings</span><span class="o">=</span><span class="n">rankings</span><span class="p">,</span> 
-        <span class="n">keywords</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span> 
-        <span class="n">geo_description</span><span class="o">=</span><span class="n">geo_description</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
+        <span class="n">rankings</span><span class="o">=</span><span class="n">rankings</span><span class="p">,</span>
+        <span class="n">keywords</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span>
+        <span class="n">geo_description</span><span class="o">=</span><span class="n">geo_description</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">df_trends</span>
 </code></pre></div>
@@ -1527,7 +1747,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 
 
-<h2 id="src.data.gtrends_extract.process_interest_over_time" class="doc doc-heading">
+<h2 id="gtrends_extract.process_interest_over_time" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query_length</span><span class="o">=</span><span class="mi">261</span><span class="p">)</span></code>
 
 
@@ -1560,7 +1780,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
       <tr>
         <td><code>date_index</code></td>
         <td><code>pd.Series</code></td>
-        <td><p>series with date form a basic query to construct df for empty reponses </p></td>
+        <td><p>series with date form a basic query to construct df for empty reponses</p></td>
         <td><code>None</code></td>
       </tr>
   </tbody>
@@ -1576,14 +1796,16 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
   <tbody>
     <tr>
       <td><code>Dataframe</code></td>
-      <td><p>contains query results in long format 
+      <td><p>contains query results in long format
 (rows: keywords, columns: search interest over time)</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query_length</span><span class="o">=</span><span class="mi">261</span><span class="p">):</span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_interest_over_time</span><span class="p">(</span>
+    <span class="n">df_query_result</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">query_length</span><span class="o">=</span><span class="mi">261</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Process query results</span>
 <span class="sd">            * check for empty response --&gt; create df with 0s if empty</span>
 <span class="sd">            * drop isPartial rows and column</span>
@@ -1591,34 +1813,47 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 <span class="sd">    Args:</span>
 <span class="sd">        df_query_result (pd.DataFrame): dataframe containing query result (could be empty)</span>
-<span class="sd">        date_index (pd.Series): series with date form a basic query to construct df for empty reponses </span>
+<span class="sd">        date_index (pd.Series): series with date form a basic query to construct df for empty reponses</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Dataframe: contains query results in long format </span>
+<span class="sd">        Dataframe: contains query results in long format</span>
 <span class="sd">        (rows: keywords, columns: search interest over time)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># non-empty df</span>
     <span class="k">if</span> <span class="n">df_query_result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># reset_index to preserve date information, drop isPartial column</span>
-        <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">df_query_result</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>\
-            <span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;isPartial&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">df_query_result</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;isPartial&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
 
-        <span class="n">df_query_result_long</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df_query_result_processed</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;search_interest&#39;</span><span class="p">)</span>
+        <span class="n">df_query_result_long</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
+            <span class="n">df_query_result_processed</span><span class="p">,</span>
+            <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span>
+            <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+            <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;search_interest&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># long format (date, keyword, search interest)</span>
         <span class="k">return</span> <span class="n">df_query_result_long</span>
 
     <span class="c1"># empty df: no search result for any keyword</span>
-    <span class="k">else</span><span class="p">:</span>        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">keywords</span> <span class="o">=</span> <span class="n">keywords</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;process_interest_over_time() handles empty dataframe for </span><span class="si">{</span><span class="n">keywords</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
         <span class="c1"># create empty df with 0s</span>
-        <span class="n">query_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_index</span><span class="p">)</span> <span class="k">if</span> <span class="n">date_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">query_length</span>
-
-        <span class="n">df_zeros</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">query_length</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;search_interest&#39;</span><span class="p">])</span>
+        <span class="n">query_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_index</span><span class="p">)</span>
+        <span class="n">df_zeros</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">query_length</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="s2">&quot;search_interest&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="c1"># replace 0s with keywords</span>
+        <span class="n">df_zeros</span><span class="p">[</span><span class="s2">&quot;keyword&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">query_length</span><span class="p">)</span>
         <span class="c1"># replace 0s with dates</span>
-        <span class="n">df_zeros</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">date_index</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">date_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="c1"># replace 0s with keywords </span>
-        <span class="n">df_zeros</span><span class="p">[</span><span class="s1">&#39;keyword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">query_length</span><span class="p">)</span>
-
+        <span class="n">df_zeros</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">date_index</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keywords</span><span class="p">))],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">df_zeros</span>
 </code></pre></div>
@@ -1633,7 +1868,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 
 
-<h2 id="src.data.gtrends_extract.process_related_query_response" class="doc doc-heading">
+<h2 id="gtrends_extract.process_related_query_response" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">process_related_query_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">)</span></code>
 
 
@@ -1641,21 +1876,26 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
     <div class="doc doc-contents ">
 
-      <p>Helper function for unpack_related_queries_response() </p>
+      <p>Helper function for unpack_related_queries_response()</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">process_related_query_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Helper function for unpack_related_queries_response() &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for unpack_related_queries_response()&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="n">kw</span><span class="p">][</span><span class="n">ranking</span><span class="p">]</span>
-        <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;query_timestamp&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">kw</span><span class="p">,</span> <span class="n">ranking</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()]</span>
-    <span class="k">except</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="s2">&quot;ranking&quot;</span><span class="p">,</span> <span class="s2">&quot;geo&quot;</span><span class="p">,</span> <span class="s2">&quot;query_timestamp&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">kw</span><span class="p">,</span>
+            <span class="n">ranking</span><span class="p">,</span>
+            <span class="n">geo</span><span class="p">,</span>
+            <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Append empty dataframe for </span><span class="si">{</span><span class="n">ranking</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">kw</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;query_timestamp&#39;</span><span class="p">])</span>
-
-    <span class="k">return</span> <span class="n">df</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="s2">&quot;ranking&quot;</span><span class="p">,</span> <span class="s2">&quot;geo&quot;</span><span class="p">,</span> <span class="s2">&quot;query_timestamp&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -1668,7 +1908,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 
 
-<h2 id="src.data.gtrends_extract.query_interest_over_time" class="doc doc-heading">
+<h2 id="gtrends_extract.query_interest_over_time" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">query_interest_over_time</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">)</span></code>
 
 
@@ -1713,8 +1953,8 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">query_interest_over_time</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s1">&#39;today 5-y&#39;</span><span class="p">):</span>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">query_interest_over_time</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="s2">&quot;today 5-y&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Forward keywords to Google Trends API and process results into long format</span>
 
 <span class="sd">    Args:</span>
@@ -1726,13 +1966,15 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># init pytrends</span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">create_pytrends_session</span><span class="p">()</span>
-    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span> 
+    <span class="n">pt</span><span class="o">.</span><span class="n">build_payload</span><span class="p">(</span><span class="n">kw_list</span><span class="o">=</span><span class="n">keywords</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">)</span>
 
     <span class="c1"># load search interest over time</span>
     <span class="n">df_query_result_raw</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">interest_over_time</span><span class="p">()</span>
 
     <span class="c1"># preprocess query results</span>
-    <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">process_interest_over_time</span><span class="p">(</span><span class="n">df_query_result_raw</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span><span class="p">)</span>
+    <span class="n">df_query_result_processed</span> <span class="o">=</span> <span class="n">process_interest_over_time</span><span class="p">(</span>
+        <span class="n">df_query_result_raw</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">date_index</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">df_query_result_processed</span>
 </code></pre></div>
@@ -1747,7 +1989,7 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
 
 
-<h2 id="src.data.gtrends_extract.unpack_related_queries_response" class="doc doc-heading">
+<h2 id="gtrends_extract.unpack_related_queries_response" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></code>
 
 
@@ -1755,12 +1997,12 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
 
     <div class="doc doc-contents ">
 
-      <p>Unpack response from dictionary and create one dataframe for each ranking and each keyword </p>
+      <p>Unpack response from dictionary and create one dataframe for each ranking and each keyword</p>
 
         <details class="quote">
-          <summary>Source code in <code>src\data\gtrends_extract.py</code></summary>
+          <summary>Source code in <code>data\gtrends_extract.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">unpack_related_queries_response</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unpack response from dictionary and create one dataframe for each ranking and each keyword &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Unpack response from dictionary and create one dataframe for each ranking and each keyword&quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Empty response. Try again.&quot;</span>
 
     <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">response</span><span class="p">[[</span><span class="o">*</span><span class="n">response</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span>
@@ -1785,21 +2027,6 @@ df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'luft
   </div>
 
 <hr />
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
                 
               
               

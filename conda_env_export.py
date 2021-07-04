@@ -39,10 +39,14 @@ def export_env(history_only=False, include_builds=False):
     output = cp.stdout.decode("utf-8")
 
     # get header and conda dependencies from history-only mode, and pip dependencies from non history_only mode:
-    is_useful = True if history_only else False  # retain the header and conda part if history_only
+    is_useful = (
+        True if history_only else False
+    )  # retain the header and conda part if history_only
     result = []
     for line in output.splitlines():
-        is_useful = set_usefulness(line, is_useful, history_only)  # remove none pip parts if in history only mode
+        is_useful = set_usefulness(
+            line, is_useful, history_only
+        )  # remove none pip parts if in history only mode
         result.append(line) if is_useful else None
     return "\n".join(result)
 
