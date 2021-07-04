@@ -17,9 +17,7 @@ def create_pytrends_session():
 
 
 @task
-def get_response(
-    pytrends_session: TrendReq, keyword_list: List[str], cat: int = 0, geo: str = ""
-) -> dict:
+def get_response(pytrends_session: TrendReq, keyword_list: List[str], cat: int = 0, geo: str = "") -> dict:
     """Returns a dictionary with a dataframe for each keyword
     Calls pytrend's related_queries()
 
@@ -32,18 +30,14 @@ def get_response(
     Returns:
         Dictionary: Dict with dataframes with related query results
     """
-    assert isinstance(
-        keyword_list, list
-    ), f"keyword_list should be string. Instead of type {type(keyword_list)}"
+    assert isinstance(keyword_list, list), f"keyword_list should be string. Instead of type {type(keyword_list)}"
 
     pytrends_session.build_payload(keyword_list, cat=cat, geo=geo)
     response = pytrends_session.related_queries()
     if response is not None:
         logger.info(f"Query succeeded for {*keyword_list ,}")
     else:
-        logger.warning(
-            f"Query failed for {*keyword_list ,}, obtained df_related_queries is None."
-        )
+        logger.warning(f"Query failed for {*keyword_list ,}, obtained df_related_queries is None.")
 
     return response
 
@@ -74,9 +68,7 @@ def get_df_response(response: dict, rk: Any, kw: str, geo="global") -> pd.DataFr
         return df
     except KeyError:
         logger.warning(f"Append empty dataframe for {rk}: {kw}")
-        return pd.DataFrame(
-            columns=["query", "value", "keyword", "ranking", "geo", "query_timestamp"]
-        )
+        return pd.DataFrame(columns=["query", "value", "keyword", "ranking", "geo", "query_timestamp"])
 
 
 @task

@@ -18,8 +18,7 @@ from data.data_utilities import timestamp_now
 # ---------------------------------------------------
 
 csv = st.sidebar.selectbox(
-    "Select csv file from raw data", options=glob("../data/raw/*csv"),
-    format_func=lambda x: x.split('\\')[-1]
+    "Select csv file from raw data", options=glob("../data/raw/*csv"), format_func=lambda x: x.split("\\")[-1]
 )
 
 # load data with
@@ -34,9 +33,7 @@ df = df_raw.set_index("date").groupby("keyword").resample("M").mean().reset_inde
 index_name = "DAX"
 
 if st.sidebar.checkbox(f"Run query for {index_name}"):
-    esg_df = yq.esg_firm_query_keywords_pipeline(
-        index_name="DAX", path_to_settings="../settings.yaml"
-    )
+    esg_df = yq.esg_firm_query_keywords_pipeline(index_name="DAX", path_to_settings="../settings.yaml")
 
     indices = PyTickerSymbols().get_all_indices()
 
@@ -52,15 +49,17 @@ selected_keywords = st.sidebar.multiselect("Select keywords", options=keyword_li
 if st.sidebar.checkbox(f"Run query for {selected_keywords}"):
     timeframe = f'2016-12-14 {datetime.now().strftime("%Y-%m-%d")}'
     df_search_interest = get_interest_over_time(
-        keyword_list=selected_keywords, timeframe=timeframe,
+        keyword_list=selected_keywords,
+        timeframe=timeframe,
         filepath=f"../data/raw/{selected_keywords[0]}_trends_{timestamp_now()}.csv",
-        filepath_failed=f"../data/raw/{selected_keywords[0]}_trends_{timestamp_now()}.csv"
+        filepath_failed=f"../data/raw/{selected_keywords[0]}_trends_{timestamp_now()}.csv",
     )
 
 
 # ---------------------------------------------------
 # VISUALS
 # ---------------------------------------------------
+
 
 def plot_interest_over_time(df, title):
     """line chart: weekly change of Google trends"""
@@ -79,12 +78,8 @@ def plot_interest_over_time(df, title):
     fig.update_layout(plot_bgcolor="white")  # white background
 
     # -- customize legend
-    fig.update_layout(legend=dict(
-        yanchor="bottom",
-        y=0.8,
-        xanchor="right",
-        x=0.4,
-        bgcolor='rgba(0,0,0,0)'), # transparent
+    fig.update_layout(
+        legend=dict(yanchor="bottom", y=0.8, xanchor="right", x=0.4, bgcolor="rgba(0,0,0,0)"),  # transparent
         hovermode="closest",
     )
 
