@@ -17,13 +17,10 @@ Example:
     >> python conda_env_export.py # a better alternative than `conda env export`
 """
 
-# TODO currently leave out python and pip, fix this.
-
 import subprocess
+import logging
 
-from root_logger import logger
-
-logger = logger()
+logger = logging.getLogger(__name__)
 
 
 def export_env(history_only=False, include_builds=False):
@@ -65,7 +62,7 @@ def main():
     env_data = env_data_conda + "\n" + env_data_pip
     with open("conda_env.yml", "w") as f:
         f.write(env_data)
-    logger.info(
+    print(
         """
         Conda env export successfully done.
         Please check file 'conda_env.yml' before push to pip, making sure no un-safe dependencies are accidentally

@@ -92,3 +92,16 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# local or sensitive terraform files
+.terraform/
+.terraform.*
+.tfstate
+.tfstate.*
+.tfvars
+
+# prefect config files
+.prefect/
+
+# hetnzer token
+hetzner-api-token.txt
