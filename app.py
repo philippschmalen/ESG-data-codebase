@@ -28,7 +28,9 @@ st.title("Towards sustainable finance - visuals")
 # How to load data from Google trands:
 # ----------------------------------------
 keywords = ["greenwashing", "sustainable finance"]
-if st.sidebar.button(f"Get current search interest for\n {', '.join(str(x) for x in keywords)}"):
+if st.sidebar.button(
+    f"Get current search interest for\n {', '.join(str(x) for x in keywords)}"
+):
     ts = data_utils.timestamp_now()
     timeframe = "today 5-y"  # f'2019-06-01 {datetime.utcnow().strftime("%Y-%m-%d")}'
     filepath = f"./data/raw/greenwashing_{ts}.csv"
@@ -50,7 +52,9 @@ if st.sidebar.button(f"Get current search interest for\n {', '.join(str(x) for x
 raw_data_csv_files = st.sidebar.selectbox(
     "Select data", options=glob("data/raw/*csv"), format_func=lambda x: x.split("\\")[-1]
 )
-df_raw = data_utils.load_data(filepath=raw_data_csv_files, parse_dates=["date"]).set_index("date")
+df_raw = data_utils.load_data(
+    filepath=raw_data_csv_files, parse_dates=["date"]
+).set_index("date")
 
 
 df = data_utils.group_search_interest_on_time_unit(df=df_raw)
@@ -89,6 +93,8 @@ fig.add_layout_image(
 
 # layout tweaks
 fig.update_traces(line=dict(width=5))  # thicker line
-fig.update_layout(plot_bgcolor="white", legend=dict(x=0.1, y=0.9, title=""))  # white background
+fig.update_layout(
+    plot_bgcolor="white", legend=dict(x=0.1, y=0.9, title="")
+)  # white background
 
 st.plotly_chart(fig)

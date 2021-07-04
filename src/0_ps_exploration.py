@@ -5,6 +5,8 @@ import logging
 from datetime import datetime
 import plotly.express as px
 import chart_studio.plotly as cs
+from glob import glob
+import pandas as pd
 import tsf_plots
 
 from pytickersymbols import PyTickerSymbols
@@ -18,7 +20,9 @@ from data.data_utilities import timestamp_now
 # ---------------------------------------------------
 
 csv = st.sidebar.selectbox(
-    "Select csv file from raw data", options=glob("../data/raw/*csv"), format_func=lambda x: x.split("\\")[-1]
+    "Select csv file from raw data",
+    options=glob("../data/raw/*csv"),
+    format_func=lambda x: x.split("\\")[-1],
 )
 
 # load data with
@@ -33,7 +37,9 @@ df = df_raw.set_index("date").groupby("keyword").resample("M").mean().reset_inde
 index_name = "DAX"
 
 if st.sidebar.checkbox(f"Run query for {index_name}"):
-    esg_df = yq.esg_firm_query_keywords_pipeline(index_name="DAX", path_to_settings="../settings.yaml")
+    esg_df = yq.esg_firm_query_keywords_pipeline(
+        index_name="DAX", path_to_settings="../settings.yaml"
+    )
 
     indices = PyTickerSymbols().get_all_indices()
 
@@ -79,7 +85,9 @@ def plot_interest_over_time(df, title):
 
     # -- customize legend
     fig.update_layout(
-        legend=dict(yanchor="bottom", y=0.8, xanchor="right", x=0.4, bgcolor="rgba(0,0,0,0)"),  # transparent
+        legend=dict(
+            yanchor="bottom", y=0.8, xanchor="right", x=0.4, bgcolor="rgba(0,0,0,0)"
+        ),  # transparent
         hovermode="closest",
     )
 

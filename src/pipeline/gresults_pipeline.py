@@ -58,7 +58,9 @@ def get_results_count(user_agent, keyword):
     soup = BeautifulSoup(result.content, "html.parser")
 
     #  string that contains results count 'About 1,410,000,000 results'
-    total_results_text = soup.find("div", {"id": "result-stats"}).find(text=True, recursive=False)
+    total_results_text = soup.find("div", {"id": "result-stats"}).find(
+        text=True, recursive=False
+    )
 
     # extract number
     results_num = int("".join([num for num in total_results_text if num.isdigit()]))
@@ -106,15 +108,23 @@ def assert_google_results(df, keyword_list, base_url):
         {
             "keyword": pd.Series([*keyword_list], dtype="object"),
             "results_count": pd.Series([1 for i in keyword_list], dtype="int64"),
-            "search_url": pd.Series(create_search_url(keyword_list, base_url=base_url), dtype="object"),
-            "query_timestamp": pd.Series([datetime.now() for i in keyword_list], dtype="datetime64[ns]"),
+            "search_url": pd.Series(
+                create_search_url(keyword_list, base_url=base_url), dtype="object"
+            ),
+            "query_timestamp": pd.Series(
+                [datetime.now() for i in keyword_list], dtype="datetime64[ns]"
+            ),
         }
     )
 
     # comparison to actual
     column_difference = set(df.columns).symmetric_difference(df_compare.columns)
-    assert len(column_difference) == 0, f"The following columns differ to reference dataframe: {column_difference}"
-    assert (df_compare.dtypes == df.dtypes).all(), f"Different dtypes for {df.dtypes}\n{df_compare.dtypes}"
+    assert (
+        len(column_difference) == 0
+    ), f"The following columns differ to reference dataframe: {column_difference}"
+    assert (
+        df_compare.dtypes == df.dtypes
+    ).all(), f"Different dtypes for {df.dtypes}\n{df_compare.dtypes}"
     assert len(df) == len(keyword_list), f"{len(df)} does not equal {len(keyword_list)}"
 
     prefect_logger().info("Google results data meets expectations")

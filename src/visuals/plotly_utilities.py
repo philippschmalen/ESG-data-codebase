@@ -44,7 +44,9 @@ def load_colorscale(settings_filepath):
     try:
         colorscale = settings["ci"]["colorscale"]
     except Exception as e:
-        logging.error(f"Colorscale failed to load from {settings_filepath}. Return empty scale. Error: {e}")
+        logging.error(
+            f"Colorscale failed to load from {settings_filepath}. Return empty scale. Error: {e}"
+        )
         colorscale = []
 
     return colorscale
