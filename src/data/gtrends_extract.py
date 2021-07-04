@@ -2,10 +2,9 @@
 Extract data from Google trends with the pytrends package
 Methods take one keyword, call pytrends and return processed data as CSV or dataframe
 
-There are two main functions:
-    * get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
-    * get_interest_over_time: Returns CSV with interest over time for specified keywords
-
+Main functions
+    (1) get_related_queries_pipeline: Returns dataframe of trending searches for a given topic
+    (2) get_interest_over_time: Returns CSV with interest over time for specified keywords
 """
 
 import pandas as pd
@@ -14,7 +13,17 @@ import logging
 from datetime import datetime
 from random import randint
 from pytrends.request import TrendReq
-from .utilities import list_batch, df_to_csv, sleep_countdown
+from .data_utilities import (
+    n_batch,
+    list_batch,
+    df_to_csv,
+    sleep_countdown,
+    timestamp_now,
+)
+
+# ----------------------------------------------------------
+# Google trends: Create session
+# ----------------------------------------------------------
 
 
 def create_pytrends_session():
@@ -42,7 +51,9 @@ def get_related_queries(pytrends_session, keyword_list, cat=0, geo=""):
     Returns:
         Dictionary: Dict with dataframes with related query results
     """
-    assert isinstance(keyword_list, list), f"keyword_list should be string. Instead of type {type(keyword_list)}"
+    assert isinstance(
+        keyword_list, list
+    ), f"keyword_list should be string. Instead of type {type(keyword_list)}"
 
     df_related_queries = pd.DataFrame()
 
@@ -67,11 +78,12 @@ def process_related_query_response(response, kw, geo, ranking):
             geo,
             datetime.now(),
         ]
-    except:
+        return df
+    except Exception:
         logging.info(f"Append empty dataframe for {ranking}: {kw}")
-        return pd.DataFrame(columns=["query", "value", "keyword", "ranking", "geo", "query_timestamp"])
-
-    return df
+        return pd.DataFrame(
+            columns=["query", "value", "keyword", "ranking", "geo", "query_timestamp"]
+        )
 
 
 def unpack_related_queries_response(response):
@@ -84,19 +96,32 @@ def unpack_related_queries_response(response):
     return response, ranking, keywords
 
 
-def create_related_queries_dataframe(response, rankings, keywords, geo_description="global"):
+def create_related_queries_dataframe(
+    response, rankings, keywords, geo_description="global"
+):
     """Returns a single dataframe of related queries for a list of keywords
     and each ranking (either 'top' or 'rising')
     """
     df_list = []
     for r in rankings:
         for kw in keywords:
-            df_list.append(process_related_query_response(response, kw=kw, ranking=r, geo=geo_description))
+            df_list.append(
+                process_related_query_response(
+                    response, kw=kw, ranking=r, geo=geo_description
+                )
+            )
 
     return pd.concat(df_list)
 
 
-def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo="", geo_description="global"):
+# ---------------------------------------------------
+# MAIN QUERY FUNCTION
+# ---------------------------------------------------
+
+
+def get_related_queries_pipeline(
+    pytrends_session, keyword_list, cat=0, geo="", geo_description="global"
+):
     """Returns all response data for pytrend's .related_queries() in a single dataframe
 
     Example usage:
@@ -104,7 +129,9 @@ def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo="", 
         pytrends_session = create_pytrends_session()
         df = get_related_queries_pipeline(pytrends_session, keyword_list=['pizza', 'lufthansa'])
     """
-    response = get_related_queries(pytrends_session=pytrends_session, keyword_list=keyword_list, cat=cat, geo=geo)  #
+    response = get_related_queries(
+        pytrends_session=pytrends_session, keyword_list=keyword_list, cat=cat, geo=geo
+    )  #
     response, rankings, keywords = unpack_related_queries_response(response=response)
     df_trends = create_related_queries_dataframe(
         response=response,
@@ -121,7 +148,9 @@ def get_related_queries_pipeline(pytrends_session, keyword_list, cat=0, geo="", 
 # ----------------------------------------------------------
 
 
-def process_interest_over_time(df_query_result, keywords, date_index=None, query_length=261):
+def process_interest_over_time(
+    df_query_result, keywords, date_index=None, query_length=261
+):
     """Process query results
             * check for empty response --> create df with 0s if empty
             * drop isPartial rows and column
@@ -138,7 +167,9 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
     # non-empty df
     if df_query_result.shape[0] != 0:
         # reset_index to preserve date information, drop isPartial column
-        df_query_result_processed = df_query_result.reset_index().drop(["isPartial"], axis=1)
+        df_query_result_processed = df_query_result.reset_index().drop(
+            ["isPartial"], axis=1
+        )
 
         df_query_result_long = pd.melt(
             df_query_result_processed,
@@ -153,7 +184,9 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
     # empty df: no search result for any keyword
     else:
         keywords = keywords.to_list()
-        logging.info(f"""process_interest_over_time() handles empty dataframe for {keywords}""")
+        logging.info(
+            f"""process_interest_over_time() handles empty dataframe for {keywords}"""
+        )
         # create empty df with 0s
         query_length = len(date_index)
         df_zeros = pd.DataFrame(
@@ -163,7 +196,9 @@ def process_interest_over_time(df_query_result, keywords, date_index=None, query
         # replace 0s with keywords
         df_zeros["keyword"] = np.repeat(keywords, query_length)
         # replace 0s with dates
-        df_zeros["date"] = pd.concat([date_index for i in range(len(keywords))], axis=0, ignore_index=True)
+        df_zeros["date"] = pd.concat(
+            [date_index for i in range(len(keywords))], axis=0, ignore_index=True
+        )
 
         return df_zeros
 
@@ -186,7 +221,9 @@ def query_interest_over_time(keywords, date_index=None, timeframe="today 5-y"):
     df_query_result_raw = pt.interest_over_time()
 
     # preprocess query results
-    df_query_result_processed = process_interest_over_time(df_query_result_raw, keywords, date_index)
+    df_query_result_processed = process_interest_over_time(
+        df_query_result_raw, keywords, date_index
+    )
 
     return df_query_result_processed
 
@@ -242,6 +279,8 @@ def get_interest_over_time(
         filepath_failed (string): csv to store unsuccessful keywords
         max_retries (int): how often retry
         timeout (int): time to wait in seconds btw. queries
+        timeframe (string): Defaults to last 5yrs, 'today 5-y',
+        other values: 'all', Specific dates, 'YYYY-MM-DD YYYY-MM-DD',
 
     Returns:
         None: Writes dataframe to csv
@@ -259,17 +298,22 @@ def get_interest_over_time(
             # random int from range around timeout
             timeout_randomized = randint(timeout - 3, timeout + 3)
             try:
-                df = query_interest_over_time(kw_batch, date_index=date_index)
+                df = query_interest_over_time(
+                    kw_batch, date_index=date_index, timeframe=timeframe
+                )
 
-            # query unsuccessful
             except Exception as e:
-                logging.error(f"query_interest_over_time() failed in get_interest_over_time with: {e}")
+                logging.error(
+                    f"query_interest_over_time() failed in get_interest_over_time with: {e}"
+                )
                 timeout += 3  # increase timetout to be safe
                 sleep_countdown(timeout_randomized, print_step=2)
 
             # query was successful: store results, sleep
             else:
-                logging.info(f"{i+1}/{len(list(kw_batches))} get_interest_over_time() query successful")
+                logging.info(
+                    f"{i+1}/{len(list(kw_batches))} get_interest_over_time() query successful"
+                )
                 df_to_csv(df, filepath=filepath)
                 sleep_countdown(timeout_randomized)
                 break

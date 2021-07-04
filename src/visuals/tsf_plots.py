@@ -1,23 +1,16 @@
 """
 Make visualizations with plotly
 """
-
 import plotly.io as pio
 import plotly.graph_objects as go
-
 from datetime import datetime
-import logging
-
-logger = logging.getLogger(__name__)
 
 
-def set_layout_template():
+def set_layout_template(template_name="tsf", show_legend=True):
     """Creates watermarks and applies colors"""
-    # watermarks
-    watermark_date = "Updated {}".format(datetime.now().strftime("%d.%B%Y"))  # date watermark
+    # watermark_date = "Updated {}".format(datetime.now().strftime("%d.%B%Y"))
     watermark_url = "towardssustainablefinance.com"
 
-    # colorscale
     tsf_colorscale = [
         "#4d886d",
         "#f3dab9",
@@ -31,8 +24,15 @@ def set_layout_template():
 
     pio.templates["tsf"] = go.layout.Template(
         layout_colorway=tsf_colorscale,
-        layout_hovermode="closest",
         layout_font_family="Verdana",
+        layout_title_font=dict(size=24),
+        layout_font=dict(size=16),
+        layout_plot_bgcolor="#FFFFFF",
+        layout_paper_bgcolor="#FFFFFF",
+        layout_showlegend=show_legend,
+        layout_xaxis=dict(showgrid=False, zeroline=False),
+        layout_yaxis=dict(showgrid=False, zeroline=False),
+        layout_hovermode="closest",
         layout_annotations=[
             dict(
                 name="watermark",
@@ -43,21 +43,21 @@ def set_layout_template():
                 xref="paper",
                 yref="paper",
                 x=1,
-                y=-0.15,
+                y=-0.17,
                 showarrow=False,
             ),
-            dict(
-                name="watermark2",
-                text=watermark_date,
-                textangle=0,
-                opacity=0.65,
-                font=dict(color="#545454", size=16),
-                xref="paper",
-                yref="paper",
-                x=0,
-                y=0.1,
-                showarrow=False,
-            ),
+            # dict(
+            #     name="watermark2",
+            #     text=watermark_date,
+            #     textangle=0,
+            #     opacity=0.65,
+            #     font=dict(color="#545454", size=16),
+            #     xref="paper",
+            #     yref="paper",
+            #     x=0,
+            #     y=-0.15,
+            #     showarrow=False,
+            # ),
         ],
     )
     pio.templates.default = "tsf"

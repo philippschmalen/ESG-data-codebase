@@ -1,6 +1,7 @@
 """
 UTILITY FUNCTIONS
 
+load_data: Load dataframe from filepath
 list_remove_duplicates: drop duplicate elements from list
 list_flatten: flatten nested list
 n_batch: generator for n-sized list batches
@@ -14,7 +15,43 @@ sleep_countdown(): countdown in console
 import os
 import sys
 import time
+import pandas as pd
 from datetime import datetime
+import streamlit as st
+
+# ----------------------------------------
+# -- Plot data
+# ----------------------------------------
+
+
+@st.cache(allow_output_mutation=True)
+def load_data(filepath, parse_dates=False):
+    """Load data from filepath. parse_dates takes list of date columns to convert to datetime"""
+    return pd.read_csv(filepath, parse_dates=parse_dates)
+
+
+def group_search_interest_on_time_unit(df, unit="M"):
+    """Returns aggregated dataframe specified time unit. Uses pandas grouper
+    see frequency options for other time units like weekly or annually"""
+
+    # assert date as index for pd.Grouper
+    assert (
+        df.index.dtype == "datetime64[ns]"
+    ), "Dataframe misses date index. No grouping on date unit possible."
+    # assert keyword column
+    assert (
+        "keyword" in df.columns
+    ), "Dataframe misses keyword column. No grouping on date unit possible."
+
+    # groups to unit averages (defaults to monthly)
+    df = df.groupby(["keyword", pd.Grouper(freq=unit)]).mean().reset_index()
+
+    return df
+
+
+# ----------------------------------------
+# -- General-purpose utilities
+# ----------------------------------------
 
 
 def list_remove_duplicates(the_list):

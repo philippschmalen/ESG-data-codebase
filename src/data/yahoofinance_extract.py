@@ -1,13 +1,12 @@
 """
 Retrieve firm-level esg scores, process firm names and construct query strings
-
 """
-# import streamlit as st
 from yahooquery import Ticker
 from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
 import pandas as pd
+import re
 import yaml
 
 
@@ -66,7 +65,6 @@ def get_esg_details(yahoo_ticker):
     return esg_df
 
 
-@st.cache(allow_output_mutation=True)
 def get_index_firm_esg(pytickersymbols, index_name):
     """Merge index, firm name and esg data"""
     index_stocks = get_index_stock_details(pytickersymbols=pytickersymbols, index_name=index_name)
@@ -85,7 +83,7 @@ def replace_firm_names(df, settings_path):
 
     try:
         settings["query"]["firm_name"]
-    except:
+    except Exception:
         logging.warning(
             "No firm names specified in settings['query']['firm_name']. \
         Firm names still contain legal suffix which compromises search results."
@@ -94,7 +92,6 @@ def replace_firm_names(df, settings_path):
 
     replace_firm_names = settings["query"]["firm_names"]
     df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
-
     return df
 
 
