@@ -13,8 +13,8 @@ This is adopted from https://gist.github.com/gwerbin/dab3cf5f8db07611c6e0aeec177
 
 Example:
     In root folder of this repo:
-    >> which python # make sure you are in the right virtual env
-    >> python conda_env_export.py # a better alternative than `conda env export`
+    >>> which python # make sure you are in the right virtual env
+    >>> python conda_env_export.py # a better alternative than `conda env export`
 """
 
 import subprocess
