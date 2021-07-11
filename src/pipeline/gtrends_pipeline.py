@@ -1,8 +1,9 @@
 from typing import Tuple, Any, List
 from prefect import task, Parameter, Flow
 from prefect.executors import LocalDaskExecutor
-from prefect.agent.local import LocalAgent
 from pytrends.request import TrendReq
+from pytrends.exceptions import ResponseError
+import time
 import pandas as pd
 from datetime import datetime
 import logging
@@ -35,8 +36,11 @@ def get_response(
     assert isinstance(
         keyword_list, list
     ), f"keyword_list should be string. Instead of type {type(keyword_list)}"
-
-    pytrends_session.build_payload(keyword_list, cat=cat, geo=geo)
+    try:
+        pytrends_session.build_payload(keyword_list, cat=cat, geo=geo, gprop=" ")
+    except ResponseError:
+        time.sleep(0.5)
+        pytrends_session.build_payload(keyword_list, cat=cat, geo=geo, gprop=" ")
     response = pytrends_session.related_queries()
     if response is not None:
         logger.info(f"Query succeeded for {*keyword_list ,}")
@@ -80,7 +84,9 @@ def get_df_response(response: dict, rk: Any, kw: str, geo="global") -> pd.DataFr
 
 
 @task
-def create_df_trends(response: dict, rankings: Any, keywords: List[str]) -> pd.DataFrame:
+def create_df_trends(
+    response: dict, rankings: Any, keywords: List[str]
+) -> pd.DataFrame:
     """Returns a single dataframe of related queries for a list of keywords
     and each ranking (either 'top' or 'rising')
     """
@@ -105,4 +111,3 @@ with Flow("gtrends") as flow:
 if __name__ == "__main__":
     flow.executor = LocalDaskExecutor(scheduler="threads", num_workers=4)
     flow.run()
-    print(df_trends)
