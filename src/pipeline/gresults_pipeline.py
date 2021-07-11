@@ -1,12 +1,16 @@
 from typing import Tuple, Any, List
-import prefect
-from prefect import task, Parameter, Flow
-from prefect.executors import LocalDaskExecutor
 import requests
 import pandas as pd
-from bs4 import BeautifulSoup
 from datetime import datetime
 import yaml
+
+import prefect
+from prefect import task, Parameter, Flow, unmapped, apply_map
+from prefect.executors import LocalDaskExecutor
+from bs4 import BeautifulSoup
+
+
+SETTINGS = "settings.yaml"
 
 
 def prefect_logger():
@@ -16,8 +20,8 @@ def prefect_logger():
 
 
 @task
-def load_settings() -> Tuple[Any, str, List[str]]:
-    with open("settings.yaml") as file:
+def load_settings(settings_file) -> Tuple[Any, str, List[str]]:
+    with open(settings_file) as file:
         config = yaml.full_load(file)
     user_agent = config["query"]["google_results"]["user_agent"]
     base_url = config["query"]["google_results"]["base_url"]
@@ -43,7 +47,7 @@ def create_search_url(base_url, keyword_list):
 
 
 @task
-def get_results_count(user_agent, keyword):
+def get_results_count(user_agent, query) -> int:
     """Gets Google's result count for a keyword
 
     Args:
@@ -54,7 +58,7 @@ def get_results_count(user_agent, keyword):
     Returns:
         int: Results count
     """
-    result = requests.get(keyword, headers=user_agent)
+    result = requests.get(query, headers=user_agent)
     soup = BeautifulSoup(result.content, "html.parser")
 
     #  string that contains results count 'About 1,410,000,000 results'
@@ -65,12 +69,6 @@ def get_results_count(user_agent, keyword):
     # extract number
     results_num = int("".join([num for num in total_results_text if num.isdigit()]))
     return results_num
-
-
-# @task
-# def get_search_counts(user_agent, search_urls):
-#     search_counts = [get_results_count(url, user_agent) for url in search_urls]
-#     return search_counts
 
 
 @task
@@ -93,14 +91,11 @@ def get_results_df(base_url, keyword_list, search_urls, search_counts):
             "query_timestamp": datetime.now(),
         }
     )
-    # testing
-    assert_google_results(df=df, keyword_list=keyword_list, base_url=base_url)
-
     return df
 
 
 @task
-def assert_google_results(df, keyword_list, base_url):
+def assert_google_results(df, keyword_list, search_urls):
     """Ensures that dataframe meets expectations"""
 
     # expected dataframe for comparison
@@ -108,9 +103,7 @@ def assert_google_results(df, keyword_list, base_url):
         {
             "keyword": pd.Series([*keyword_list], dtype="object"),
             "results_count": pd.Series([1 for i in keyword_list], dtype="int64"),
-            "search_url": pd.Series(
-                create_search_url(keyword_list, base_url=base_url), dtype="object"
-            ),
+            "search_url": pd.Series(search_urls, dtype="object"),
             "query_timestamp": pd.Series(
                 [datetime.now() for i in keyword_list], dtype="datetime64[ns]"
             ),
@@ -130,15 +123,22 @@ def assert_google_results(df, keyword_list, base_url):
     prefect_logger().info("Google results data meets expectations")
 
 
-with Flow("gresults") as flow:
-    user_agent, base_url, keyword_list = load_settings()
-    search_urls = create_search_url(base_url, keyword_list)
-    prefect_logger().debug(search_urls)
-    search_counts = get_results_count.map(zip(user_agent, keyword_list))
-    results_df = get_results_df(base_url, keyword_list, search_urls, search_counts)
+@task
+def print_result(results_df):
+    print(results_df.head())
 
+
+with Flow("gresults") as flow:
+    user_agent, base_url, keyword_list = load_settings(SETTINGS)
+    search_urls = create_search_url(base_url, keyword_list)
+    prefect_logger().info(f"created search_urls as {search_urls}")
+    search_counts = apply_map(
+        get_results_count, user_agent=unmapped(user_agent), query=search_urls
+    )
+    results_df = get_results_df(base_url, keyword_list, search_urls, search_counts)
+    assert_google_results(results_df, keyword_list, search_urls)
+    print_result(results_df)
 
 if __name__ == "__main__":
     flow.executor = LocalDaskExecutor(scheduler="threads", num_workers=4)
     flow.run()
-    print(results_df)
