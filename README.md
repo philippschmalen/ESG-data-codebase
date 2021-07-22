@@ -94,7 +94,11 @@ Here is everything related to further develop and maintain the project.
 
 __Build__ `conda env create -f conda_env.yaml`
 
-__Export to yaml__ `conda env export --no-builds > conda_env.yaml`
+__Export to yaml__ `python conda_env_export.py` (A modifier on `conda env export` to combine results from 
+`--no-builds` and without this flag, to avoid common pitfalls from default conda.)
+
+__Update current conda env__ `conda env update -f conda_env.yaml` (optional flag `--prune` remove libs 
+installed in current env but not listed in yaml.)
 
 
 ### Build documentation with mkdocs

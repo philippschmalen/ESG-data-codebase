@@ -36,13 +36,8 @@ def get_results_count(keyword, user_agent):
 
         Args:
             keyword (string): The keyword for which to get the results count
-    <<<<<<< HEAD
-            user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
-    =======
             user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
                 Gecko) Chrome/80.0.3987.149 Safari/537.36"}
-    >>>>>>> 3cb32814fb70df3c9e78efa840f5f142d0822612
-
         Returns:
             int: Results count
     """

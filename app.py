@@ -50,7 +50,9 @@ if st.sidebar.button(
 # -- load data
 # ----------------------------------------
 raw_data_csv_files = st.sidebar.selectbox(
-    "Select data", options=glob("data/raw/*csv"), format_func=lambda x: x.split("\\")[-1]
+    "Select data",
+    options=glob("data/raw/*csv"),
+    format_func=lambda x: x.split("\\")[-1],
 )
 df_raw = data_utils.load_data(
     filepath=raw_data_csv_files, parse_dates=["date"]
