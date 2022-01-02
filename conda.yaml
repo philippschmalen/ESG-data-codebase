@@ -17,8 +17,10 @@ dependencies:
   - mkdocstrings
   - mlflow
   - pandas
+  - plotly
   - prefect
   - pytest
+  - pytrends
   - pyyaml
   - requests
   - tabulate

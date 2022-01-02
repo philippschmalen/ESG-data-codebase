@@ -13,13 +13,7 @@ import logging
 from datetime import datetime
 from random import randint
 from pytrends.request import TrendReq
-from .data_utilities import (
-    n_batch,
-    list_batch,
-    df_to_csv,
-    sleep_countdown,
-    timestamp_now,
-)
+from .utils_data import list_batch, df_to_csv, sleep_countdown
 
 # ----------------------------------------------------------
 # Google trends: Create session
@@ -261,7 +255,7 @@ def get_interest_over_time(
     max_retries=3,
     timeout=10,
 ):
-    """Workhorse function to query Google Trend's interest_over_time() function.
+    """Main function to query Google Trend's interest_over_time() function.
     It respects the query's requirements like
         * max. 5 keywords per query, handled by list_batch()
         * a basic date index for queries returning empty dataframe
@@ -315,7 +309,10 @@ def get_interest_over_time(
                     f"{i+1}/{len(list(kw_batches))} get_interest_over_time() query successful"
                 )
                 df_to_csv(df, filepath=filepath)
-                sleep_countdown(timeout_randomized)
+
+                if i < len(kw_batches) - 1:
+                    logging.info(f"Sleep {timeout_randomized}s")
+                    sleep_countdown(timeout_randomized)
                 break
 
         # max_retries reached: store index of unsuccessful query

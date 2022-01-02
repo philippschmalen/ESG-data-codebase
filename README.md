@@ -15,6 +15,23 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 
 <center><img src="references/img/tsf_logo.png" height ="300" width="310"/></center>
 
+
+
+---
+
+## TODOs
+
+- [ ] check visuals
+- [ ] revise README
+- [ ] create github actions
+- [ ] run and revise mkdocs
+- [ ]
+
+
+
+---
+
+
 ## Getting started
 
 Open `anaconda prompt` as admin and run:

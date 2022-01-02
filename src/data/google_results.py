@@ -34,12 +34,12 @@ def create_search_url(keyword_list, url="https://www.google.com/search?q="):
 def get_results_count(keyword, user_agent):
     """Gets Google's result count for a keyword
 
-        Args:
-            keyword (string): The keyword for which to get the results count
-            user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
-                Gecko) Chrome/80.0.3987.149 Safari/537.36"}
-        Returns:
-            int: Results count
+    Args:
+        keyword (string): The keyword for which to get the results count
+        user_agent (string): For example {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
+            Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    Returns:
+        int: Results count
     """
     result = requests.get(keyword, headers=user_agent)
     soup = BeautifulSoup(result.content, "html.parser")
