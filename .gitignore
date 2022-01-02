@@ -1,7 +1,7 @@
-# custom
+# local dev
 archive/*
 *.bat
-notebooks/*
+*.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

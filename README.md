@@ -1,7 +1,7 @@
 ESG data codebase
 ==============================
 
-Collection of python scripts and code snippets to get alternative ESG data from sources like Google Trends or Google results. 
+Collection of python scripts and code snippets to get alternative ESG data from sources like Google Trends or Google results.
 
 ## Goal
 
@@ -16,6 +16,20 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 <center><img src="references/img/tsf_logo.png" height ="300" width="310"/></center>
 
 ## Getting started
+
+Open `anaconda prompt` as admin and run:
+
+```bash
+git clone https://github.com/philippschmalen/ESG-data-codebase.git
+
+# create venv from file
+conda env create -f conda.yaml
+# init pre-commit
+pre-commit install
+pre-commit autoupdate
+# test-run
+pre-commit
+```
 
 Configure `settings.yaml`. Mine looks like:
 
@@ -33,7 +47,7 @@ query:
 
 ### Search interest over time
 
-To get analysis-ready data from Google trends, use  `get_interest_over_time()`. It takes a list of keywords and stores each query result into a CSV in `filepath`. It has in-built error handling and is designed fail-safe. For example, it increases the timeout between queries if one fails due to rate limit. Even after max retries, data is not lost, but the unsuccessful keywords are stored in a csv. 
+To get analysis-ready data from Google trends, use  `get_interest_over_time()`. It takes a list of keywords and stores each query result into a CSV in `filepath`. It has in-built error handling and is designed fail-safe. For example, it increases the timeout between queries if one fails due to rate limit. Even after max retries, data is not lost, but the unsuccessful keywords are stored in a csv.
 
 
 ## Code reference
@@ -44,7 +58,7 @@ Here is the official documentation powered by mkdocs and mkdocstrings.
 
 ## Useful resources
 
-The project benefits from previous work of the repositories: 
+The project benefits from previous work of the repositories:
 
 1. https://github.com/philippschmalen/ESG-trending-topics-radar
 2. https://github.com/philippschmalen/ESG-with-googletrends
@@ -88,26 +102,26 @@ Project Organization
 
 ## Dev
 
-Here is everything related to further develop and maintain the project.  
+Here is everything related to further develop and maintain the project.
 
 ### Conda virtual env
 
 __Build__ `conda env create -f conda_env.yaml`
 
-__Export to yaml__ `python conda_env_export.py` (A modifier on `conda env export` to combine results from 
+__Export to yaml__ `python conda_env_export.py` (A modifier on `conda env export` to combine results from
 `--no-builds` and without this flag, to avoid common pitfalls from default conda.)
 
-__Update current conda env__ `conda env update -f conda_env.yaml` (optional flag `--prune` remove libs 
+__Update current conda env__ `conda env update -f conda_env.yaml` (optional flag `--prune` remove libs
 installed in current env but not listed in yaml.)
 
 
 ### Build documentation with mkdocs
 
-Following Google style doccstrings: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html 
+Following Google style doccstrings: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
 
 A common issue that causes false rendering is to include a space after a headline. `Args: ` will __not__ work, but `Args:` will do.
 
-Workflow to update documentation: 
+Workflow to update documentation:
 
 ```bash
 # conda activate esg_codebase
@@ -120,23 +134,23 @@ mkdocs gh-deploy # deploy to github pages
 
 ```bash
 # in project root, run with conda env activated
-mkdocs new . 
+mkdocs new .
 # created mkdocs.yml and ./docs
 ```
-Configure `mkdocs.yml` to work with `mkdocstrings` package. 
+Configure `mkdocs.yml` to work with `mkdocstrings` package.
 ```yaml
 site_name: ESG data codebase
 theme:
   name: "material" # theme works with mkdocstrings
-plugins: 
+plugins:
   - search
   - mkdocstrings:
-      default_handler: python 
+      default_handler: python
       watch:
         - src/data # enable auto-reload
 ```
 
-Add python scripts to `index.md` so that they appear in the code reference: 
+Add python scripts to `index.md` so that they appear in the code reference:
 
 ```markdown
 # Code reference
@@ -147,6 +161,6 @@ Add python scripts to `index.md` so that they appear in the code reference:
 ::: src.data.gtrends_extract.py
 ```
 
---- 
+---
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

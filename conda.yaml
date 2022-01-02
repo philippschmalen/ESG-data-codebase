@@ -1,0 +1,28 @@
+name: esg_codebase
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8.10
+  - pip=21.1.1
+  - black
+  - pre-commit
+  - flake8
+  - streamlit
+  - beautifulsoup4
+  - chart-studio
+  - jupyterlab
+  - mkdocs
+  - mkdocs-material
+  - mkdocstrings
+  - mlflow
+  - pandas
+  - prefect
+  - pytest
+  - pyyaml
+  - requests
+  - tabulate
+  - urllib3
+  - pip:
+      - yahooquery==2.2.15
+      - pytickersymbols==1.8.45
