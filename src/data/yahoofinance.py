@@ -6,7 +6,6 @@ from pytickersymbols import PyTickerSymbols
 import logging
 import numpy as np
 import pandas as pd
-import re
 import yaml
 
 
@@ -46,7 +45,6 @@ def get_index_stock_details(pytickersymbols, index_name):
 
     # set ticker as index
     index_details.set_index("yahoo_ticker", inplace=True, drop=False)
-    index_details.drop(columns=["id"], inplace=True)
 
     return index_details
 

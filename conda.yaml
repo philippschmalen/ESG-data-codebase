@@ -19,6 +19,7 @@ dependencies:
   - pandas
   - plotly
   - prefect
+  - prophet
   - pytest
   - pytrends
   - pyyaml
