@@ -21,6 +21,7 @@ The project is in the scope of the [towards sustainable finance](http://towardss
 
 ## TODOs
 
+- [ ]
 - [ ] check visuals
 - [ ] revise README
 - [ ] create github actions

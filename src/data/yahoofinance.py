@@ -83,21 +83,23 @@ def replace_firm_names(df, settings_path):
     """Replace firm names as specified in settings.yaml"""
 
     with open(settings_path, encoding="utf8") as file:
-        settings = yaml.full_load(file)
+        settings = yaml.safe_load(file)
 
     try:
-        settings["query"]["firm_name"]
+        settings["query"]["firm_names"]
     except Exception:
         logging.warning(
             "No firm names specified in settings['query']['firm_name']. \
         Firm names still contain legal suffix which compromises search results."
         )
+
     assert (
         "name" in df.columns
     ), "Dataframe has no name column. Firm names cannot be replaced."
 
     replace_firm_names = settings["query"]["firm_names"]
     df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
+
     return df
 
 

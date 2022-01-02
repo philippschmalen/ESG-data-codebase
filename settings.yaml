@@ -1,10 +1,10 @@
 dir:
-  raw: 'data/raw'
-  interim: 'data/interim'
-  processed: 'data/processed'
-  external: 'data/external'
+  raw: "data/raw"
+  interim: "data/interim"
+  processed: "data/processed"
+  external: "data/external"
 ci:
-  colorscale: 
+  colorscale:
     - "#4d886d"
     - "#f3dab9"
     - "#9bcab8"
@@ -12,28 +12,33 @@ ci:
     - "#dc9b4d"
     - "#4a82a1"
     - "#cfaea5"
-    - '#D5E6E0'
+    - "#D5E6E0"
 query:
   google_results:
-    user_agent: {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
+    user_agent:
+      {
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+      }
     base_url: "https://www.google.com/search?q="
-  # replace fim names 
-  firm_names: 
-    # -- DAx -- 
-    Münchener Rückversicherungs-Gesellschaft: Munich re 
-    Bayerische Motoren Werke: BMW 
-    Volkswagen: VW 
+  # replace fim names
+  firm_names:
+    # -- DAx --
+    Münchener Rückversicherungs-Gesellschaft: Munich re
+    Bayerische Motoren Werke: BMW
+    Volkswagen: VW
     HeidelbergCement: heidelberg cement
     Aero Engines: ""
     E.ON: EON
-    Infineon Technologies: Infineon 
+    Infineon Technologies: Infineon
     Kommanditgesellschaft auf Aktien: ""
     AG: ""
     SE: ""
-    "& Co. KGaA St": "" 
+    "& Co. KGaA St": ""
     "& Co. KGaA Vz": ""
     "& Co. KGaA": ""
     PLC: ""
+    N.V.: ""
+    Porsche Automobil Holding: "Porsche"
     hanswrust: "IK BIN MIR EINER"
 esg:
   # inspired by https://www.esade.edu/itemsweb/biblioteca/bbdd/inbbdd/archivos/Thomson_Reuters_ESG_Scores.pdf
@@ -75,5 +80,3 @@ esg:
     - aggressive
     - manipulation
     - dispute
-
-  
