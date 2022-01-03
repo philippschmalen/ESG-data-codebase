@@ -98,7 +98,7 @@ def replace_firm_names(df, settings_path):
     ), "Dataframe has no name column. Firm names cannot be replaced."
 
     replace_firm_names = settings["query"]["firm_names"]
-    df["firm_name"] = df.name.replace(replace_firm_names, regex=True)
+    df["firm_name"] = df.name.replace(replace_firm_names, regex=True).str.strip()
 
     return df
 
