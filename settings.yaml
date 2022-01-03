@@ -38,8 +38,8 @@ query:
     "& Co. KGaA": ""
     PLC: ""
     N.V.: ""
-    Porsche Automobil Holding: "Porsche"
-    hanswrust: "IK BIN MIR EINER"
+    Porsche Automobil Holding: Porsche
+    hanswrust: IK BIN MIR EINER
 esg:
   # inspired by https://www.esade.edu/itemsweb/biblioteca/bbdd/inbbdd/archivos/Thomson_Reuters_ESG_Scores.pdf
   negative:
